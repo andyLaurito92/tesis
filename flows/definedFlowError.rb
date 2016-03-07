@@ -1,0 +1,3 @@
+class DefinedFlowError < StandardError
+	
+end
