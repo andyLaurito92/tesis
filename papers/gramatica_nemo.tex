@@ -1,0 +1,472 @@
+\documentclass[envcountsect,runningheads]{llncs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENLARGED STYLE FOR SUBMISSION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setlength{\textwidth}{15cm}
+%\setlength{\textheight}{21cm}
+%\addtolength{\oddsidemargin}{-1.25cm}
+%\setlength{\evensidemargin}{\oddsidemargin}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[all]{xy}\CompileMatrices
+\usepackage[english]{babel}
+\usepackage[mathcal]{euscript}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{pslatex}
+\usepackage{alltt}
+\usepackage{float}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage{stmaryrd}
+
+%new
+\newcommand{\red}{\rightarrow}
+\newcommand{\rred}{\Rightarrow}
+\newcommand{\jeq}{\; \mathop{\triangleright} \;}
+\def \mathrule #1#2#3{\begin{array}{l}%
+    {\mbox{\scriptsize ({\sc #1})} }%
+    \\ \irule{#2}{#3}%
+\end{array}}
+\newcommand{\irule}[2]{\frac{\textstyle\rule[-1.3ex]{0cm}{3ex}#1}%
+{\textstyle\rule[-.5ex]{0cm}{3ex}#2}}
+\newcommand{\pntrans}{[\rangle}
+\newcommand{\arule}[3]{\frac{\textstyle\rule[-.8ex]{0cm}{3ex}#1}%
+{\textstyle\rule[.2ex]{0cm}{3ex}#2}{\mbox{\scriptsize {\sc #3}}}}
+
+
+
+% concurrency relation
+\newcommand{\co}[1]{\mathbf{co}(#1)}
+%symbol for depth function
+\newcommand{\depth}{\ensuremath{\mathit{depth}}}
+%symbol for natural numbers
+\newcommand{\nat}{\ensuremath{\mathbb{N}}}
+% category of persistent graph grammars
+\newcommand{\pGG}{\ensuremath{\mathbf{PGG}}}
+% category of persistent occurrence graph grammars
+\newcommand{\poGG}{\ensuremath{\mathbf{POGG}}}
+% category of prime event structures
+\newcommand{\pes}{\mathbf{PES}}
+
+
+%
+% macros from Paolo Baldan's files
+%
+\newcommand{\elem}[1]{\ensuremath{\mathit{Elem}(#1)}}
+% partial maps
+\newcommand{\pto}{\rightarrowtail}
+% domain of a partial map
+\newcommand{\dom}[1]{\ensuremath{\mathit{dom}(#1)}}
+% category of graphs with partial morphisms
+\newcommand{\PGraph}{\ensuremath{\mathbf{PGraph}}}
+% category of graphs with total morphisms
+\newcommand{\Graph}{\ensuremath{\mathbf{Graph}}}
+% typed graphs: underlying graph
+\newcommand{\tgr}[1]{\ensuremath{|{#1}|}}
+% typed graphs: underlying morphism
+\newcommand{\tmap}[1]{\ensuremath{\tau_{{#1}}}}
+% category of T-typed graphs with partial morphisms
+\newcommand{\PTyped}[1]{\ensuremath{{#1}\mbox{-}\mathbf{PGraph}}}
+% category of T-typed graphs with total morphisms
+\newcommand{\Typed}[1]{\ensuremath{{#1}\mbox{-}\mathbf{Graph}}}
+% unfolding functor for SPO grammars
+\newcommand{\Unfs}{\ensuremath{\mathcal{U}_s}}
+% functor from AES to O-GG
+\newcommand{\Ngg}{\ensuremath{{\mathcal{N}}_s}}
+% symbol for semi-abstract span
+\newcommand{\spar}{\ensuremath{\leftrightarrow}}
+% empty production
+\newcommand{\emptyprod}{\ensuremath{\emptyset}}
+% xypic label
+\newcommand{\lb}[3]{\save []+<#2, #3>*\txt{\ensuremath{#1}}
+  \restore}
+% preconditions
+\newcommand{\pre}[1]{\mbox{${^\bullet}\!{#1}$}}
+% postconditions
+\newcommand{\post}[1]{\mbox{${{#1} {^\bullet}}$}}
+% contexts
+\newcommand{\cont}[1]{\ensuremath{\underline{#1}}}
+% strong causes
+\newcommand{\cause}[1]{\ensuremath{\lfloor {#1} \rfloor }}
+% weak dependency relation
+\newcommand{\wc}{\ensuremath{\nearrow}}
+
+% domain of a partial map
+\newcommand{\pmapincluded}{\subseteq}
+
+%
+% FIGURE SEPARATOR
+%
+%\newcommand{\topfigrule}{\vskip3pt\noindent\rule{\textwidth}{1pt}\vskip-15pt}
+
+%
+% MACRO FOR COMMENTS
+%
+%\newcommand{\nota}[1]{\noindent \fbox{ \parbox{\textwidth}{#1} }  }
+\newcommand{\nota}[1]{}
+
+%
+% ABBREVIATIONS AND SYMBOLS
+%
+\newcommand{\eg}{e.g.}
+\newcommand{\ie}{i.e.}
+\newcommand{\wrt}{w.r.t.}
+
+
+
+
+%
+% JOIN PROCESSES
+%
+\newcommand{\tuple}[1]{\vec{#1}}
+\newcommand{\zero} {0}
+\newcommand{\mess}[2] { #1 \langle #2 \rangle}
+\newcommand{\defproc}[2]{\textrm{\bf def } #1 \textrm{ \bf in } #2}
+\newcommand{\basdef}[2]{ #1\triangleright  #2}
+\newcommand{\mergingdef}[2]{ #1 \blacktriangleright #2}
+\newcommand{\begintrans}[3]{ #1\triangleright  [#2:#3]}
+\newcommand{\trans}[2]{[#1:#2]}
+\newcommand{\abort}{\mathit{abort}}
+\newcommand{\bigpar}{|\!|}
+
+\newcommand{\membrane}[1]{\{\![ #1 ]\!\}}
+
+\newcommand{\denote}[1]{\llbracket #1\rrbracket}
+
+\newcommand{\outp}[2]{\overline{#1}\langle #2 \rangle}
+\newcommand{\inp}[2]{#1(#2)}
+
+
+%Macros Hernan
+\newcommand{\join}{\textsf {Join}}
+\newcommand{\fn}{\mathit{fn}}
+\newcommand{\dn}{\mathit{dn}}
+\newcommand{\rn}{\mathit{rn}}
+\newcommand{\subst}[2]{\{^{#1}/_{#2}\}}
+\newcommand{\airlock}[2]{\triangleright}
+\newcommand{\frozen}[1]{\llcorner #1 \lrcorner}
+\newcommand{\reduce}{\rightarrow}
+\newtheorem{notation}{Notation}
+
+
+
+\title{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
+\author{Andr\'es Laurito}
+
+\institute{
+Departamento de Computac\'on - FCEN -UBA\\
+ \email{andy.laurito@gmail.com} }
+
+\titlerunning{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
+
+\authorrunning{A. Laurito}
+
+
+\bibliographystyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+ Something great 
+\begin{quotation}
+ ``The best way to predict the future is to invent it - Alan Kay''
+\end{quotation}
+
+\end{abstract}
+
+\section{Introduction}
+
+In this paper we intend to create a computational model for programming languages 
+running over the Software Defined Network (SDN) paradigm. For this purpose, we will 
+define a graph grammar semantic, with it's own productions. This productions will 
+represent actions that take place in our network, and we will see how this 
+actions creates new behaviour in the model network. \\
+The network will be model as a graph, and it's representation will be obtained by a YAML 
+file, which will have to be delivered by the user of the programming language. We will explain
+in further details how we manage to create a graph from a YAML file in the following section. \\ 
+Finally, we will explain how this graph grammar can be used to model NEMO, a 
+network oriented progamming language.
+
+\section{Graph grammar production's}
+
+We start by defining the most basic grammar production's. These 
+productions are the one's that allows us to modify the network topoloy:
+
+
+\begin{itemize}
+  \item Node creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}
+         \POS[]-<4.5pc,0pc>\drop{NEW\_NODE:}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{1} &
+       }
+    \]
+    \caption{Node creation}
+    \protect\label{fig:nodecreation}
+  \end{figure}
+  This production creates a new logical node (this means that 
+  the node could be either physic (which mean's it's a physical host with an 
+  assocciated address) or logic (this mean's a group of physical nodes, meanning
+  that the address could be a CIDR). \\
+  It is important to remark that the created node is in an idle state, meaning 
+  that is not interacting with any other node in the network. \\ 
+  \\
+  
+  \item Service creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {\bullet}_{1} \ar@(ul,ur)^{idle}
+         \POS[]-<5pc,0pc>\drop{NEW\_SERVICE:}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
+         & {\hookleftarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}[r]
+         \POS[]+<1.5pc,.5pc> *+=<6.5pc,3.8pc>[F-]{} &
+         {\bullet} \ar@(ul,ur)^{active}
+         \POS[]-<-.1pc,.5pc>*+=<4pc,4pc>[]{}\drop{service}
+       }
+    \]
+    \caption{Service creation}
+    \protect\label{fig:servicecreation}
+  \end{figure}
+  This is the production which defines new services in my node. Services are 
+  defined by the user, and they can be whatever service make sense in a node (also is important 
+  to notice that services in logical nodes, will not be the same as services in physical 
+  nodes). A service could be an Enum Type or something like that. Examples of 
+  a service could be ssh,http,https,sql,etc. (Note that physical services can be mapped to an 
+  active port). \\
+  Another thing to notice is that services will start in an active state, 
+  expecting to be used by the network. This state is going to be important in a 
+  future, because this state will define whenever is possible to use the 
+  service. \\
+  ¿What would it be a service when we are talking in the logical node case?.\\
+  
+  \item Link creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+        {\bullet}_{1}\ar@(ul,ur)^{idle} \POS[]-<3.8pc,0pc>\drop{NEW\_LINK:}
+         \POS[]-<.4pc,-0.5pc> &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}
+         \POS[]+<.4pc,0pc>
+         \POS[]-<1pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle} 
+         \POS[]-<.4pc,-0.5pc> &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}
+         \POS[]+<.4pc,-0.5pc>
+         \POS[]-<2pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookrightarrow} 
+         \POS[]+<4.6pc,0.5pc> *+=<7pc,3.8pc>[]{} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[d]
+         \POS[]+<0pc,.5pc> &
+         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}[dl]
+         \\
+         & & & & & & {\bullet} \POS[]+<2pc,2pc>*+=<7pc,6pc>[F-]{} \POS[]-<-0.5pc,.5pc>\drop{link}
+       }
+    \]
+    \caption{Link creation}
+    \protect\label{fig:linkcreation}
+  \end{figure}
+  Here we define a new link between nodes 1 and 2. The only condition to apply 
+  this production is that both nodes must be in an idle state.\\
+  Note: Being in an idle state does not mean that they are doing nothing!. An 
+  idle state behaves likes a wildcard, meaning that from this state, multiply actions 
+  can be applied to the node.\\
+  
+  \item Link's property creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}\POS[]+<0pc,2pc>\drop{NEW\_LINK\_PROPERTY:}
+         \\
+         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
+         & {\hookleftarrow} &
+         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}\ar@{->}[r]\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<1.5pc,.5pc> *+=<6.5pc,3.8pc>[F-]{} &
+         {\bullet}
+         \POS[]-<-.1pc,.5pc>*+=<4pc,4pc>[]{}\drop{new\_property}
+       }
+    \]
+    \caption{Service creation}
+    \protect\label{fig:servicecreation}
+  \end{figure}
+  In this production we are allowing definition of link's property. This properties are going to be 
+  perhaps physical properties in physical links (for example, we can define here bandwith, 
+  average latency, perhpahs if it's either ethernet or wifi), and some other properties in logical 
+  nodes.\\
+  QUESTIONS:\\
+  1) What properties could be assigned to a logical link? \\
+  2) Can I always define properties in a node? (It really doesn't matter what is going on with 
+  that link in the network?. Perphas it happens something similar as nodes, that we need some 
+  'idle' state, for example, an empty state).\\
+  
+  \end{itemize}
+  
+  So far we have defined productions that which are intended to be use between the interactions 
+  with the elements in the network. With the following productions, we will start using the productions
+  listed before, in order to crate interaction between the elements in the network. \\
+  
+  \begin{itemize}
+    \item Flow creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=30pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{NEW\_FLOW:}
+         \\
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
+         {\bullet}_{link}
+         & {\hookleftarrow} & 
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
+         {\bullet}_{link} 
+         & {\hookrightarrow} & 
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r]\ar@{->}[dr] &
+         {\bullet}_{link}
+         \\
+         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
+         & & &
+         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
+         & & &
+        {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]\ar@{->}[r] &
+         {\bullet}\ar@(ul,ur)^{flowing}\ar@{->}[u] \POS[]-<.5pc,.5pc> \drop{my\_flow\_service}
+      }
+    \]
+    \caption{Flow creation}
+    \protect\label{fig:flowcreation}
+  \end{figure}
+  In order to create a flow, I first need two things: 
+  \begin{itemize}
+    \item I need to have a link between the nodes
+    \item I need to have in both nodes the service which will be the content type of the flow.  
+   \end{itemize}
+  
+  Lets go through these rules one more time. The first rule is just telling us that, in order to be able to
+  create a node, I need a connection between this node's (remember that this conection can be either
+  logical or physical).\\
+  The second rule is telling us that, in order to create a flow of type X (lets say for example, 
+  that I want to create a ssh flow between this nodes), I need to guarantee that 
+  both nodes support ssh connections. This is represented as both nodes having 
+  a link to the service. \\
+  Finally, it's important to notice that a flow is associated betwen nodes and a link 
+  (this last one is going to be the place where it's flowing).\\
+  \\
+  THINS THAT HAD TO BE THINK A BIT MORE: \\
+  1) Some rules may not be valid in this context ... ¿How do I deny multiple ssh 
+  conections betwen same nodes? (Also, this sounds to me like a type condition, since another
+  services may allow this behaviour, for example sql.) \\
+  2) 
+ 
+  \item Flow's properties creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=30pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{NEW\_FLOW:}
+         \\
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
+         {\bullet}_{link}
+         & {\hookleftarrow} & 
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
+         {\bullet}_{link} 
+         & {\hookrightarrow} & 
+         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r]\ar@{->}[dr] &
+         {\bullet}_{link}
+         \\
+         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
+         & & &
+         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
+         & & &
+        {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[]{} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]\ar@{->}[r] &
+         {\bullet}\ar@(ul,ur)^{flowing}\ar@{->}[u]\ar@{->}[d] \POS[]+<-3pc,1pc>*+=<10pc,11pc>[F-]{} 
+         \POS[]-<-.5pc,.5pc>\drop{my\_flow\_service}
+         \\\
+         & & & & & & & & & &{\bullet}\POS[]-<.5pc,.5pc> \drop{my\_flows\_property}
+      }
+    \]
+    \caption{Flow's property creation}
+    \protect\label{fig:flowpropertycreation}
+  \end{figure}
+  This production allow's the creation of flow's properties.\\
+  
+  QUESTIONS:\\
+  1) Can this properties be the actions associated in the nemo language ? 
+  Perphaps properties can be understood as premises that have to be guaranteed 
+  while the flow exist. \\
+  2) Some of this properties could be dynamic (this has sense, since flow is the representation 
+  of dynamism in the network). \\
+    
+\end{itemize} 
+
+\section{Graph instantiation}
+
+In this section we will focus in giving several examples of the usage of the 
+grammar recently defined. The examples used in this section will be those defined in 
+a previous document (REMEMBER TO REWRITE EXAMPLES HERE) \\ 
+Lets first defined the first example, a network with two host and a router, 
+which want to start a ssh connection. \\
+There were two problems here:
+\begin{itemize}
+  \item Neither of the host had ssh active
+  \item Neither of the host were connected to the router.
+\end{itemize}
+
+Let's model our network, and see how the grammar defined before help us to 
+detect problems in what we are trying to do.\\
+This would be the network represented in our model:
+\begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=30pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{FIRST EXAMPLE}
+         \\
+         \\
+         {\bullet}\ar@(ul,ur)^{idle} \POS[]-<-.5pc,.5pc> \drop{h1} &
+         {\bullet}\ar@(ul,ur)^{idle} \POS[]-<-.5pc,.5pc> \drop{router} &
+         {\bullet}\ar@(ul,ur)^{idle} \POS[]-<-.5pc,.5pc> \drop{h2}
+      }
+    \]
+\end{figure}
+
+Having model our network, what we can check is that NEW\_FLOW production can't be 
+applied to my network (since there is no morphism between the left side of the production 
+and this model). In this case, if I write a program for the situation described, 
+we will have a compiler error, since there's going to be an instruction that 
+cannot be done, and this is because the production associated with it cannot be 
+executed.
+
+\end{document}
