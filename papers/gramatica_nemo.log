@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  14 MAY 2016 20:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  14 MAY 2016 21:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -403,67 +403,67 @@ LaTeX Warning: Label `fig:servicecreation' multiply defined.
 )
 \openout1 = `gramatica_nemo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 176.
-LaTeX Font Info:    ... okay on input line 176.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 176.
-LaTeX Font Info:    ... okay on input line 176.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 176.
-LaTeX Font Info:    ... okay on input line 176.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 176.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 175.
+LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 175.
+LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 175.
+LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 175.
 LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 17
-6.
+5.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 176.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 176.
-LaTeX Font Info:    ... okay on input line 176.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 176.
-LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 175.
+LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 175.
+LaTeX Font Info:    ... okay on input line 175.
 LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 17
-6.
+5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 17
-6.
+5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OMX+psycm on input line 17
-6.
+5.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 176.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 175.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 176.
+LaTeX Font Info:    Try loading font information for U+msa on input line 175.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 176.
+LaTeX Font Info:    Try loading font information for U+msb on input line 175.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 176.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 176.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 176.
-LaTeX Font Info:    Try loading font information for U+stmry on input line 176.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 175.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-Package xypdf Info: Line width: 0.3999pt on input line 176.
+Package xypdf Info: Line width: 0.3999pt on input line 175.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -523,118 +523,139 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 178.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
 
 
-LaTeX Warning: there is no bold Symbol font on input line 178.
+LaTeX Warning: there is no bold Symbol font on input line 177.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 180.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 192.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 222.
-<images/first_example.png, id=1, 681.54625pt x 375.4025pt>
-File: images/first_example.png Graphic file (type png)
-
-<use images/first_example.png>
-Package pdftex.def Info: images/first_example.png used on input line 224.
-(pdftex.def)             Requested size: 347.1264pt x 227.62616pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--249
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--249
-
- []
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 191.
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 242.
+
+<images/first_example.png, id=9, 681.54625pt x 375.4025pt>
+File: images/first_example.png Graphic file (type png)
+
+<use images/first_example.png>
+Package pdftex.def Info: images/first_example.png used on input line 244.
+(pdftex.def)             Requested size: 347.1264pt x 227.62616pt.
+
+<images/second_example.png, id=11, 962.59625pt x 336.25626pt>
+File: images/second_example.png Graphic file (type png)
+
+<use images/second_example.png>
+Package pdftex.def Info: images/second_example.png used on input line 252.
+(pdftex.def)             Requested size: 347.1219pt x 227.62505pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--256
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--256
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 229--256
+
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2 <./images/first_example.png>]
+ [2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3 <./images/first_example.png> <./images/second_example.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 262.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 282.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 262.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 282.
  (./gramatica_nemo-01.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 277--284
+Underfull \hbox (badness 10000) in paragraph at lines 297--304
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--284
+Underfull \hbox (badness 10000) in paragraph at lines 297--304
 
  []
 
-(./gramatica_nemo-02.xyc)
+(./gramatica_nemo-02.xyc) [4]
 Missing character: There is no Â in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--316
+Underfull \hbox (badness 10000) in paragraph at lines 325--336
 
  []
 
-[3] (./gramatica_nemo-03.xyc)
-Overfull \hbox (29.52335pt too wide) detected at line 339
+(./gramatica_nemo-03.xyc)
+Overfull \hbox (29.52335pt too wide) detected at line 359
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 343--348
+Underfull \hbox (badness 10000) in paragraph at lines 363--368
 
  []
 
 (./gramatica_nemo-04.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 370--379
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 390--399
 
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 382--385
+
+Underfull \hbox (badness 10000) in paragraph at lines 402--405
 
  []
 
 (./gramatica_nemo-05.xyc)
-Overfull \hbox (111.24153pt too wide) detected at line 416
+Overfull \hbox (111.24153pt too wide) detected at line 436
 []
  []
 
+[6]
 Missing character: There is no Â in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 426--441
+Underfull \hbox (badness 10000) in paragraph at lines 446--461
 
  []
 
-[5] (./gramatica_nemo-06.xyc)
-Overfull \hbox (123.24153pt too wide) detected at line 474
+(./gramatica_nemo-06.xyc)
+Overfull \hbox (123.24153pt too wide) detected at line 494
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 478--479
+Underfull \hbox (badness 10000) in paragraph at lines 498--499
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 480--486
+Underfull \hbox (badness 10000) in paragraph at lines 500--506
 
  []
 
-(./gramatica_nemo-07.xyc) [6] [7] (./gramatica_nemo.aux)
+[7] (./gramatica_nemo-07.xyc) [8] (./gramatica_nemo.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6185 strings out of 493089
- 79820 string characters out of 6134842
- 201365 words of memory out of 5000000
- 9461 multiletter control sequences out of 15000+600000
+ 6190 strings out of 493089
+ 79957 string characters out of 6134842
+ 200365 words of memory out of 5000000
+ 9465 multiletter control sequences out of 15000+600000
  44603 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,11n,27p,3257b,1060s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -648,10 +669,10 @@ type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/
 xyatip10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/xybti
 p10.pfb>
-Output written on ./gramatica_nemo.pdf (7 pages, 104192 bytes).
+Output written on ./gramatica_nemo.pdf (8 pages, 119331 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 73 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -17,7 +17,6 @@
 \usepackage{pslatex}
 \usepackage{alltt}
 \usepackage{float}
-%\usepackage{natbib}
 \usepackage{url}
 \usepackage{subfigure}
 \usepackage{stmaryrd}
@@ -155,14 +154,14 @@
 
 
 
-\title{A network's computational model for Software Defined Networking}
+\title{A network computational model's for Software Defined Networking}
 \author{Andr\'es Laurito}
 
 \institute{
 Departamento de Computac\'on - FCEN -UBA\\
  \email{andy.laurito@gmail.com} }
 
-\titlerunning{A network's computational model for Software Defined Networking}
+\titlerunning{A network computational model's for Software Defined Networking}
 
 \authorrunning{A. Laurito}
 
@@ -190,45 +189,73 @@ create a compiler for a new network progamming language recently emerged called 
 \end{abstract}
 
 \section{Introduction}
-Nowadays network's have became a crucial resource of any software application. 
-Technologies for improving code crafting are always emerging. By contrast, network's have 
-several issues to be solved. Some of this issues may be tagged as debugging problem's (it is 
-rather difficult to debug problems in network's using known tools such as 
-ping, traceroute, netstat, between others), changeability problem's (changing traffic rule's, or 
+Nowadays networks have became a crucial resource of any software application. 
+Technologies for improving code crafting are emerging constantly. By contrast, network's have 
+several issues to be solved. Some of this issues may be tagged as 
+\begin{itemize}
+  \item \textbf{Debugging problem's:} It is rather difficult to debug problems in network's using
+  most known tools such as ping, traceroute, netstat, between others.
+  \item \textbf{Changeability problem's:} changing traffic rule's, or 
 security rule's in network may impliy modifying hundred, or even thousands code line's 
-distributed in several devices around the network), deploys problem's (most 
-changes are made mannually in several devices, making human error's easier),  between 
-others. Is it possible to do better ?, Can software be of help in this task?, Is it possible to know 
-when network's changes will break something before applying them?. \\
+distributed in several devices around the network.
+\item \textbf{Deployment problem's:} most changes are made mannually in several devices, 
+making human mistakes easier.
+\end{itemize}
+Is it possible to do better ?, Can software be of help in this task?, Is it possible to know 
+when network change's will break something before applying them?. \\
 We believe that all this question's have possitive answers, and the best way of 
-attacking this problem nowadays is using network's programming languages which are 
+solving this problem nowadays is using network's programming languages which are 
 build over the Software Defined Networking (SDN) paradigm.\\
 Multiple SDN's programming languages have emerged over the past year's (some examples 
-of these are Pyretic, Frenetic, Nemo, etc.), having each of them different's approach to solve 
-some of the problems described before. \\
+of these are Pyretic, Frenetic, Nemo, etc.), having each of them different approaches to solve 
+some of the problems described before. Some of the principal lack's of the network 
+programming languages discipline nowadays are formal grammar definitions, verification, 
+validation, testing, software metrics and quality assurance, betwen multiple others. \\
+Missing this properties makes harder to build some tools for network programming languages,
+such as compiler's, debugger's, coding enviorment's, etc. This limitation's 
+makes the network operator's job difficult, even when using some of this 
+programming languages.\\
+The main contribution of this paper is presenting, as far as the authors know, 
+the first network computational model based on the definition of a graph 
+grammar. In section 2 we will define the problem to be solved with several 
+examples and assumptions. In section 3 we will define the graph grammar, and we 
+will extend this grammar to a type graph grammar in section 4. In section 5 we 
+will use this grammar to show how we can solve the problems specified in section 
+2, and in section 6 we will check how the grammar can be used for building a 
+simple compiler for the Nemo programming language. Finally, in section 7 we will 
+give our conclusion and in section 8 we will introduce further work to be done.
+
+\section{Definning the problem}
 Let us remember that a program may be defined as a sequence of instruction's that executed 
 perform a task in a computer or multiple computer's. Every program can be model as a Turing's 
-machine or a finite lambda calculus computation, and despite of the model chosen, the operations are performed over a structure (usually this 
-structure is a memory). In consequence, every network program is model as a 
-finite sequence of operations over a structure.\\
+machine or a finite lambda calculus computation, and despite of the model chosen, the 
+operations are performed over a structure (usually this structure is a memory). In consequence,
+every network program is model as a finite sequence of operations over a structure.\\
 Our first proposal is to define this structure as an oriented graph, since network's 
 can be easily mapped to graphs, and also is perfect reasonably to think 
 program's operation as graph's rewriting. After this reasoning, the second propose is to define
 a graph grammar in order to model all the network program's that may be written in any netowrk
 programming language. \\
 In order to define the grammar production's, we will narrow to model 
-program's that solve the following problems:\\
+programs that solve the following problems in networks where each device support's SDN:\\
 \\
 \textbf{\underline{\textit{First Problem:}}} \\
 Suppose that we have the following network:\\
-\includegraphics[width=\textwidth, height=8cm]{first_example.png}  
+\includegraphics[width=\textwidth, height=8cm]{first_example.png}\\  
 where H1 want's to establish an ssh 
 connection with H2, and let's assume that there are not forwarding rules in 
 order to establish such connection's, and also H2 has not an ssh server client to 
 fullfilled this connection. \\
 \\
+\textbf{\underline{\textit{Second Problem:}}} \\
+Suppose that we have the following network:\\
+\includegraphics[width=\textwidth, height=8cm]{second_example.png}\\
+where H1 wants to establish a ssh connection with H2, using S1->S2->S4 path, and 
+let's assume that there are not forwarding rules from S2 to S4. 
+\\
+
 Defining a graph grammar allows us to check easily some of the problems described 
-before, particularly static properties, such as examples 1 to 4 (as we will shall show in following
+before, particularly static properties, such as examples 1 and 2 (as we will shall see in following
 sections). However, dynamic properties (such as applying some load balancing policy when a 
 queue start's to drop more than 50\% of packets) are not easily checked by grammar 
 production's. Some problems required to execute our program in a traffic network, 
@@ -240,15 +267,8 @@ in several simulation's, in order to check if the production applied to the actu
 possible. For doing this, we will mapped the dynamic grammar production's to 
 devs (a formal language specification for defining simulator's), and we will run a simulation 
 using this formal specification.\\
-In section 2 we will define the graph grammar production's, which will model a 
-primitive set of operations that can be performed over the network. In section 3 
-we will use this grammar to model sequence of operations to show how 
-the problems introduced before are solved. In section 4 we extend the graph grammar of 
-section 2 to a type graph grammar. In section 5 we show how this grammar can be 
-apply to model Nemo program's. AND MORE  
-
-
-
+Having defined the problem that we will be solving, let's define the primitive 
+operations that we will used in our computational model.
 
 \section{Graph grammar}
 
