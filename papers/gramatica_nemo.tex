@@ -319,14 +319,19 @@ productions are the one's that allows us to modify the network topoloy:
          {}\POS[]-<0pc,0pc>\drop{REMOVE\_NODE:}
          \\
          \\
-         {\bullet} \ar@(ul,ur)^{service} \POS[]-<3pc,.5pc>\drop{transmitter/receiver}&
-         {\bullet} \ar@(ul,ur)^{idle} \ar@{.>}^{behaves}[l]\ar@{.>}^{source/target}[r] \POS[]-<0pc,.5pc>\drop{1} &
+         {\bullet} \ar@(ul,ur)^{service} \POS[]-<1pc,.5pc>\drop{transmitter}&
+         {\bullet} \ar@(ul,ur)^{idle} \ar@{.>}^{behaves}[l] \ar@{.>}^{behaves}[dl]
+         \ar@{.>}^{source}[r] \ar@{.>}^{source}[dr] 
+         \POS[]-<0pc,.5pc>\drop{1} &
          {\bullet} \POS[]-<0pc,.5pc>\drop{link}
-         \POS[]+<-5pc,.5pc> *+=<16pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         \POS[]+<-5pc,-1pc> *+=<12pc,7pc>[F-]{} & {\hookleftarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} &
+         \\
+         {\bullet} \ar@(r,d)^{service} \POS[]-<1pc,.5pc>\drop{receiver} & &
+         {\bullet} \POS[]-<0pc,.5pc>\drop{link}
        }
     \]
     \caption{Deleting a node}
@@ -335,7 +340,9 @@ productions are the one's that allows us to modify the network topoloy:
   This is the production that will allow us to delete node's from our network. \\ 
   In order to apply this condition, we must satisfied that this node is neither 
   linked against a link, nor linked against a service.\\
-  
+  QUESTION: IS THE NEGATIVE CONDITION SAYING THAT ALL OF THIS PROPERTIES 
+  MUST BE PRESENT TO NOT FULLFILLED THIS RULE?, OR IM SAYING THAT IF ONE OF
+  THEM IS PRESENT, THEN IT FAILS (this is what I want).\\
    
   \item Node properties creation
   \begin{figure}[H]
@@ -379,8 +386,8 @@ productions are the one's that allows us to modify the network topoloy:
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{}
        }
     \]
-    \caption{Node properties creation}
-    \protect\label{fig:nodecreation}
+    \caption{Node properties deletion}
+    \protect\label{fig:nodedeletion}
   \end{figure}
   This production allows us to remove a node's property. At first, I see no need 
   to impose some restriction to applied this rule.\\
@@ -409,6 +416,34 @@ productions are the one's that allows us to modify the network topoloy:
   flows,this means that, when a flow is created, this flow will be of type service. The fact that the
   main idea is to send and receive information, is represented as dual nodes representing a 
   transmitter and a reicever in the graph.\\
+  
+  \item Service Deletion
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=35pt@R=16pt
+       {
+        {} \POS[]-<0pc,0pc>\drop{REMOVE\_SERVICE:}
+         \\
+         \\
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[r]
+         \POS[]-<-0.5pc,.5pc> \drop{transmitter} 
+         &
+         {\bullet} \ar@(ul,ur)^{service} \POS[]-<-0.5pc,.5pc> \drop{receiver}
+         & {\hookleftarrow} &
+         {}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{}
+         \\
+         {\bullet} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{1} &
+         {\bullet} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{2}
+         \POS[]+<-2pc,1pc> *+=<8pc,7pc>[F-]{}
+      }
+    \]
+    \caption{Service Creation}
+    \protect\label{fig:servicecreation}
+  \end{figure}
+  In this production we remove a service, whenever the service is not attached by a node.\\
   
   \item Node behaves as some endpiont of communication
   \begin{figure}[H]
@@ -442,7 +477,38 @@ productions are the one's that allows us to modify the network topoloy:
   the communication of services. One node could eventually behave as either 
   endpoints (an example of this situation could be a http connection, where the node is 
   both client and server).\\
-  
+
+ \item Node stops behaving as some endpiont in the communication
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=35pt@R=35pt
+       {
+         {}\POS[]-<1pc,0pc>\drop{NODE\_STOPS\_IMPLEMENTING\_ROLE:}
+         \\
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{behaves}[r] &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookleftarrow} &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d]  \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookrightarrow} &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         \\
+         & {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & 
+         & {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<0pc,2pc> *+=<6pc,9pc>[F-]{} &
+         & {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<0pc,2pc> *+=<6pc,9pc>[F-]{}
+       }
+    \]
+    \caption{Node stops implementing role}
+    \protect\label{fig:deattachmentnodetoservice}
+  \end{figure}
+  This production is used to make a node stop behaving as one of the communication's 
+  endpoint.\\
+  I THINK THIS SHOULD BE THE STANDARD TO USE FOR EVERY PRODUCTION THAT DELETES
+  PROPERTIES OR NODES FROM GRAPH (REMEMBER THAT SERVICES, NODES CAN STOP 
+  WORKING WHILE THE NETWORK IS RUNNING).\\
+   
   \item Link creation
   \begin{figure}[H]
     \[
