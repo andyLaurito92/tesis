@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  4 JUN 2016 00:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  4 JUN 2016 12:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -362,184 +362,316 @@ Package: stmaryrd 1994/03/03 St Mary's Road symbol package
 LaTeX Font Info:    Overwriting symbol font `stmry' in version `bold'
 (Font)                  U/stmry/m/n --> U/stmry/b/n on input line 89.
 )
-\c@notation=\count132
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks28
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count132
+))
+\Gin@req@height=\dimen162
+\Gin@req@width=\dimen163
+)
+\c@notation=\count133
 
 (./gramatica_nemo.aux)
 \openout1 = `gramatica_nemo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 175.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 177.
 LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 17
-5.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
 LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 17
-5.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 17
-5.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
 LaTeX Font Info:    Try loading font information for OMX+psycm on input line 17
-5.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 175.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 177.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 175.
+LaTeX Font Info:    Try loading font information for U+msa on input line 177.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 175.
+LaTeX Font Info:    Try loading font information for U+msb on input line 177.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
-LaTeX Font Info:    Try loading font information for U+stmry on input line 175.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 177.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-Package xypdf Info: Line width: 0.3999pt on input line 175.
+Package xypdf Info: Line width: 0.3999pt on input line 177.
+
+(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count134
+\scratchdimen=\dimen164
+\scratchbox=\box60
+\nofMPsegments=\count135
+\nofMParguments=\count136
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count137
+\MPscratchDim=\dimen165
+\MPnumerator=\count138
+\makeMPintoPDFobject=\count139
+\everyMPtoPDFconversion=\toks30
+) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 177.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
 
 
-LaTeX Warning: there is no bold Symbol font on input line 177.
+LaTeX Warning: there is no bold Symbol font on input line 179.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 179.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 181.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 187.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 209.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 209.
-(./gramatica_nemo-01.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 224--230
-
- []
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 201.
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./gramatica_nemo-02.xyc)
-Overfull \hbox (23.96938pt too wide) detected at line 246
-[]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 252.
+
+<images/first_example.png, id=9, 681.54625pt x 375.4025pt>
+File: images/first_example.png Graphic file (type png)
+
+<use images/first_example.png>
+Package pdftex.def Info: images/first_example.png used on input line 254.
+(pdftex.def)             Requested size: 347.1264pt x 227.62616pt.
+
+<images/second_example.png, id=11, 962.59625pt x 336.25626pt>
+File: images/second_example.png Graphic file (type png)
+
+<use images/second_example.png>
+Package pdftex.def Info: images/second_example.png used on input line 262.
+(pdftex.def)             Requested size: 347.1219pt x 227.62505pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--266
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 250--255
+Underfull \hbox (badness 10000) in paragraph at lines 239--266
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--266
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3 <./images/first_example.png> <./images/second_example.png>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 292.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 292.
+ (./gramatica_nemo-01.xyc)
+Underfull \hbox (badness 10000) in paragraph at lines 307--313
+
+ []
+
+(./gramatica_nemo-02.xyc)
+Overfull \hbox (23.96938pt too wide) detected at line 329
+[]
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 333--338
 
  []
 
 (./gramatica_nemo-03.xyc)
-Overfull \hbox (103.23361pt too wide) detected at line 280
+Overfull \hbox (103.23361pt too wide) detected at line 363
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--288
+Underfull \hbox (badness 10000) in paragraph at lines 367--371
 
  []
 
 (./gramatica_nemo-04.xyc)
-Overfull \hbox (36.999pt too wide) detected at line 320
+Overfull \hbox (36.999pt too wide) detected at line 403
 []
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 324--330
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 407--413
 
  []
 
 (./gramatica_nemo-05.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 352--361
+Underfull \hbox (badness 10000) in paragraph at lines 435--444
 
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 364--367
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 447--450
 
  []
 
 (./gramatica_nemo-06.xyc)
-Overfull \hbox (118.38802pt too wide) detected at line 396
+Overfull \hbox (118.38802pt too wide) detected at line 479
 []
  []
 
 Missing character: There is no Â in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--421
+Underfull \hbox (badness 10000) in paragraph at lines 489--504
 
  []
 
-[4] (./gramatica_nemo-07.xyc)
-Overfull \hbox (123.24153pt too wide) detected at line 454
+[7] (./gramatica_nemo-07.xyc)
+Overfull \hbox (123.24153pt too wide) detected at line 537
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--459
+Underfull \hbox (badness 10000) in paragraph at lines 541--542
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--466
+Underfull \hbox (badness 10000) in paragraph at lines 543--549
 
  []
 
-(./gramatica_nemo-08.xyc) [5] [6] (./gramatica_nemo.aux) ) 
+(./gramatica_nemo-08.xyc) [8] [9] (./gramatica_nemo.aux) ) 
 Here is how much of TeX's memory you used:
- 4962 strings out of 493089
- 61421 string characters out of 6134842
- 179067 words of memory out of 5000000
- 8297 multiletter control sequences out of 15000+600000
- 42974 words of font info for 108 fonts, out of 8000000 for 9000
+ 6196 strings out of 493089
+ 80080 string characters out of 6134842
+ 203370 words of memory out of 5000000
+ 9468 multiletter control sequences out of 15000+600000
+ 44603 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,11n,27p,3257b,1060s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,11n,27p,3257b,1060s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2
 015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2015/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fo
 nts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/time
-s/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on ./gramatica_nemo.pdf (6 pages, 86856 bytes).
+s/utmbi8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
+Output written on ./gramatica_nemo.pdf (9 pages, 122933 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 39 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
