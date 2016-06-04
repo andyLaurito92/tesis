@@ -156,14 +156,14 @@
 
 
 
-\title{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
+\title{A network computational model's for Software Defined Networking}
 \author{Andr\'es Laurito}
 
 \institute{
 Departamento de Computac\'on - FCEN -UBA\\
  \email{andy.laurito@gmail.com} }
 
-\titlerunning{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
+\titlerunning{A network computational model's for Software Defined Networking}
 
 \authorrunning{A. Laurito}
 
@@ -287,7 +287,7 @@ productions are the one's that allows us to modify the network topoloy:
 
 
 \begin{itemize}
-  \item Node creation
+  \item Creating a node
   \begin{figure}[H]
     \[
        \xymatrix@C=25pt@R=16pt
@@ -301,7 +301,7 @@ productions are the one's that allows us to modify the network topoloy:
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{1} &
        }
     \]
-    \caption{Node creation}
+    \caption{Creating a node}
     \protect\label{fig:nodecreation}
   \end{figure}
   This production creates a new logical node (this means that 
@@ -310,13 +310,39 @@ productions are the one's that allows us to modify the network topoloy:
   that the address could be a CIDR). \\
   It is important to remark that the created node is in an idle state, meaning 
   that is not interacting with any other node in the network. \\ 
+
+  \item Deleting a node
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=35pt@R=16pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{REMOVE\_NODE:}
+         \\
+         \\
+         {\bullet} \ar@(ul,ur)^{service} \POS[]-<3pc,.5pc>\drop{transmitter/receiver}&
+         {\bullet} \ar@(ul,ur)^{idle} \ar@{.>}^{behaves}[l]\ar@{.>}^{source/target}[r] \POS[]-<0pc,.5pc>\drop{1} &
+         {\bullet} \POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<-5pc,.5pc> *+=<16pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} &
+       }
+    \]
+    \caption{Deleting a node}
+    \protect\label{fig:nodedeletion}
+  \end{figure}
+  This is the production that will allow us to delete node's from our network. \\ 
+  In order to apply this condition, we must satisfied that this node is neither 
+  linked against a link, nor linked against a service.\\
   
+   
   \item Node properties creation
   \begin{figure}[H]
     \[
        \xymatrix@C=25pt@R=16pt
        {
-         {}\POS[]-<6pc,0pc>\drop{NODE\_PROPERTY\_CREATION:}
+         {}\POS[]-<0pc,0pc>\drop{NODE\_PROPERTY\_CREATION:}
          \\
          \\
          O \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
@@ -335,6 +361,29 @@ productions are the one's that allows us to modify the network topoloy:
   This production allows us to create a node's property. The only condition to 
   be satisfied to apply this production, is that the property to be created can't be an already
   defined property for node 1.
+  
+  \item Node properties deletion
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{NODE\_PROPERTY\_DELETION:}
+         \\
+         \\
+         {\bullet} \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{has}[l]
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {\bullet} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{1} & {\hookrightarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{}
+       }
+    \]
+    \caption{Node properties creation}
+    \protect\label{fig:nodecreation}
+  \end{figure}
+  This production allows us to remove a node's property. At first, I see no need 
+  to impose some restriction to applied this rule.\\
   
   \item Service Creation
   \begin{figure}[H]
@@ -520,51 +569,38 @@ productions are the one's that allows us to modify the network topoloy:
   both nodes implements the same service, and one transmits while the other 
   listens.\\
   Finally, it's important to notice that the new flow is created in a running state, 
-  and is associated to the link. \\
+  and is associated to the link with the link over, meaning that the flow is running over 
+  this link. \\
   \\
   THINS THAT HAD TO BE THINK A BIT MORE: \\
   1) Some rules may not be valid in this context ... ¿How do I deny multiple ssh 
   conections betwen same nodes? (Also, this sounds to me like a type condition, since another
   services may allow this behaviour, for example sql.) \\
-  2) 
  
-  \item Flow's properties creation
+  \item Flow's property creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=25pt@R=30pt
+       \xymatrix@C=25pt@R=16pt
        {
-         {}\POS[]-<0pc,0pc>\drop{NEW\_FLOW:}
+         {}\POS[]-<0pc,0pc>\drop{FLOW\_PROPERTY\_CREATION:}
          \\
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
-         {\bullet}_{link}
-         & {\hookleftarrow} & 
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
-         {\bullet}_{link} 
-         & {\hookrightarrow} & 
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r]\ar@{->}[dr] &
-         {\bullet}_{link}
          \\
-         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
-         & & &
-         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
-         & & &
-        {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]\ar@{->}[r] &
-         {\bullet}\ar@(ul,ur)^{flowing}\ar@{->}[u]\ar@{->}[d] \POS[]+<-3pc,1pc>*+=<10pc,11pc>[F-]{} 
-         \POS[]-<-.5pc,.5pc>\drop{my\_flow\_service}
-         \\\
-         & & & & & & & & & &{\bullet}\POS[]-<.5pc,.5pc> \drop{my\_flows\_property}
-      }
+         O \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running} \ar@{.>}^{has}[l]
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running} \ar@{->}^{has}[r]
+         \POS[]+<1.5pc,.5pc> *+=<6pc,3.8pc>[F-]{} &
+         {\bullet} \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop}
+       }
     \]
-    \caption{Flow's property creation}
-    \protect\label{fig:flowpropertycreation}
+    \caption{Node properties creation}
+    \protect\label{fig:nodecreation}
   \end{figure}
-  This production allow's the creation of flow's properties.\\
+  As other productions already defined, this one allow's us to create a new 
+  flow's property. The only condition to be satisfied, is that this new property 
+  to be created is not already created in flow.
   
   QUESTIONS:\\
   1) Can this properties be the actions associated in the nemo language ? 
