@@ -319,19 +319,19 @@ productions are the one's that allows us to modify the network topoloy:
          {}\POS[]-<0pc,0pc>\drop{REMOVE\_NODE:}
          \\
          \\
-         {\bullet} \ar@(ul,ur)^{service} \POS[]-<1pc,.5pc>\drop{transmitter}&
+         O \ar@(ul,ur)^{service} \POS[]-<1pc,.5pc>\drop{transmitter}&
          {\bullet} \ar@(ul,ur)^{idle} \ar@{.>}^{behaves}[l] \ar@{.>}^{behaves}[dl]
          \ar@{.>}^{source}[r] \ar@{.>}^{source}[dr] 
          \POS[]-<0pc,.5pc>\drop{1} &
-         {\bullet} \POS[]-<0pc,.5pc>\drop{link}
+         O \POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<-5pc,-1pc> *+=<12pc,7pc>[F-]{} & {\hookleftarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} &
          \\
-         {\bullet} \ar@(r,d)^{service} \POS[]-<1pc,.5pc>\drop{receiver} & &
-         {\bullet} \POS[]-<0pc,.5pc>\drop{link}
+         O \ar@(r,d)^{service} \POS[]-<1pc,.5pc>\drop{receiver} & &
+         O \POS[]-<0pc,.5pc>\drop{link}
        }
     \]
     \caption{Deleting a node}
