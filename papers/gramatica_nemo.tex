@@ -541,6 +541,33 @@ productions are the one's that allows us to modify the network topoloy:
   idle state behaves likes a wildcard, meaning that from this state, multiply actions 
   can be applied to the node.\\
   
+  \item Link deletion
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+        {\bullet}_{1}\ar@(ul,ur)^{idle} \ar@{->}^{source}[d]
+        \POS[]-<5pc,0pc>\drop{REMOVE\_LINK:} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
+         & {\hookleftarrow} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}
+         \POS[]+<-2pc,-.5pc>*+=<7pc,8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle} &
+         {\bullet}_{2} \ar@(ul,ur)^{idle}
+         \POS[]+<-2pc,-.5pc>*+=<7pc,8pc>[F-]{}
+         \\
+         {\bullet} \POS[]-<.8pc,0pc> \drop{link}
+         \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} 
+       }
+    \]
+    \caption{Link deletion}
+    \protect\label{fig:linkdeletion}
+  \end{figure}
+  This is the production used to remove links from nodes. When we allow this production to be
+  applied without contraints, we are trying to represent real states that could happen, since 
+  links usually fail witout previous warning.\\
+  
   \item Link's property creation
   \begin{figure}[H]
     \[
@@ -575,6 +602,28 @@ productions are the one's that allows us to modify the network topoloy:
   2) Can I always define properties in a node? (It really doesn't matter what is going on with 
   that link in the network?. Perphas it happens something similar as nodes, that we need some 
   'idle' state, for example, an empty state).\\
+  
+  \item Link's property deletion
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}\POS[]+<0pc,2pc>\drop{REMOVE\_LINK\_PROPERTY:}
+         \\
+         {\bullet}\ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} & 
+         {\bullet} \ar@{->}^{has}[l] \POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} 
+         & {\hookleftarrow} &
+         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
+       }
+    \]
+    \caption{Link's property deletion}
+    \protect\label{fig:linkpropertydeletion}
+  \end{figure}
+  This is the production that allows us to remove properties from a link.\\
   
   \end{itemize}
   
@@ -643,6 +692,34 @@ productions are the one's that allows us to modify the network topoloy:
   conections betwen same nodes? (Also, this sounds to me like a type condition, since another
   services may allow this behaviour, for example sql.) \\
  
+ \item Remove flow from link
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=35pt@R=35pt
+       {
+         {}\POS[]-<1pc,0pc>\drop{REMOVE\_FLOW\_FROM\_LINK:}
+         \\
+         {\bullet} \POS[]-<-0.5pc,.5pc> \drop{link}
+         & {\hookleftarrow} &
+         {\bullet} \POS[]-<-0.5pc,.5pc> \drop{link}
+         & {\hookrightarrow} &
+         {\bullet} \POS[]-<-0.5pc,.5pc> \drop{link}
+         \\
+         {\bullet} \ar@(r,d)^{running} \ar@{->}^{over}[u] \POS[]-<1.5pc,0pc> \drop{flow} 
+         \POS[]+<0pc,2pc> *+=<5pc,9pc>[F-]{} & &
+          {}
+         \POS[]+<0pc,2pc> *+=<5pc,9pc>[F-]{} & &
+         {}
+         \POS[]+<0pc,2pc> *+=<5pc,9pc>[F-]{}
+       }
+    \]
+    \caption{Remove flow from link}
+    \protect\label{fig:removeflowfromlink}
+  \end{figure}
+  This production is used to remove flows from links. Notice that is not necessary to detach 
+  nodes from services, since they can still create new flows from the services where they 
+  are attached. This production could be used for example, when a flow ends.\\
+ 
   \item Flow's property creation
   \begin{figure}[H]
     \[
@@ -674,7 +751,29 @@ productions are the one's that allows us to modify the network topoloy:
   while the flow exist. \\
   2) Some of this properties could be dynamic (this has sense, since flow is the representation 
   of dynamism in the network). \\
-    
+
+  \item Flow's property deletion
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}\POS[]-<0pc,0pc>\drop{REMOVE\_FLOW\_PROPERTY:}
+         \\
+         \\
+         {\bullet} \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running} \ar@{->}^{has}[l]
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}_{flow} \ar@(ul,ur)^{running}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
+       }
+    \]
+    \caption{Flow properties deletion}
+    \protect\label{fig:flowpropertydeletion}
+  \end{figure}
+  Finally, this productions allows us to remove properties from a flow.
+   
 \end{itemize} 
 
 \section{Graph instantiation}
