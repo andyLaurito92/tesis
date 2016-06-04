@@ -311,6 +311,31 @@ productions are the one's that allows us to modify the network topoloy:
   It is important to remark that the created node is in an idle state, meaning 
   that is not interacting with any other node in the network. \\ 
   
+  \item Node properties creation
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=25pt@R=16pt
+       {
+         {}\POS[]-<6pc,0pc>\drop{NODE\_PROPERTY\_CREATION:}
+         \\
+         \\
+         O \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{.>}^{has}[l]
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {\bullet} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{1} & {\hookrightarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{has}[r]
+         \POS[]+<1.5pc,.5pc> *+=<6pc,3.8pc>[F-]{} &
+         {\bullet} \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop}
+       }
+    \]
+    \caption{Node properties creation}
+    \protect\label{fig:nodecreation}
+  \end{figure}
+  This production allows us to create a node's property. The only condition to 
+  be satisfied to apply this production, is that the property to be created can't be an already
+  defined property for node 1.
+  
   \item Service Creation
   \begin{figure}[H]
     \[
@@ -365,48 +390,38 @@ productions are the one's that allows us to modify the network topoloy:
     \protect\label{fig:attachmentnodetoservice}
   \end{figure}
   This production is used to make node's to behave as one of the endpoints in 
-  the communication of services. The node can only behave as one of the endpoint in 
-  one service, and it's allow to implement more than one service.
-  THIS RESTRICTION SHOULD BE DONE BY NEGATIVE APPLICATION\\
+  the communication of services. One node could eventually behave as either 
+  endpoints (an example of this situation could be a http connection, where the node is 
+  both client and server).\\
   
   \item Link creation
   \begin{figure}[H]
     \[
        \xymatrix@C=25pt@R=16pt
        {
-        {\bullet}_{1}\ar@(ul,ur)^{idle} \POS[]-<3.8pc,0pc>\drop{NEW\_LINK:}
-         \POS[]-<.4pc,-0.5pc> &
+        {\bullet}_{1}\ar@(ul,ur)^{idle} \ar@{.>}^{source}[d]
+        \POS[]-<3.8pc,0pc>\drop{NEW\_LINK:} &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{.>}^{target}[dl]
+         & {\hookleftarrow} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle} &
          {\bullet}_{2}\ar@(ul,ur)^{idle}
-         \POS[]+<.4pc,0pc>
-         \POS[]-<1pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookleftarrow} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle} 
-         \POS[]-<.4pc,-0.5pc> &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}
-         \POS[]+<.4pc,-0.5pc>
-         \POS[]-<2pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookrightarrow} 
-         \POS[]+<4.6pc,0.5pc> *+=<7pc,3.8pc>[]{} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}^{source}[d]
-         \POS[]+<0pc,.5pc> &
+         \POS[]+<-2pc,-.5pc>*+=<7pc,8pc>[F-]{} & {\hookrightarrow} &
+         {\bullet}_{1}\ar@(ul,ur)^{idle} \ar@{->}^{source}[d] &
          {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
          \\
-         & & & & & & {\bullet}_{link}\ar@(r,d)^{empty} \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} \POS[]-<-0.5pc,.5pc>
-         \\
-         %{\ar[d]} 
-         \\
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}^{source}[d] \POS[]-<3.8pc,0pc>
-         \POS[]-<.4pc,-0.5pc> &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
-         \POS[]+<.4pc,0pc>
-         \\
-         {\bullet}_{link}\ar@(r,d)^{empty} \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} \POS[]-<-0.5pc,.5pc>
+         O \POS[]-<.8pc,0pc> \drop{link}
+         \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} & & & & & &
+         {\bullet}_{link} 
+         \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} 
        }
     \]
     \caption{Link creation}
     \protect\label{fig:linkcreation}
   \end{figure}
   Here we define a new link between nodes 1 and 2. The only condition to apply 
-  this production is that both nodes must be in an idle state and neither of them should have an existing 
-  link created. This restriction is done by the negative condition showed in L.\\
+  this production is that both nodes must be in an idle state and neither of them should have an 
+  existing link between them. This restriction is denoted by the dot lined in L, 
+  wich represents the negative condition.\\
   Note: Being in an idle state does not mean that they are doing nothing!. An 
   idle state behaves likes a wildcard, meaning that from this state, multiply actions 
   can be applied to the node.\\
@@ -414,25 +429,29 @@ productions are the one's that allows us to modify the network topoloy:
   \item Link's property creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=35pt@R=16pt
+       \xymatrix@C=25pt@R=16pt
        {
          {}\POS[]+<0pc,2pc>\drop{NEW\_LINK\_PROPERTY:}
          \\
-         {\bullet}\ar@(ul,ur)^{empty} \POS[]-<0pc,.5pc>\drop{link}
-         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
+         {\bullet}\ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} & 
+         {\bullet} \ar@{.>}^{has}[l] \POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} 
          & {\hookleftarrow} &
-         {\bullet}\ar@(ul,ur)^{empty}\POS[]-<0pc,.5pc>\drop{link}
+         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
-         {\bullet}\ar@(ul,ur)^{empty} \ar@{->}[r]\POS[]-<0pc,.5pc>\drop{link}
-         \POS[]+<1.5pc,.5pc> *+=<6.5pc,3.8pc>[F-]{} &
+         {\bullet}\ar@{->}^{has}[r]\POS[]-<0pc,.5pc>\drop{link}
+         \POS[]+<2.5pc,.5pc> *+=<7.5pc,3.8pc>[F-]{} &
          {\bullet}\ar@(ul,ur)^{property}
-         \POS[]+<0pc,.5pc>*+=<4pc,4pc>[]{}\drop{}
+         \POS[]+<0pc,.5pc>*+=<3pc,3pc>[]{}\POS[]-<0pc,.8pc>\drop{prop}
        }
     \]
     \caption{Link's property creation}
     \protect\label{fig:linkpropertycreation}
   \end{figure}
-  In this production we are allowing definition of link's property. This properties are going to be 
+  As in the node's creation property, this production allows us to create a new 
+  link's property. The condition to be satisfied to apply this production, is 
+  that link cannot have defined the property to be created.
+  This properties are going to be 
   perhaps physical properties in physical links (for example, we can define here bandwith, 
   average latency, perhpahs if it's either ethernet or wifi), and some other properties in logical 
   nodes.\\
@@ -444,7 +463,7 @@ productions are the one's that allows us to modify the network topoloy:
   
   \end{itemize}
   
-  So far we have defined productions that which are intended to be use between the interactions 
+  So far we have defined productions that are intended to be use between the interactions 
   with the elements in the network. With the following productions, we will start using the productions
   listed before, in order to crate interaction between the elements in the network. \\
   
@@ -452,29 +471,34 @@ productions are the one's that allows us to modify the network topoloy:
     \item Flow creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=35pt@R=35pt
+       \xymatrix@C=25pt@R=35pt
        {
          {}\POS[]-<1pc,0pc>\drop{NEW\_FLOW:}
          \\
-         {\bullet} \ar@(ul,ur)^{empty} \POS[]-<-0.5pc,.5pc> \drop{link} &
+         {\bullet} \POS[]-<.5pc,.5pc> \drop{link} &
          {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{behaves}[r] \ar@{->}^{source}[l] &
          {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
          & {\hookleftarrow} &
-         {\bullet}_{1} \ar@(ul,ur)^{idle} &
+         {\bullet} \POS[]-<.5pc,.5pc> \drop{link} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{behaves}[r] \ar@{->}^{source}[l] &
          {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
          & {\hookrightarrow} &
-         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r]
+         {\bullet} \POS[]-<1pc,.5pc> \drop{link} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r] \ar@{->}^{source}[l]
          &
          {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
          \\
          &
          {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r] \ar@{->}^{target}[ul] & 
          {\bullet} \ar@(r,d)^{service} \POS[]-<-1.5pc,0pc> \drop{receiver}
-         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
-         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
-         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
-         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
-         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{}
+         \POS[]+<-2.5pc,2pc> *+=<10pc,9pc>[F-]{} & & &
+         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r] \ar@{->}^{target}[ul] & 
+         {\bullet} \ar@(r,d)^{service} \POS[]-<-1.5pc,0pc> \drop{receiver}
+         \POS[]+<-2.5pc,2pc> *+=<10pc,9pc>[F-]{} & &
+         {\bullet} \ar@(r,d)^{running} \ar@{->}^{over}[u] \POS[]-<1pc,0pc> \drop{flow} &
+         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r] \ar@{->}^{target}[ul] & 
+         {\bullet} \ar@(r,d)^{service} \POS[]-<-1.5pc,0pc> \drop{receiver}
+         \POS[]+<-3pc,2pc> *+=<11pc,9pc>[F-]{}
        }
     \]
     \caption{Flow creation}
@@ -483,18 +507,20 @@ productions are the one's that allows us to modify the network topoloy:
   In order to create a flow, I first need two things: 
   \begin{itemize}
     \item I need to have a link between the nodes
-    \item I need to have in both nodes the service which will be the content type of the flow.  
+    \item One node has to behave as the transmitter, while the other one should 
+    behave as the reicever.  
    \end{itemize}
   
-  Lets go through these rules one more time. The first rule is just telling us that, in order to be able to
+  Lets go through these rules one more time. The first rule is just telling us that, in order to be 
+  able to
   create a node, I need a connection between this node's (remember that this conection can be either
   logical or physical).\\
   The second rule is telling us that, in order to create a flow of type X (lets say for example, 
   that I want to create a ssh flow between this nodes), I need to guarantee that 
-  both nodes support ssh connections. This is represented as both nodes having 
-  a link to the service. \\
-  Finally, it's important to notice that a flow is associated betwen nodes and a link 
-  (this last one is going to be the place where it's flowing).\\
+  both nodes implements the same service, and one transmits while the other 
+  listens.\\
+  Finally, it's important to notice that the new flow is created in a running state, 
+  and is associated to the link. \\
   \\
   THINS THAT HAD TO BE THINK A BIT MORE: \\
   1) Some rules may not be valid in this context ... ¿How do I deny multiple ssh 
