@@ -16,12 +16,12 @@
 \usepackage{amssymb}
 \usepackage{pslatex}
 \usepackage{alltt}
+
 \usepackage{float}
+%\usepackage{natbib}
 \usepackage{url}
 \usepackage{subfigure}
 \usepackage{stmaryrd}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
 
 %new
 \newcommand{\red}{\rightarrow}
@@ -154,14 +154,14 @@
 
 
 
-\title{A network computational model's for Software Defined Networking}
+\title{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
 \author{Andr\'es Laurito}
 
 \institute{
 Departamento de Computac\'on - FCEN -UBA\\
  \email{andy.laurito@gmail.com} }
 
-\titlerunning{A network computational model's for Software Defined Networking}
+\titlerunning{Nemo's graph grammar - The beggining of the end of Network's fireman approach}
 
 \authorrunning{A. Laurito}
 
@@ -177,100 +177,27 @@ Departamento de Computac\'on - FCEN -UBA\\
 \maketitle
 
 \begin{abstract}
-In this paper we define a computational model for netowrk's programming languages 
-that use Software Defined Network (SDN) paradigm. For this purpose, 
-network's will be model as graphs, and a graph grammar semantic will be defined. 
-Production's in the grammar will model actions that can take place in the network, and programs 
-will be just a sequence of instruction's modifying a starting graph. \\
-After graph grammar's definition, we will extend this grammar to a type graph grammar, and we 
-will explain how this new grammar can be applied to create a type programming language 
-for networks. Finally we will show how this computational model is well defined, by using it to 
-create a compiler for a new network progamming language recently emerged called Nemo. 
+ Something great 
+\begin{quotation}
+ ``The best way to predict the future is to invent it - Alan Kay''
+\end{quotation}
+
 \end{abstract}
 
 \section{Introduction}
-Nowadays networks have became a crucial resource of any software application. 
-Technologies for improving code crafting are emerging constantly. By contrast, network's have 
-several issues to be solved. Some of this issues may be tagged as 
-\begin{itemize}
-  \item \textbf{Debugging problem's:} It is rather difficult to debug problems in network's using
-  most known tools such as ping, traceroute, netstat, between others.
-  \item \textbf{Changeability problem's:} changing traffic rule's, or 
-security rule's in network may impliy modifying hundred, or even thousands code line's 
-distributed in several devices around the network.
-\item \textbf{Deployment problem's:} most changes are made mannually in several devices, 
-making human mistakes easier.
-\end{itemize}
-Is it possible to do better ?, Can software be of help in this task?, Is it possible to know 
-when network change's will break something before applying them?. \\
-We believe that all this question's have possitive answers, and the best way of 
-solving this problem nowadays is using network's programming languages which are 
-build over the Software Defined Networking (SDN) paradigm.\\
-Multiple SDN's programming languages have emerged over the past year's (some examples 
-of these are Pyretic, Frenetic, Nemo, etc.), having each of them different approaches to solve 
-some of the problems described before. Some of the principal lack's of the network 
-programming languages discipline nowadays are formal grammar definitions, verification, 
-validation, testing, software metrics and quality assurance, betwen multiple others. \\
-Missing this properties makes harder to build some tools for network programming languages,
-such as compiler's, debugger's, coding enviorment's, etc. This limitation's 
-makes the network operator's job difficult, even when using some of this 
-programming languages.\\
-The main contribution of this paper is presenting, as far as the authors know, 
-the first network computational model based on the definition of a graph 
-grammar. In section 2 we will define the problem to be solved with several 
-examples and assumptions. In section 3 we will define the graph grammar, and we 
-will extend this grammar to a type graph grammar in section 4. In section 5 we 
-will use this grammar to show how we can solve the problems specified in section 
-2, and in section 6 we will check how the grammar can be used for building a 
-simple compiler for the Nemo programming language. Finally, in section 7 we will 
-give our conclusion and in section 8 we will introduce further work to be done.
 
-\section{Definning the problem}
-Let us remember that a program may be defined as a sequence of instruction's that executed 
-perform a task in a computer or multiple computer's. Every program can be model as a Turing's 
-machine or a finite lambda calculus computation, and despite of the model chosen, the 
-operations are performed over a structure (usually this structure is a memory). In consequence,
-every network program is model as a finite sequence of operations over a structure.\\
-Our first proposal is to define this structure as an oriented graph, since network's 
-can be easily mapped to graphs, and also is perfect reasonably to think 
-program's operation as graph's rewriting. After this reasoning, the second propose is to define
-a graph grammar in order to model all the network program's that may be written in any netowrk
-programming language. \\
-In order to define the grammar production's, we will narrow to model 
-programs that solve the following problems in networks where each device support's SDN:\\
-\\
-\textbf{\underline{\textit{First Problem:}}} \\
-Suppose that we have the following network:\\
-\includegraphics[width=\textwidth, height=8cm]{first_example.png}\\  
-where H1 want's to establish an ssh 
-connection with H2, and let's assume that there are not forwarding rules in 
-order to establish such connection's, and also H2 has not an ssh server client to 
-fullfilled this connection. \\
-\\
-\textbf{\underline{\textit{Second Problem:}}} \\
-Suppose that we have the following network:\\
-\includegraphics[width=\textwidth, height=8cm]{second_example.png}\\
-where H1 wants to establish a ssh connection with H2, using S1->S2->S4 path, and 
-let's assume that there are not forwarding rules from S2 to S4. 
-\\
+In this paper we intend to create a computational model for programming languages 
+running over the Software Defined Network (SDN) paradigm. For this purpose, we will 
+define a graph grammar semantic, with it's own productions. This productions will 
+represent actions that take place in our network, and we will see how this 
+actions creates new behaviour in the model network. \\
+The network will be model as a graph, and it's representation will be obtained by a YAML 
+file, which will have to be delivered by the user of the programming language. We will explain
+in further details how we manage to create a graph from a YAML file in the following section. \\ 
+Finally, we will explain how this graph grammar can be used to model NEMO, a 
+network oriented progamming language.
 
-Defining a graph grammar allows us to check easily some of the problems described 
-before, particularly static properties, such as examples 1 and 2 (as we will shall see in following
-sections). However, dynamic properties (such as applying some load balancing policy when a 
-queue start's to drop more than 50\% of packets) are not easily checked by grammar 
-production's. Some problems required to execute our program in a traffic network, 
-however our approach is identifying problems in program's before they actually 
-happen in the real network. In order to identify this class of problems, we 
-propose an execution of some of the grammar production's in a simulator which 
-will be inserted inside the language compiler. The program will then be executed 
-in several simulation's, in order to check if the production applied to the actual graph is 
-possible. For doing this, we will mapped the dynamic grammar production's to 
-devs (a formal language specification for defining simulator's), and we will run a simulation 
-using this formal specification.\\
-Having defined the problem that we will be solving, let's define the primitive 
-operations that we will used in our computational model.
-
-\section{Graph grammar}
+\section{Graph grammar production's}
 
 We start by defining the most basic grammar production's. These 
 productions are the one's that allows us to modify the network topoloy:
@@ -300,39 +227,64 @@ productions are the one's that allows us to modify the network topoloy:
   that the address could be a CIDR). \\
   It is important to remark that the created node is in an idle state, meaning 
   that is not interacting with any other node in the network. \\ 
-  \\
   
-  \item Service creation
+  \item Service Creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=25pt@R=16pt
+       \xymatrix@C=35pt@R=16pt
        {
-         {\bullet}_{1} \ar@(ul,ur)^{idle}
+        {}
          \POS[]-<5pc,0pc>\drop{NEW\_SERVICE:}
-         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
-         & {\hookleftarrow} &
-         {\bullet}_{1} \ar@(ul,ur)^{idle}
+         \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookleftarrow} &
+         {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
-         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}[r]
-         \POS[]+<1.5pc,.5pc> *+=<6.5pc,3.8pc>[F-]{} &
-         {\bullet} \ar@(ul,ur)^{active}
-         \POS[]-<-.1pc,.5pc>*+=<4pc,4pc>[]{}\drop{service}
-       }
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[r] \POS[]-<-0.5pc,.5pc> \drop{transmitter} 
+         &
+         {\bullet} \ar@(ul,ur)^{service} \POS[]-<-0.5pc,.5pc> \drop{receiver}
+         \POS[]+<-2pc,.5pc> *+=<7.5pc,3.8pc>[F-]{} &
+      }
     \]
-    \caption{Service creation}
+    \caption{Service Creation}
     \protect\label{fig:servicecreation}
   \end{figure}
-  This is the production which defines new services in my node. Services are 
-  defined by the user, and they can be whatever service make sense in a node (also is important 
-  to notice that services in logical nodes, will not be the same as services in physical 
-  nodes). A service could be an Enum Type or something like that. Examples of 
-  a service could be ssh,http,https,sql,etc. (Note that physical services can be mapped to an 
-  active port). \\
-  Another thing to notice is that services will start in an active state, 
-  expecting to be used by the network. This state is going to be important in a 
-  future, because this state will define whenever is possible to use the 
-  service. \\
-  ¿What would it be a service when we are talking in the logical node case?.\\
+  In this production we define a new service. A service is either some property 
+  implemented in nodes, or implemented in another node, wich will be used for generating 
+  flows,this means that, when a flow is created, this flow will be of type service. The fact that the
+  main idea is to send and receive information, is represented as dual nodes representing a 
+  transmitter and a reicever in the graph.\\
+  
+  \item Node behaves as some endpiont of communication
+  \begin{figure}[H]
+    \[
+       \xymatrix@C=35pt@R=35pt
+       {
+         {}\POS[]-<1pc,0pc>\drop{NODE\_IMPLEMENTS\_ROLE:}
+         \\
+         {\bullet}_{1} \ar@(ul,ur)^{idle} &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookleftarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookrightarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r]
+         &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         \\
+         & {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
+         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
+         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{}
+       }
+    \]
+    \caption{Node implements role}
+    \protect\label{fig:attachmentnodetoservice}
+  \end{figure}
+  This production is used to make node's to behave as one of the endpoints in 
+  the communication of services. The node can only behave as one of the endpoint in 
+  one service, and it's allow to implement more than one service.
+  THIS RESTRICTION SHOULD BE DONE BY NEGATIVE APPLICATION\\
   
   \item Link creation
   \begin{figure}[H]
@@ -344,24 +296,34 @@ productions are the one's that allows us to modify the network topoloy:
          {\bullet}_{2}\ar@(ul,ur)^{idle}
          \POS[]+<.4pc,0pc>
          \POS[]-<1pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookleftarrow} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle} 
+         {\bullet}_{1}\ar@(ul,ur)^{idle} 
          \POS[]-<.4pc,-0.5pc> &
          {\bullet}_{2}\ar@(ul,ur)^{idle}
          \POS[]+<.4pc,-0.5pc>
          \POS[]-<2pc,-0.5pc>*+=<7pc,3.8pc>[F-]{} & {\hookrightarrow} 
          \POS[]+<4.6pc,0.5pc> *+=<7pc,3.8pc>[]{} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[d]^{source}
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}^{source}[d]
          \POS[]+<0pc,.5pc> &
-         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}[dl]^{target}
+         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
          \\
-         & & & & & & {\bullet} \POS[]+<2pc,2pc>*+=<7pc,6pc>[F-]{} \POS[]-<-0.5pc,.5pc>\drop{link}
+         & & & & & & {\bullet}_{link}\ar@(r,d)^{empty} \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} \POS[]-<-0.5pc,.5pc>
+         \\
+         %{\ar[d]} 
+         \\
+         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}^{source}[d] \POS[]-<3.8pc,0pc>
+         \POS[]-<.4pc,-0.5pc> &
+         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
+         \POS[]+<.4pc,0pc>
+         \\
+         {\bullet}_{link}\ar@(r,d)^{empty} \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} \POS[]-<-0.5pc,.5pc>
        }
     \]
     \caption{Link creation}
     \protect\label{fig:linkcreation}
   \end{figure}
   Here we define a new link between nodes 1 and 2. The only condition to apply 
-  this production is that both nodes must be in an idle state.\\
+  this production is that both nodes must be in an idle state and neither of them should have an existing 
+  link created. This restriction is done by the negative condition showed in L.\\
   Note: Being in an idle state does not mean that they are doing nothing!. An 
   idle state behaves likes a wildcard, meaning that from this state, multiply actions 
   can be applied to the node.\\
@@ -369,23 +331,23 @@ productions are the one's that allows us to modify the network topoloy:
   \item Link's property creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=25pt@R=16pt
+       \xymatrix@C=35pt@R=16pt
        {
          {}\POS[]+<0pc,2pc>\drop{NEW\_LINK\_PROPERTY:}
          \\
-         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         {\bullet}\ar@(ul,ur)^{empty} \POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} 
          & {\hookleftarrow} &
-         {\bullet}\POS[]-<0pc,.5pc>\drop{link}
+         {\bullet}\ar@(ul,ur)^{empty}\POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
-         {\bullet}\ar@{->}[r]\POS[]-<0pc,.5pc>\drop{link}
+         {\bullet}\ar@(ul,ur)^{empty} \ar@{->}[r]\POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<1.5pc,.5pc> *+=<6.5pc,3.8pc>[F-]{} &
-         {\bullet}
-         \POS[]-<-.1pc,.5pc>*+=<4pc,4pc>[]{}\drop{new\_property}
+         {\bullet}\ar@(ul,ur)^{property}
+         \POS[]+<0pc,.5pc>*+=<4pc,4pc>[]{}\drop{}
        }
     \]
-    \caption{Service creation}
-    \protect\label{fig:servicecreation}
+    \caption{Link's property creation}
+    \protect\label{fig:linkpropertycreation}
   \end{figure}
   In this production we are allowing definition of link's property. This properties are going to be 
   perhaps physical properties in physical links (for example, we can define here bandwith, 
@@ -407,32 +369,30 @@ productions are the one's that allows us to modify the network topoloy:
     \item Flow creation
   \begin{figure}[H]
     \[
-       \xymatrix@C=25pt@R=30pt
+       \xymatrix@C=35pt@R=35pt
        {
-         {}\POS[]-<0pc,0pc>\drop{NEW\_FLOW:}
+         {}\POS[]-<1pc,0pc>\drop{NEW\_FLOW:}
          \\
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
-         {\bullet}_{link}
-         & {\hookleftarrow} & 
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r] &
-         {\bullet}_{link} 
-         & {\hookrightarrow} & 
-         {\bullet}\ar@(ul,ur)^{active} \POS[]-<-.5pc,.5pc> \drop{my\_service} &
-         {\bullet}_{1}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[r]\ar@{->}[dr] &
-         {\bullet}_{link}
+         {\bullet} \ar@(ul,ur)^{empty} \POS[]-<-0.5pc,.5pc> \drop{link} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{->}^{behaves}[r] \ar@{->}^{source}[l] &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookleftarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle} &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
+         & {\hookrightarrow} &
+         {\bullet}_{1} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r]
+         &
+         {\bullet} \ar@(ul,ur)^{service} \ar@{->}^{dual}[d] \POS[]-<-0.5pc,.5pc> \drop{transmitter}
          \\
-         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
-         & & &
-         {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]
-         & & &
-        {\bullet}\ar@(ul,ur)^{active}\POS[]-<-.5pc,.5pc> \drop{my\_service} \POS[]+<3pc,2pc>*+=<10pc,8pc>[F-]{} &
-         {\bullet}_{2}\ar@(ul,ur)^{idle}\ar@{->}[l]\ar@{->}[ur]\ar@{->}[r] &
-         {\bullet}\ar@(ul,ur)^{flowing}\ar@{->}[u] \POS[]-<.5pc,.5pc> \drop{my\_flow\_service}
-      }
+         &
+         {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{behaves}[r] \ar@{->}^{target}[ul] & 
+         {\bullet} \ar@(r,d)^{service} \POS[]-<-1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
+         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{} & & &
+         {\bullet} \ar@(r,d)^{service} \POS[]-<1.5pc,0pc> \drop{receiver}
+         \POS[]+<-1pc,2pc> *+=<7.5pc,9pc>[F-]{}
+       }
     \]
     \caption{Flow creation}
     \protect\label{fig:flowcreation}
