@@ -156,8 +156,10 @@
 
 
 
-\title{A network computational model's for Software Defined Networking}
-\author{Andr\'es Laurito}
+\title{A network computational model's \\ for Software Defined Networking}
+\author{Andr\'es  Laurito\inst{1}  \and
+        Hern\'an Melgratti\inst{2}}
+
 
 \institute{
 Departamento de Computac\'on - FCEN -UBA\\
@@ -165,8 +167,7 @@ Departamento de Computac\'on - FCEN -UBA\\
 
 \titlerunning{A network computational model's for Software Defined Networking}
 
-\authorrunning{A. Laurito}
-
+\authorrunning{A. Laurito and H. Melgratti}
 
 \bibliographystyle{plain}
 
@@ -236,6 +237,7 @@ simple compiler for the Nemo programming language. Finally, in section 7 we will
 give our conclusion and in section 8 we will introduce further work to be done.
 
 \section{Definning the problem}
+
 Let us remember that a program may be defined as a sequence of instruction's that executed 
 perform a task in a computer or multiple computer's. Every program can be model as a Turing's 
 machine or a finite lambda calculus computation, and despite of the model chosen, the 
@@ -319,19 +321,19 @@ productions are the one's that allows us to modify the network topoloy:
          {}\POS[]-<0pc,0pc>\drop{REMOVE\_NODE:}
          \\
          \\
-         O \ar@(ul,ur)^{service} \POS[]-<1pc,.5pc>\drop{transmitter}&
+         \circ \ar@(ul,ur)^{service} \POS[]-<1pc,.5pc>\drop{transmitter}&
          {\bullet} \ar@(ul,ur)^{idle} \ar@{.>}^{behaves}[l] \ar@{.>}^{behaves}[dl]
          \ar@{.>}^{source}[r] \ar@{.>}^{source}[dr] 
          \POS[]-<0pc,.5pc>\drop{1} &
-         O \POS[]-<0pc,.5pc>\drop{link}
+         \circ \POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<-5pc,-1pc> *+=<12pc,7pc>[F-]{} & {\hookleftarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow} &
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} &
          \\
-         O \ar@(r,d)^{service} \POS[]-<1pc,.5pc>\drop{receiver} & &
-         O \POS[]-<0pc,.5pc>\drop{link}
+         \circ \ar@(r,d)^{service} \POS[]-<1pc,.5pc>\drop{receiver} & &
+         \circ \POS[]-<0pc,.5pc>\drop{link}
        }
     \]
     \caption{Deleting a node}
@@ -352,7 +354,7 @@ productions are the one's that allows us to modify the network topoloy:
          {}\POS[]-<0pc,0pc>\drop{NODE\_PROPERTY\_CREATION:}
          \\
          \\
-         O \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         \circ \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
          {\bullet}_{1} \ar@(ul,ur)^{idle} \ar@{.>}^{has}[l]
          \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
          {\bullet} \ar@(ul,ur)^{idle}
@@ -435,15 +437,16 @@ productions are the one's that allows us to modify the network topoloy:
          {}
          \POS[]+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{}
          \\
-         {\bullet} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{1} &
-         {\bullet} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{2}
+         {\circ} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{1} &
+         {\circ} \ar@(r,d)^{idle} \ar@{.>}^{behaves}[u] \POS[]-<-0.5pc,.5pc> \drop{2}
          \POS[]+<-2pc,1pc> *+=<8pc,7pc>[F-]{}
       }
     \]
     \caption{Service Creation}
     \protect\label{fig:servicecreation}
   \end{figure}
-  In this production we remove a service, whenever the service is not attached by a node.\\
+  In this production we allow to remove a service, whenever the service is not
+  being used by a node (this is represented as a node linked to one of the service endpoint's).\\
   
   \item Node behaves as some endpiont of communication
   \begin{figure}[H]
@@ -524,7 +527,7 @@ productions are the one's that allows us to modify the network topoloy:
          {\bullet}_{1}\ar@(ul,ur)^{idle} \ar@{->}^{source}[d] &
          {\bullet}_{2} \ar@(ul,ur)^{idle}\ar@{->}^{target}[dl]
          \\
-         O \POS[]-<.8pc,0pc> \drop{link}
+         \circ \POS[]-<.8pc,0pc> \drop{link}
          \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} & & & & & &
          {\bullet}_{link} 
          \POS[]+<2pc,2pc>*+=<7pc,8pc>[F-]{} 
@@ -575,7 +578,7 @@ productions are the one's that allows us to modify the network topoloy:
        {
          {}\POS[]+<0pc,2pc>\drop{NEW\_LINK\_PROPERTY:}
          \\
-         {\bullet}\ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} & 
+         {\circ}\ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} & 
          {\bullet} \ar@{.>}^{has}[l] \POS[]-<0pc,.5pc>\drop{link}
          \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} 
          & {\hookleftarrow} &
@@ -728,7 +731,7 @@ productions are the one's that allows us to modify the network topoloy:
          {}\POS[]-<0pc,0pc>\drop{FLOW\_PROPERTY\_CREATION:}
          \\
          \\
-         O \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
+         \circ \ar@(ul,ur)^{property} \POS[]-<0pc,.5pc>\drop{prop} &
          {\bullet}_{flow} \ar@(ul,ur)^{running} \ar@{.>}^{has}[l]
          \POS[]+<-2pc,.5pc> *+=<6pc,3.8pc>[F-]{} & {\hookleftarrow} &
          {\bullet}_{flow} \ar@(ul,ur)^{running}

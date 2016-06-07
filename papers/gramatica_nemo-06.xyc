@@ -1,5 +1,5 @@
-\xycompiled{gramatica_nemo-06}{2016/6/4:1164 [gramatica_nemo:441]}{Xy-pic 3.8.9}%
-{\xymatrixnocompile @C=35pt@R=16pt { {} \POS []-<0pc,0pc>\drop {REMOVE\_SERVICE:} \\ \\ {\bullet } \ar @(ul,ur)^{service} \ar @{->}^{dual}[r] \POS []-<-0.5pc,.5pc> \drop {transmitter} & {\bullet } \ar @(ul,ur)^{service} \POS []-<-0.5pc,.5pc> \drop {receiver} & {\hookleftarrow } & {} \POS []+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow } & {} \POS []+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} \\ {\bullet } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {1} & {\bullet } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {2} \POS []+<-2pc,1pc> *+=<8pc,7pc>[F-]{} }}\relax 
+\xycompiled{gramatica_nemo-06}{2016/6/7:1195 [gramatica_nemo:443]}{Xy-pic 3.8.9}%
+{\xymatrixnocompile @C=35pt@R=16pt { {} \POS []-<0pc,0pc>\drop {REMOVE\_SERVICE:} \\ \\ {\bullet } \ar @(ul,ur)^{service} \ar @{->}^{dual}[r] \POS []-<-0.5pc,.5pc> \drop {transmitter} & {\bullet } \ar @(ul,ur)^{service} \POS []-<-0.5pc,.5pc> \drop {receiver} & {\hookleftarrow } & {} \POS []+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} & {\hookrightarrow } & {} \POS []+<0pc,.5pc> *+=<3.8pc,3.8pc>[F-]{} \\ {\circ } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {1} & {\circ } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {2} \POS []+<-2pc,1pc> *+=<8pc,7pc>[F-]{} }}\relax 
 \xy@{\xymatrix }{\enter@ {\def \noexpand \xy@minX@@ {\xy@minX@@ }\def \noexpand \xy@maxX@@ {\xy@maxX@@ }\def \noexpand \xy@minY@@ {\xy@minY@@ }\def \noexpand \xy@maxY@@ {\xy@maxY@@ }\edef \noexpand \xymatrixprefix@@ {\codeof \xymatrixprefix@@ }}}%
 \xy@{}{\save@ \edef \matrixorigin@ {\X@c =\the \X@c \Y@c =\the \Y@c }\edef \xy@minX@@ {\the \X@c }\edef \xy@maxX@@ {\the \X@c }\edef \xy@minY@@ {\the \Y@c }\edef \xy@maxY@@ {\the \Y@c }}%
 \xy@{""}{\edef \xymatrixprefix@@ {}}%
@@ -302,7 +302,7 @@
 \xy@@ix@{{+=<3.8pc,3.8pc>[F-]}{}}\relax 
 \xy@{*+=<3.8pc,3.8pc>[F-]{}}{\expandafter \drop@ \the \toks 9 }%
 \xy@{ENTRY "4,1"}{\Row =4 \Col =1\relax \cfromid@ {4,1}\pfromc@ }%
-\xy@@ix@{{!V\entrybox }{{\bullet } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {1} }}\relax 
+\xy@@ix@{{!V\entrybox }{{\circ } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {1} }}\relax 
 \xy@{}{\expandafter \dropentry@ \the \toks 9}%
 \xy@{\save }{\save@ }%
 \xy@{\afterPATH {\afterar@@ }}{\def \PATHslide@@ {\z@ }}%
@@ -417,7 +417,7 @@
 \xy@@ix@{{}{1}}\relax 
 \xy@{\drop {1}}{\expandafter \drop@ \the \toks 9 }%
 \xy@{ENTRY "4,2"}{\Row =4 \Col =2\relax \cfromid@ {4,2}\pfromc@ }%
-\xy@@ix@{{!V\entrybox }{{\bullet } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {2} \POS []+<-2pc,1pc> *+=<8pc,7pc>[F-]{} }}\relax 
+\xy@@ix@{{!V\entrybox }{{\circ } \ar @(r,d)^{idle} \ar @{.>}^{behaves}[u] \POS []-<-0.5pc,.5pc> \drop {2} \POS []+<-2pc,1pc> *+=<8pc,7pc>[F-]{} }}\relax 
 \xy@{}{\expandafter \dropentry@ \the \toks 9}%
 \xy@{\save }{\save@ }%
 \xy@{\afterPATH {\afterar@@ }}{\def \PATHslide@@ {\z@ }}%
