@@ -266,6 +266,22 @@ where H1 wants to establish a ssh connection with H2, using S1->S2->S4 path, and
 let's assume that there are not forwarding rules from S2 to S4. 
 \\
 
+The following examples have been extracted from [1]
+
+\textbf{\underline{\textit{Third Problem:}}} \\
+A tenant needs two connections to carry different service flows between two datacenters.
+One connection of the tenant is 40G bandwidth with less than 400ms delay, another 
+connection is 100M bandwidth with less than 50ms delay.\\
+
+\textbf{\underline{\textit{Fourth Problem:}}} \\
+The tenant has two types of traffic, CDN sync traffic uses high bandwidth connection and online 
+game traffic uses low latency connection.\\
+
+\textbf{\underline{\textit{Fifth Problem:}}} \\
+The tenant wants the online game traffic to go through WOC in nighttime before it is carried by 
+low latency connection.\\
+
+
 Defining a graph grammar allows us to check easily some of the problems described 
 before, particularly static properties, such as examples 1 and 2 (as we will shall see in following
 sections). However, dynamic properties (such as applying some load balancing policy when a 
@@ -815,5 +831,14 @@ and this model). In this case, if I write a program for the situation described,
 we will have a compiler error, since there's going to be an instruction that 
 cannot be done, and this is because the production associated with it cannot be 
 executed.
+
+\begin{thebibliography}{10}
+
+\bibitem{AB:MPTN}
+Y. Xia, Ed., S. Jiang, Ed. T. Zhou, Ed. and S. Hares
+\newblock NEMO (NEtwork MOdeling) Language draft-xia-sdnrg-nemo-language-00
+\newblock Internet-Draft
+  
+\end{thebibliography}
 
 \end{document}

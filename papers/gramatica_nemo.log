@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  7 JUN 2016 19:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.4.26)  7 JUN 2016 21:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -582,141 +582,154 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3 <./images/first_example.png> <./images/second_example.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 271--275
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--279
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--283
+
+ []
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 294.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 310.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 294.
- (./gramatica_nemo-01.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 309--315
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 310.
+(./gramatica_nemo-01.xyc)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 325--331
 
  []
 
 (./gramatica_nemo-02.xyc)
-Overfull \hbox (15.11224pt too wide) detected at line 338
+Overfull \hbox (15.11224pt too wide) detected at line 354
 []
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 342--348
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--364
 
  []
 
-(./gramatica_nemo-03.xyc) (./gramatica_nemo-04.xyc)
+(./gramatica_nemo-03.xyc)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-Underfull \hbox (badness 10000) in paragraph at lines 394--396
+(./gramatica_nemo-04.xyc)
+Underfull \hbox (badness 10000) in paragraph at lines 410--412
 
  []
 
 (./gramatica_nemo-05.xyc)
-Overfull \hbox (23.96938pt too wide) detected at line 412
+Overfull \hbox (23.96938pt too wide) detected at line 428
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 416--421
+Underfull \hbox (badness 10000) in paragraph at lines 432--437
 
  []
 
-(./gramatica_nemo-06.xyc)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-Underfull \hbox (badness 10000) in paragraph at lines 448--450
+[6] (./gramatica_nemo-06.xyc)
+Underfull \hbox (badness 10000) in paragraph at lines 464--466
 
  []
 
 (./gramatica_nemo-07.xyc)
-Overfull \hbox (103.23361pt too wide) detected at line 475
+Overfull \hbox (103.23361pt too wide) detected at line 491
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--483
+Underfull \hbox (badness 10000) in paragraph at lines 495--499
 
  []
 
 (./gramatica_nemo-08.xyc)
-Overfull \hbox (25.37888pt too wide) detected at line 505
+Overfull \hbox (25.37888pt too wide) detected at line 521
 []
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 509--514
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 525--530
 
  []
 
 (./gramatica_nemo-09.xyc)
-Overfull \hbox (33.26117pt too wide) detected at line 535
+Overfull \hbox (33.26117pt too wide) detected at line 551
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 539--546
+Underfull \hbox (badness 10000) in paragraph at lines 555--562
 
  []
 
 [8] (./gramatica_nemo-10.xyc)
-Overfull \hbox (43.95073pt too wide) detected at line 566
+Overfull \hbox (43.95073pt too wide) detected at line 582
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--573
+Underfull \hbox (badness 10000) in paragraph at lines 586--589
 
  []
 
 (./gramatica_nemo-11.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 596--608
+Underfull \hbox (badness 10000) in paragraph at lines 612--624
 
  []
 
 [9] (./gramatica_nemo-12.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 629--630
+Underfull \hbox (badness 10000) in paragraph at lines 645--646
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 633--636
+Underfull \hbox (badness 10000) in paragraph at lines 649--652
 
  []
 
 (./gramatica_nemo-13.xyc)
-Overfull \hbox (109.38802pt too wide) detected at line 670
+Overfull \hbox (109.38802pt too wide) detected at line 686
 []
  []
 
+[10]
 Missing character: There is no Â in font ptmr7t!
 Missing character: There is no ¿ in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 681--697
+Underfull \hbox (badness 10000) in paragraph at lines 697--713
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 681--697
+Underfull \hbox (badness 10000) in paragraph at lines 697--713
 
  []
 
-[10] (./gramatica_nemo-14.xyc)
-Underfull \hbox (badness 10000) in paragraph at lines 722--725
+(./gramatica_nemo-14.xyc)
+Underfull \hbox (badness 10000) in paragraph at lines 738--741
 
  []
 
 (./gramatica_nemo-15.xyc)
-Overfull \hbox (1.4733pt too wide) detected at line 743
+Overfull \hbox (1.4733pt too wide) detected at line 759
 []
  []
 
 
-Underfull \vbox (badness 7168) has occurred while \output is active []
+Underfull \vbox (badness 1931) has occurred while \output is active []
 
  [11]
-Underfull \hbox (badness 10000) in paragraph at lines 751--757
+Underfull \hbox (badness 10000) in paragraph at lines 767--773
 
  []
 
@@ -727,10 +740,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6223 strings out of 493089
- 80740 string characters out of 6134842
- 203479 words of memory out of 5000000
- 9465 multiletter control sequences out of 15000+600000
+ 6224 strings out of 493089
+ 80749 string characters out of 6134842
+ 203483 words of memory out of 5000000
+ 9466 multiletter control sequences out of 15000+600000
  46311 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,11n,27p,3257b,1071s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -744,7 +757,7 @@ type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/
 xyatip10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/xypic/xybti
 p10.pfb>
-Output written on ./gramatica_nemo.pdf (13 pages, 132168 bytes).
+Output written on ./gramatica_nemo.pdf (13 pages, 133837 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream
