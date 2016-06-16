@@ -181,25 +181,28 @@ Departamento de Computac\'on - FCEN -UBA\\
 
 \begin{abstract}
  In this paper we define a computational model for netowrk's programming languages 
- In this paper we define a computational model for netowrk's programming languages 
- that use Software Defined Network (SDN) paradigm. For this purpose, 
  that use Software Defined Network (SDN) paradigm. For this purpose, 
  network's will be model as graphs, and a graph grammar semantic will be defined. 
- network's will be model as graphs, and a graph grammar semantic will be defined. 
- Production's in the grammar will model actions that can take place in the network, and programs 
  Production's in the grammar will model actions that can take place in the network, and programs 
  will be just a sequence of instruction's modifying a starting graph. \\
- will be just a sequence of instruction's modifying a starting graph. \\
- After graph grammar's definition, we will extend this grammar to a type graph grammar, and we 
  After graph grammar's definition, we will extend this grammar to a type graph grammar, and we 
  will explain how this new grammar can be applied to create a type programming language 
- will explain how this new grammar can be applied to create a type programming language 
- for networks. Finally we will show how this computational model is well defined, by using it to 
  for networks. Finally we will show how this computational model is well defined, by using it to 
  create a compiler for a new network progamming language recently emerged called Nemo.
  \end{abstract}
 
 \section{Introduction}
+ As it was said in [2] {opendaylight link}, sdn has multiple definitions as for example:
+ \begin{itemize}
+   \item Separation of control-plane and data-plane;
+   \item Programmability;
+   \item Defining the cloud networking;
+   \item Network virtualization;
+   \item Next-generation network management; and
+   \item Network agility and operational simplicity.
+ \end{itemize}
+ In this paper, we intend to add a new defition: Network testing enviorment.\\
+
 Nowadays networks have became a crucial resource of any software application. 
 Technologies for improving code crafting are emerging constantly. By contrast, network's have 
 several issues to be solved. Some of this issues may be tagged as 
@@ -838,7 +841,14 @@ executed.
 Y. Xia, Ed., S. Jiang, Ed. T. Zhou, Ed. and S. Hares
 \newblock NEMO (NEtwork MOdeling) Language draft-xia-sdnrg-nemo-language-00
 \newblock Internet-Draft
-  
+
+\bibitem{AB:MPTN}
+Madhu Venugopal
+\newblock OpenDayLight https://www.opendaylight.org/news/blogs/2013/12/opendaylight-developer-spotlight-madhu-venugopal 
+
+
+
+ 
 \end{thebibliography}
 
 \end{document}
