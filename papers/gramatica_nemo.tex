@@ -16,10 +16,12 @@
 \usepackage{amssymb}
 \usepackage{pslatex}
 \usepackage{alltt}
-
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
 \usepackage{float}
 %\usepackage{natbib}
 \usepackage{url}
+\usepackage{listings}
 \usepackage{subfigure}
 \usepackage{stmaryrd}
 \usepackage{graphicx}
@@ -154,7 +156,8 @@
 \newcommand{\reduce}{\rightarrow}
 \newtheorem{notation}{Notation}
 
-
+\newtcbtheorem[number within=section]{multicastAtlasIntent}{Multicast ATLAS Intent}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 
 \title{A network computational model's \\ for Software Defined Networking}
 \author{Andr\'es  Laurito\inst{1}  \and
@@ -284,6 +287,7 @@ game traffic uses low latency connection.\\
 The tenant wants the online game traffic to go through WOC in nighttime before it is carried by 
 low latency connection.\\
 
+\section{Resolving the problem}
 
 Defining a graph grammar allows us to check easily some of the problems described 
 before, particularly static properties, such as examples 1 and 2 (as we will shall see in following
@@ -294,12 +298,61 @@ however our approach is identifying problems in program's before they actually
 happen in the real network. In order to identify this class of problems, we 
 propose an execution of some of the grammar production's in a simulator which 
 will be inserted inside the language compiler. The program will then be executed 
-in several simulation's, in order to check if the production applied to the actual graph is 
+in a simulator, in order to check if the productions applied to the actual graph is 
 possible. For doing this, we will mapped the dynamic grammar production's to 
 devs (a formal language specification for defining simulator's), and we will run a simulation 
 using this formal specification.\\
-Having defined the problem that we will be solving, let's define the primitive 
-operations that we will used in our computational model.
+
+\newpage
+
+Solving the ATLAS problem with an intent would be as follows:
+
+\begin{itemize}
+	\item First we will define the intent code as follows
+	\begin{lstlisting}
+Flow myControlFLow = new MultiCastFlow(src="10.0.0.1",dst=["10.0.0.2"
+,"10.0.0.3","10.0.0.4"])
+
+Action myLoadBalancing = new Action({Lo que recibiria este como
+ constructor, lo pienso como un lambda, seria un bloque de codigo que va a 
+ estar ejecutandose en el contexto del controller})
+
+Intent "multicast ATLAS" 
+	Type "HostToMultiHostIntent" 
+	Select myControlFlow 
+	Action myLoadBalancing 
+\end{lstlisting}
+
+\item This intent will be taken by the compiler, who will parse the intent, evaluate if it's both syntactically and semantically correct and finally produce a request to the ONOS api as follows (it is possible that the request will have more attributes defined in it, but this will depend on the intent, for example, in the action defined, if a condition is set into the intent, etc).
+\begin{lstlisting}
+curl --X POST { 
+	"type":"HostToMultiHost",
+	"appid":"org.onosproject.ovsdb",
+	"priority":"55",
+	"source":"10.0.0.1",
+	"destinations":["10.0.0.2","10.0.0.3","10.0.0.4"]
+} 
+\end{lstlisting}
+
+\item This request will be recieved by the intent's api which is defined in the ONOS controller. The api will first decode the json, build the intent class associated to the intent recieved and finally will compile this class. This final "compilation" means to create the necessary objects to make this intent work (for example, to create pathsIntents for each (source,destination) pair). The classes implemented in the ONOS intent's api in order to make this post work are the following ones:
+	\begin{itemize}
+	\item HostToMultiHostIntent.java . This class is the one who has all the information needed to build the intent.
+	\item HostToMultiHostIntentCodec.java . This class extends JsonCodec, and is in charge of decoding the json received by the POST. Once the JSON has been decoded, this class builds an instance of HostToMultiHostIntent
+	\item HostToMultiHostIntentCompiler.java . This class is in charge of the logic of building the intent into the controller. It's principal functionallity is to create every object necessary to make the intent work. In this multicast examples, some of this objects are the paths from the source to each of the destinations defined, to translate the actions into real objects who will make the job done, etc.
+	\item HostToMultiHostIntentCompilerTest.java
+	\item HostToMultiHostIntentTest.java
+	\end{itemize}
+
+\item Once the intent has been compiled, what happens now is that ONOS starts communicating with the Floodlight controller (which is included in ONOS as compiled libraries), who will be the one responsible of loading the necessary OpenFlow entries in each of the SDN switches in the network topology.
+
+\item Since the main objective here is to not deploy until we are really sure that everything works fine, floodlight will communicate with a simulator, instead of a real network. With this approach, we can manage to test the entire intent in a controlled network. To make this happens we have: ¿Cual de las dos opciones será la mejor?
+	\begin{itemize}
+		\item created a DEVS specification of a SDN swtich, which implements the minor set of OpenFlow messages in order to make the intent work.
+		\item created a DEVS specification of a SDN switch, where the OpenFlow protocol is implemented by a third process which is not inside the simulator. This process is the one who interacts with Floodlight, and is constantly comunnicating with the simulation (like Mininet does with OpenVSwitch).
+	\end{itemize}	 
+\end{itemize}
+
+
 
 \section{Graph grammar production's}
 
