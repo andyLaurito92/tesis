@@ -1,6 +1,6 @@
 require 'json'
 require 'typhoeus'
-
+require 'rgl/adjacency'
 
 response_hosts = Typhoeus.get('http://127.0.0.1:8181/onos/v1/hosts/',userpwd:"onos:rocks")
 =begin
@@ -64,5 +64,15 @@ links is an array of elements of this kind
 links = JSON.parse(response_links.body)['links']
 
 def buildGraphTopology(hosts,devices,links)
+	my_direct_graph=RGL::DirectedAdjacencyGraph[]
+
+	hosts.each do |host|
+		my_direct_graph.add_vertex(host['id'])
+	end
+
+	devices.each do |device|	
+		my_direct_graph.add_vertex(devices['id'])
+	end
+
 	
 end
