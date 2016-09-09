@@ -1,0 +1,921 @@
+Coupled
+    {
+    Type = Root
+    Name = GettingStarted
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+        Atomic
+            {
+            Name = LoadScilabParams
+            Ports = 1 ; 0
+            Path = sinks/RunScilabJob.h
+            Description = If Scilab is configured as backed in the cmd line options, this model runs Scilab commands at Init, Exit and when receive events.\n
+            Graphic
+                {
+                Position = -9975 ; -12285
+                Dimension = 450 ; 435
+                Direction = Right
+                Color = 15
+                Icon = %sinks%scilab.ico
+                }
+            Parameters
+                {
+                Run at Init = Str; exec('../examples/Matias/PhaseI/Scilab/model.scilabParams', 0) ; Scilab Job at Init
+                Run at External = Str;  ; Scilab Job when receive event
+                Run at Exit = Str;  ; Scilab Job at Exit
+                }
+            }
+        Atomic
+            {
+            Name = ExperimenetTracker
+            Ports = 0 ; 0
+            Path = sinks/SimulationExperimentTracker.h
+            Description = Allows to use multiple simulation runs setting new parameter values in each run. It configures Scilab variables according to the current simunation number.\nThis model should run with 1st priority!!
+            Graphic
+                {
+                Position = -7635 ; -12420
+                Dimension = 570 ; 540
+                Direction = Right
+                Color = 15
+                Icon = %realtime%lcd.svg
+                }
+            Parameters
+                {
+                ScilabSimulationSetID = Str; SimulationName ; indicates the simulation set ID
+                ScilabSimulationCounterVariableName = Str; ExperimentNumber ; Name of the Scilab variable that indicates the simulation number.
+                ScilabParametersVariableName = Str; ParameterValues ; Name of the Scilab variable that contains the parameter values for each simulation
+                ScilabParametersValuesVariableName = Str; ParameterNames ; Name of the Scilab variable that contains the parameter names for each simulation
+                }
+            }
+        Atomic
+            {
+            Name = UpdateScilabParams
+            Ports = 1 ; 0
+            Path = sinks/RunScilabJob.h
+            Description = If Scilab is configured as backed in the cmd line options, this model runs Scilab commands at Init, Exit and when receive events.\n
+            Graphic
+                {
+                Position = -5130 ; -12405
+                Dimension = 525 ; 510
+                Direction = Right
+                Color = 15
+                Icon = %sinks%scilab.ico
+                }
+            Parameters
+                {
+                Run at Init = Str;  ; Scilab Job at Init
+                Run at External = Str;  ; Scilab Job when receive event
+                Run at Exit = Str;  ; Scilab Job at Exit
+                }
+            }
+        Atomic
+            {
+            Name = FelixServer1
+            Ports = 0 ; 1
+            Path = PhaseI/FelixServer.h
+            Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+            Graphic
+                {
+                Position = -9990 ; -11115
+                Dimension = 630 ; 645
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%generator.png
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = Dst1
+            Ports = 1 ; 0
+            Path = PhaseI/Packetsink.h
+            Description = 
+            Graphic
+                {
+                Position = -10080 ; -2505
+                Dimension = 675 ; 675
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%sink.png
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = Dst2
+            Ports = 1 ; 0
+            Path = PhaseI/Packetsink.h
+            Description = 
+            Graphic
+                {
+                Position = -5580 ; -2430
+                Dimension = 675 ; 675
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%sink.png
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = Router1
+            Ports = 2 ; 1
+            Path = PhaseI/Router.h
+            Description = In0: Incomming packets\nInN: Outgoing packets from a single flow\n\nDemultiplexes a single packet flow in N input output streams.\nEach output stream contains packets belonging to a single flow identifier.
+            Graphic
+                {
+                Position = -7950 ; -8505
+                Dimension = 600 ; 675
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%router.jpg
+                }
+            Parameters
+                {
+                }
+            }
+        Coupled
+            {
+            Type = Coordinator
+            Name = Link0
+            Ports = 1; 1
+            Description = Coupled DEVS model
+            Graphic
+                {
+                Position = -9990; -9870
+                Dimension = 645; 705
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%ethernet.jpg
+                Window = 5000; 5000; 5000; 5000
+                }
+            Parameters
+                {
+                }
+            System
+                {
+                Inport
+                    {
+                    Name = Inport0
+                    CoupledPort = 1
+                    Description = 
+                    Graphic
+                        {
+                        Position = -4740 ; -3525
+                        Dimension = 480
+                        Direction = Right
+                        }
+                    }
+                Outport
+                    {
+                    Name = Outport0
+                    CoupledPort = 1
+                    Description = 
+                    Graphic
+                        {
+                        Position = -930 ; 2850
+                        Dimension = 360
+                        Direction = Right
+                        }
+                    }
+                Atomic
+                    {
+                    Name = InNICQueue
+                    Ports = 2 ; 2
+                    Path = PhaseI/NetworkQueue.h
+                    Description = In0 Incomming packets to queue\nIn1 Incoming signal to request dequeue\nOut0 Outgoing dequeued packets\nOut1 Outgoing queue lenght information\n\nQueues incoming packets and enqueues them as required by a\nexternal entity. FIFO Policy (FirstInFirstOut). Provides information\nits internal state.
+                    Graphic
+                        {
+                        Position = -3855 ; -1230
+                        Dimension = 675 ; 675
+                        Direction = Down
+                        Color = 15
+                        Icon = %datanetworks%queue.png
+                        }
+                    Parameters
+                        {
+                        MaxCapacity = Str; FelixNICQueue1.maxBuffer ; Queue Capacity in Bytes. (Use -1 for INF capacity)
+                        ForcedPeriod = Str; -1 ; Force minimum period to transition. Use -1 for INF
+                        }
+                    }
+                Atomic
+                    {
+                    Name = Link
+                    Ports = 1 ; 1
+                    Path = PhaseI/Link.h
+                    Description = Vector to scalar signal
+                    Graphic
+                        {
+                        Position = -3990 ; 585
+                        Dimension = 630 ; 630
+                        Direction = Down
+                        Color = 15
+                        Icon = %vectors%vec2scalar.svg
+                        }
+                    Parameters
+                        {
+                        link.capacity = Str; FelixLink.capacity ; Signal Index
+                        link.delay = Str; link.delay ; 
+                        }
+                    }
+                Point
+                    {
+                    ConectedLines = 3 ; 4 ; 5
+                    ConectedExtrems = Org ; Org ; Org
+                    Position = -3675 ; 1950
+                    }
+                Line
+                    {
+                    Source = Prt ;  1 ;  1 ; 0
+                    Sink = Cmp ;  1 ;  1 ; -1
+                    PointX = -4125 ; -3675 ; -3675
+                    PointY = -3525 ; -3525 ; -1365
+                    }
+                Line
+                    {
+                    Source = Cmp ;  1 ;  1 ; 0
+                    Sink = Cmp ;  2 ;  1 ; -1
+                    PointX = -3675 ; -3675 ; -3675
+                    PointY = -450 ; -450 ; 435
+                    }
+                Line
+                    {
+                    Source = Cmp ;  2 ;  1 ; 0
+                    Sink = Pnt ;  1 ; -1 ; 0
+                    PointX = -3675 ; -3675 ; -3675
+                    PointY = 1350 ; 1350 ; 1950
+                    }
+                Line
+                    {
+                    Source = Cmp ;  1 ;  2 ; -1
+                    Sink = Pnt ;  1 ; -1 ; 0
+                    PointX = -3375 ; -3375 ; -2325 ; -2325 ; -3675
+                    PointY = -1365 ; -1650 ; -1650 ; 1950 ; 1950
+                    }
+                Line
+                    {
+                    Source = Pnt ;  1 ; -1 ; 0
+                    Sink = Prt ;  2 ;  1 ; -1
+                    PointX = -3675 ; -3675 ; -1065 ; -1065
+                    PointY = 1950 ; 2775 ; 2775 ; 2850
+                    }
+                }
+            }
+                Coupled
+                    {
+                    Type = Coordinator
+                    Name = Link3
+                    Ports = 1; 1
+                    Description = Coupled DEVS model
+                    Graphic
+                        {
+                        Position = -10005; -4335
+                        Dimension = 675; 720
+                        Direction = Down
+                        Color = 15
+                        Icon = %datanetworks%ethernet.jpg
+                        Window = 5000; 5000; 5000; 5000
+                        }
+                    Parameters
+                        {
+                        }
+                    System
+                        {
+                        Inport
+                            {
+                            Name = Inport0
+                            CoupledPort = 1
+                            Description = 
+                            Graphic
+                                {
+                                Position = -4740 ; -3525
+                                Dimension = 480
+                                Direction = Right
+                                }
+                            }
+                        Outport
+                            {
+                            Name = Outport0
+                            CoupledPort = 1
+                            Description = 
+                            Graphic
+                                {
+                                Position = -930 ; 2850
+                                Dimension = 360
+                                Direction = Right
+                                }
+                            }
+                        Atomic
+                            {
+                            Name = InNICQueue
+                            Ports = 2 ; 2
+                            Path = PhaseI/NetworkQueue.h
+                            Description = In0 Incomming packets to queue\nIn1 Incoming signal to request dequeue\nOut0 Outgoing dequeued packets\nOut1 Outgoing queue lenght information\n\nQueues incoming packets and enqueues them as required by a\nexternal entity. FIFO Policy (FirstInFirstOut). Provides information\nits internal state.
+                            Graphic
+                                {
+                                Position = -3855 ; -1230
+                                Dimension = 675 ; 675
+                                Direction = Down
+                                Color = 15
+                                Icon = %datanetworks%queue.png
+                                }
+                            Parameters
+                                {
+                                MaxCapacity = Str; FelixNICQueue1.maxBuffer ; Queue Capacity in Bytes. (Use -1 for INF capacity)
+                                ForcedPeriod = Str; -1 ; Force minimum period to transition. Use -1 for INF
+                                }
+                            }
+                        Atomic
+                            {
+                            Name = Link
+                            Ports = 1 ; 1
+                            Path = PhaseI/Link.h
+                            Description = Vector to scalar signal
+                            Graphic
+                                {
+                                Position = -3990 ; 585
+                                Dimension = 630 ; 630
+                                Direction = Down
+                                Color = 15
+                                Icon = %vectors%vec2scalar.svg
+                                }
+                            Parameters
+                                {
+                                link.capacity = Str; DstLink.capacity ; Signal Index
+                                link.delay = Str; link.delay ; 
+                                }
+                            }
+                        Point
+                            {
+                            ConectedLines = 3 ; 4 ; 5
+                            ConectedExtrems = Org ; Org ; Org
+                            Position = -3675 ; 1800
+                            }
+                        Line
+                            {
+                            Source = Prt ;  1 ;  1 ; 0
+                            Sink = Cmp ;  1 ;  1 ; -1
+                            PointX = -4125 ; -3675 ; -3675
+                            PointY = -3525 ; -3525 ; -1365
+                            }
+                        Line
+                            {
+                            Source = Cmp ;  1 ;  1 ; 0
+                            Sink = Cmp ;  2 ;  1 ; -1
+                            PointX = -3675 ; -3675 ; -3675
+                            PointY = -450 ; -450 ; 435
+                            }
+                        Line
+                            {
+                            Source = Cmp ;  2 ;  1 ; 0
+                            Sink = Pnt ;  1 ; -1 ; 0
+                            PointX = -3675 ; -3675 ; -3675
+                            PointY = 1350 ; 1350 ; 1800
+                            }
+                        Line
+                            {
+                            Source = Cmp ;  1 ;  2 ; -1
+                            Sink = Pnt ;  1 ; -1 ; 0
+                            PointX = -3375 ; -3375 ; -2250 ; -2250 ; -3675
+                            PointY = -1365 ; -1650 ; -1650 ; 1800 ; 1800
+                            }
+                        Line
+                            {
+                            Source = Pnt ;  1 ; -1 ; 0
+                            Sink = Prt ;  2 ;  1 ; -1
+                            PointX = -3675 ; -3675 ; -1065 ; -1065
+                            PointY = 1800 ; 2100 ; 2100 ; 2850
+                            }
+                        }
+                    }
+                        Coupled
+                            {
+                            Type = Coordinator
+                            Name = Link4
+                            Ports = 1; 1
+                            Description = Coupled DEVS model
+                            Graphic
+                                {
+                                Position = -5580; -4335
+                                Dimension = 675; 720
+                                Direction = Down
+                                Color = 15
+                                Icon = %datanetworks%ethernet.jpg
+                                Window = 5000; 5000; 5000; 5000
+                                }
+                            Parameters
+                                {
+                                }
+                            System
+                                {
+                                Inport
+                                    {
+                                    Name = Inport0
+                                    CoupledPort = 1
+                                    Description = 
+                                    Graphic
+                                        {
+                                        Position = -4695 ; -3525
+                                        Dimension = 390
+                                        Direction = Right
+                                        }
+                                    }
+                                Outport
+                                    {
+                                    Name = Outport0
+                                    CoupledPort = 1
+                                    Description = 
+                                    Graphic
+                                        {
+                                        Position = -930 ; 2850
+                                        Dimension = 375
+                                        Direction = Right
+                                        }
+                                    }
+                                Atomic
+                                    {
+                                    Name = InNICQueue
+                                    Ports = 2 ; 2
+                                    Path = PhaseI/NetworkQueue.h
+                                    Description = In0 Incomming packets to queue\nIn1 Incoming signal to request dequeue\nOut0 Outgoing dequeued packets\nOut1 Outgoing queue lenght information\n\nQueues incoming packets and enqueues them as required by a\nexternal entity. FIFO Policy (FirstInFirstOut). Provides information\nits internal state.
+                                    Graphic
+                                        {
+                                        Position = -3855 ; -1230
+                                        Dimension = 675 ; 675
+                                        Direction = Down
+                                        Color = 15
+                                        Icon = %datanetworks%queue.png
+                                        }
+                                    Parameters
+                                        {
+                                        MaxCapacity = Str; FelixNICQueue1.maxBuffer ; Queue Capacity in Bytes. (Use -1 for INF capacity)
+                                        ForcedPeriod = Str; -1 ; Force minimum period to transition. Use -1 for INF
+                                        }
+                                    }
+                                Atomic
+                                    {
+                                    Name = Link
+                                    Ports = 1 ; 1
+                                    Path = PhaseI/Link.h
+                                    Description = Vector to scalar signal
+                                    Graphic
+                                        {
+                                        Position = -3990 ; 585
+                                        Dimension = 630 ; 630
+                                        Direction = Down
+                                        Color = 15
+                                        Icon = %vectors%vec2scalar.svg
+                                        }
+                                    Parameters
+                                        {
+                                        link.capacity = Str; DstLink.capacity ; Signal Index
+                                        link.delay = Str; link.delay ; 
+                                        }
+                                    }
+                                Point
+                                    {
+                                    ConectedLines = 3 ; 4 ; 5
+                                    ConectedExtrems = Org ; Org ; Org
+                                    Position = -3675 ; 1800
+                                    }
+                                Line
+                                    {
+                                    Source = Prt ;  1 ;  1 ; 0
+                                    Sink = Cmp ;  1 ;  1 ; -1
+                                    PointX = -4200 ; -3675 ; -3675
+                                    PointY = -3525 ; -3525 ; -1365
+                                    }
+                                Line
+                                    {
+                                    Source = Cmp ;  1 ;  1 ; 0
+                                    Sink = Cmp ;  2 ;  1 ; -1
+                                    PointX = -3675 ; -3675 ; -3675
+                                    PointY = -450 ; -450 ; 435
+                                    }
+                                Line
+                                    {
+                                    Source = Cmp ;  2 ;  1 ; 0
+                                    Sink = Pnt ;  1 ; -1 ; 0
+                                    PointX = -3675 ; -3675 ; -3675
+                                    PointY = 1350 ; 1350 ; 1800
+                                    }
+                                Line
+                                    {
+                                    Source = Cmp ;  1 ;  2 ; -1
+                                    Sink = Pnt ;  1 ; -1 ; 0
+                                    PointX = -3375 ; -3375 ; -2475 ; -2475 ; -3675
+                                    PointY = -1365 ; -1650 ; -1650 ; 1800 ; 1800
+                                    }
+                                Line
+                                    {
+                                    Source = Pnt ;  1 ; -1 ; 0
+                                    Sink = Prt ;  2 ;  1 ; -1
+                                    PointX = -3675 ; -3675 ; -1350 ; -1350 ; -1065
+                                    PointY = 1800 ; 2100 ; 2100 ; 2850 ; 2850
+                                    }
+                                }
+                            }
+                                Atomic
+                                    {
+                                    Name = FelixServer2
+                                    Ports = 0 ; 1
+                                    Path = PhaseI/FelixServer.h
+                                    Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+                                    Graphic
+                                        {
+                                        Position = -5805 ; -11055
+                                        Dimension = 675 ; 675
+                                        Direction = Down
+                                        Color = 15
+                                        Icon = %datanetworks%generator.png
+                                        }
+                                    Parameters
+                                        {
+                                        }
+                                    }
+                                Coupled
+                                    {
+                                    Type = Coordinator
+                                    Name = Link1
+                                    Ports = 1; 1
+                                    Description = Coupled DEVS model
+                                    Graphic
+                                        {
+                                        Position = -5805; -9735
+                                        Dimension = 675; 720
+                                        Direction = Down
+                                        Color = 15
+                                        Icon = %datanetworks%ethernet.jpg
+                                        Window = 5000; 5000; 5000; 5000
+                                        }
+                                    Parameters
+                                        {
+                                        }
+                                    System
+                                        {
+                                        Inport
+                                            {
+                                            Name = Inport0
+                                            CoupledPort = 1
+                                            Description = 
+                                            Graphic
+                                                {
+                                                Position = -4740 ; -3525
+                                                Dimension = 480
+                                                Direction = Right
+                                                }
+                                            }
+                                        Outport
+                                            {
+                                            Name = Outport0
+                                            CoupledPort = 1
+                                            Description = 
+                                            Graphic
+                                                {
+                                                Position = -930 ; 2850
+                                                Dimension = 360
+                                                Direction = Right
+                                                }
+                                            }
+                                        Atomic
+                                            {
+                                            Name = InNICQueue
+                                            Ports = 2 ; 2
+                                            Path = PhaseI/NetworkQueue.h
+                                            Description = In0 Incomming packets to queue\nIn1 Incoming signal to request dequeue\nOut0 Outgoing dequeued packets\nOut1 Outgoing queue lenght information\n\nQueues incoming packets and enqueues them as required by a\nexternal entity. FIFO Policy (FirstInFirstOut). Provides information\nits internal state.
+                                            Graphic
+                                                {
+                                                Position = -3855 ; -1230
+                                                Dimension = 675 ; 675
+                                                Direction = Down
+                                                Color = 15
+                                                Icon = %datanetworks%queue.png
+                                                }
+                                            Parameters
+                                                {
+                                                MaxCapacity = Str; FelixNICQueue1.maxBuffer ; Queue Capacity in Bytes. (Use -1 for INF capacity)
+                                                ForcedPeriod = Str; -1 ; Force minimum period to transition. Use -1 for INF
+                                                }
+                                            }
+                                        Atomic
+                                            {
+                                            Name = Link
+                                            Ports = 1 ; 1
+                                            Path = PhaseI/Link.h
+                                            Description = Vector to scalar signal
+                                            Graphic
+                                                {
+                                                Position = -3990 ; 585
+                                                Dimension = 630 ; 630
+                                                Direction = Down
+                                                Color = 15
+                                                Icon = %vectors%vec2scalar.svg
+                                                }
+                                            Parameters
+                                                {
+                                                link.capacity = Str; FelixLink.capacity ; Signal Index
+                                                link.delay = Str; link.delay ; 
+                                                }
+                                            }
+                                        Point
+                                            {
+                                            ConectedLines = 3 ; 4 ; 5
+                                            ConectedExtrems = Org ; Org ; Org
+                                            Position = -3675 ; 1650
+                                            }
+                                        Line
+                                            {
+                                            Source = Prt ;  1 ;  1 ; 0
+                                            Sink = Cmp ;  1 ;  1 ; -1
+                                            PointX = -4125 ; -3675 ; -3675
+                                            PointY = -3525 ; -3525 ; -1365
+                                            }
+                                        Line
+                                            {
+                                            Source = Cmp ;  1 ;  1 ; 0
+                                            Sink = Cmp ;  2 ;  1 ; -1
+                                            PointX = -3675 ; -3675 ; -3675
+                                            PointY = -450 ; -450 ; 435
+                                            }
+                                        Line
+                                            {
+                                            Source = Cmp ;  2 ;  1 ; 0
+                                            Sink = Pnt ;  1 ; -1 ; 0
+                                            PointX = -3675 ; -3675 ; -3675
+                                            PointY = 1350 ; 1350 ; 1650
+                                            }
+                                        Line
+                                            {
+                                            Source = Cmp ;  1 ;  2 ; -1
+                                            Sink = Pnt ;  1 ; -1 ; 0
+                                            PointX = -3375 ; -3375 ; -2625 ; -2625 ; -3675
+                                            PointY = -1365 ; -1725 ; -1725 ; 1650 ; 1650
+                                            }
+                                        Line
+                                            {
+                                            Source = Pnt ;  1 ; -1 ; 0
+                                            Sink = Prt ;  2 ;  1 ; -1
+                                            PointX = -3675 ; -3675 ; -1065 ; -1065
+                                            PointY = 1650 ; 2100 ; 2100 ; 2850
+                                            }
+                                        }
+                                    }
+                                        Atomic
+                                            {
+                                            Name = Router2
+                                            Ports = 1 ; 2
+                                            Path = PhaseI/Router.h
+                                            Description = In0: Incomming packets\nInN: Outgoing packets from a single flow\n\nDemultiplexes a single packet flow in N input output streams.\nEach output stream contains packets belonging to a single flow identifier.
+                                            Graphic
+                                                {
+                                                Position = -7950 ; -5580
+                                                Dimension = 600 ; 675
+                                                Direction = Down
+                                                Color = 15
+                                                Icon = %datanetworks%router.jpg
+                                                }
+                                            Parameters
+                                                {
+                                                }
+                                            }
+                                        Coupled
+                                            {
+                                            Type = Coordinator
+                                            Name = Link2
+                                            Ports = 1; 1
+                                            Description = Coupled DEVS model
+                                            Graphic
+                                                {
+                                                Position = -7980; -7110
+                                                Dimension = 675; 720
+                                                Direction = Down
+                                                Color = 15
+                                                Icon = %datanetworks%ethernet.jpg
+                                                Window = 5000; 5000; 5000; 5000
+                                                }
+                                            Parameters
+                                                {
+                                                }
+                                            System
+                                                {
+                                                Inport
+                                                    {
+                                                    Name = Inport0
+                                                    CoupledPort = 1
+                                                    Description = 
+                                                    Graphic
+                                                        {
+                                                        Position = -4695 ; -3525
+                                                        Dimension = 390
+                                                        Direction = Right
+                                                        }
+                                                    }
+                                                Outport
+                                                    {
+                                                    Name = Outport0
+                                                    CoupledPort = 1
+                                                    Description = 
+                                                    Graphic
+                                                        {
+                                                        Position = -930 ; 2850
+                                                        Dimension = 375
+                                                        Direction = Right
+                                                        }
+                                                    }
+                                                Atomic
+                                                    {
+                                                    Name = InNICQueue
+                                                    Ports = 2 ; 2
+                                                    Path = PhaseI/NetworkQueue.h
+                                                    Description = In0 Incomming packets to queue\nIn1 Incoming signal to request dequeue\nOut0 Outgoing dequeued packets\nOut1 Outgoing queue lenght information\n\nQueues incoming packets and enqueues them as required by a\nexternal entity. FIFO Policy (FirstInFirstOut). Provides information\nits internal state.
+                                                    Graphic
+                                                        {
+                                                        Position = -3855 ; -1230
+                                                        Dimension = 675 ; 675
+                                                        Direction = Down
+                                                        Color = 15
+                                                        Icon = %datanetworks%queue.png
+                                                        }
+                                                    Parameters
+                                                        {
+                                                        MaxCapacity = Str; FelixNICQueue1.maxBuffer ; Queue Capacity in Bytes. (Use -1 for INF capacity)
+                                                        ForcedPeriod = Str; -1 ; Force minimum period to transition. Use -1 for INF
+                                                        }
+                                                    }
+                                                Atomic
+                                                    {
+                                                    Name = Link
+                                                    Ports = 1 ; 1
+                                                    Path = PhaseI/Link.h
+                                                    Description = Vector to scalar signal
+                                                    Graphic
+                                                        {
+                                                        Position = -3990 ; 585
+                                                        Dimension = 630 ; 630
+                                                        Direction = Down
+                                                        Color = 15
+                                                        Icon = %vectors%vec2scalar.svg
+                                                        }
+                                                    Parameters
+                                                        {
+                                                        link.capacity = Str; Link2.capacity ; Signal Index
+                                                        link.delay = Str; link.delay ; 
+                                                        }
+                                                    }
+                                                Point
+                                                    {
+                                                    ConectedLines = 3 ; 4 ; 5
+                                                    ConectedExtrems = Org ; Org ; Org
+                                                    Position = -3675 ; 1800
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Prt ;  1 ;  1 ; 0
+                                                    Sink = Cmp ;  1 ;  1 ; -1
+                                                    PointX = -4200 ; -3675 ; -3675
+                                                    PointY = -3525 ; -3525 ; -1365
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  1 ;  1 ; 0
+                                                    Sink = Cmp ;  2 ;  1 ; -1
+                                                    PointX = -3675 ; -3675 ; -3675
+                                                    PointY = -450 ; -450 ; 435
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  2 ;  1 ; 0
+                                                    Sink = Pnt ;  1 ; -1 ; 0
+                                                    PointX = -3675 ; -3675 ; -3675
+                                                    PointY = 1350 ; 1350 ; 1800
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  1 ;  2 ; -1
+                                                    Sink = Pnt ;  1 ; -1 ; 0
+                                                    PointX = -3375 ; -3375 ; -2550 ; -2550 ; -3675
+                                                    PointY = -1365 ; -1500 ; -1500 ; 1800 ; 1800
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Pnt ;  1 ; -1 ; 0
+                                                    Sink = Prt ;  2 ;  1 ; -1
+                                                    PointX = -3675 ; -3675 ; -1065
+                                                    PointY = 1800 ; 2850 ; 2850
+                                                    }
+                                                }
+                                            }
+                                                Atomic
+                                                    {
+                                                    Name = FinalizationCommands
+                                                    Ports = 0 ; 0
+                                                    Path = sinks/multipleSimulationCommands.h
+                                                    Description = Executes Scilab commands when using multiple simulation runs (at the end of each simulation, and at the end of ALL simulations).\nThis model should run with LAST priority
+                                                    Graphic
+                                                        {
+                                                        Position = -2685 ; -12435
+                                                        Dimension = 570 ; 570
+                                                        Direction = Right
+                                                        Color = 15
+                                                        Icon = %datanetworks%scilab.bmp
+                                                        }
+                                                    Parameters
+                                                        {
+                                                        initSimulationCommandName = Str; ../examples/Matias/PhaseI/Scilab/firstSimulation.sce ; 
+                                                        eachSimulationCommandName = Str; ../examples/Matias/PhaseI/Scilab/eachSimulation.sce ; 
+                                                        lastSimulationCommandName = Str; ../examples/Matias/PhaseI/Scilab/lastSimulation.sce ; 
+                                                        }
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  8 ;  1 ; 0
+                                                    Sink = Cmp ;  7 ;  1 ; -1
+                                                    PointX = -9675 ; -9675 ; -7800 ; -7800
+                                                    PointY = -9075 ; -8775 ; -8775 ; -8640
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  9 ;  1 ; 0
+                                                    Sink = Cmp ;  5 ;  1 ; -1
+                                                    PointX = -9675 ; -9750 ; -9750
+                                                    PointY = -3525 ; -3525 ; -2640
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  10 ;  1 ; 0
+                                                    Sink = Cmp ;  6 ;  1 ; -1
+                                                    PointX = -5250 ; -5250 ; -5250
+                                                    PointY = -3525 ; -3525 ; -2565
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  12 ;  1 ; 0
+                                                    Sink = Cmp ;  7 ;  2 ; -1
+                                                    PointX = -5475 ; -5475 ; -7500 ; -7500
+                                                    PointY = -8925 ; -8775 ; -8775 ; -8640
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  13 ;  2 ; 0
+                                                    Sink = Cmp ;  10 ;  1 ; -1
+                                                    PointX = -7500 ; -7500 ; -5250 ; -5250
+                                                    PointY = -4800 ; -4575 ; -4575 ; -4440
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  13 ;  1 ; 0
+                                                    Sink = Cmp ;  9 ;  1 ; -1
+                                                    PointX = -7800 ; -7800 ; -9675 ; -9675
+                                                    PointY = -4800 ; -4575 ; -4575 ; -4440
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  7 ;  1 ; 0
+                                                    Sink = Cmp ;  14 ;  1 ; -1
+                                                    PointX = -7650 ; -7650 ; -7650
+                                                    PointY = -7725 ; -7725 ; -7215
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  14 ;  1 ; 0
+                                                    Sink = Cmp ;  13 ;  1 ; -1
+                                                    PointX = -7650 ; -7650 ; -7650
+                                                    PointY = -6300 ; -6300 ; -5715
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  11 ;  1 ; 0
+                                                    Sink = Cmp ;  12 ;  1 ; -1
+                                                    PointX = -5475 ; -5475 ; -5475
+                                                    PointY = -10275 ; -10275 ; -9840
+                                                    }
+                                                Line
+                                                    {
+                                                    Source = Cmp ;  4 ;  1 ; 0
+                                                    Sink = Cmp ;  8 ;  1 ; -1
+                                                    PointX = -9675 ; -9675 ; -9675
+                                                    PointY = -10350 ; -10350 ; -9990
+                                                    }
+        }
+    }
+

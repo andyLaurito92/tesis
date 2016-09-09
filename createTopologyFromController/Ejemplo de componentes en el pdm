@@ -1,0 +1,72 @@
+Asi es un modelo atomico
+
+Atomic
+{
+Name = Dst1
+Ports = 1 ; 0
+Path = PhaseI/Packetsink.h
+Description = 
+Graphic
+    {
+    Position = -10080 ; -2505
+    Dimension = 675 ; 675
+    Direction = Down
+    Color = 15
+    Icon = %datanetworks%sink.png
+    }
+Parameters
+    {
+    }
+}
+
+Outport
+{
+Name = Outport0
+CoupledPort = 1
+Description = 
+Graphic
+    {
+    Position = -930 ; 2850
+    Dimension = 360
+    Direction = Right
+    }
+}
+
+Inport
+{
+Name = Inport0
+CoupledPort = 1
+Description = 
+Graphic
+    {
+    Position = -4740 ; -3525
+    Dimension = 480
+    Direction = Right
+    }
+}
+
+El modelo de simulación se trata como un modelo compuesto, arranca asi:
+
+Coupled
+    {
+    Type = Root
+    Name = GettingStarted //Nombre del pdm (de la simulacion)
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+            Muchos modelos atomicos y acoplados que forman la simulacion
+        }
+    }
