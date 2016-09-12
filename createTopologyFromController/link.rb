@@ -22,7 +22,6 @@ links is an array of elements of this kind
 	"state"=>"ACTIVE"
 }
 =end
-	@json_representation=json
 	def initialize(json)
 		@json_representation=json
 	end

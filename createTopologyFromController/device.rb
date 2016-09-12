@@ -7,6 +7,11 @@ class Device
 		'devices'
 	end
 
+	def self.quantity_of_devices
+		@@quantity ||= 0
+		@@quantity += 1
+	end
+
 =begin
 devices is an array of elements of this kind
 {
@@ -26,9 +31,29 @@ devices is an array of elements of this kind
 		}
 }
 =end
-	@json_representation=json
 	def initialize(json)
 		@json_representation=json
+	end
+
+	def fjalsd
+		"Atomic
+            {
+            Name = Router#{quantity_of_devices}
+            Ports = 2 ; 1
+            Path = PhaseI/Router.h
+            Description = In0: Incomming packets\nInN: Outgoing packets from a single flow\n\nDemultiplexes a single packet flow in N input output streams.\nEach output stream contains packets belonging to a single flow identifier.
+            Graphic
+                {
+                Position = -7950 ; -8505
+                Dimension = 600 ; 675
+                Direction = Down
+                Color = 15
+                Icon = %datanetworks%router.jpg
+                }
+            Parameters
+                {
+                }
+            }"
 	end
 
 

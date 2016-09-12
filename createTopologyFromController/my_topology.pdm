@@ -1,0 +1,166 @@
+Coupled
+    {
+        Type = Root
+        Name = MyTopology
+        Ports = 0; 0
+        Description = Testing the creation of a topology by getting the info from the controller
+        Graphic
+            {
+                Position = 0; 0
+                Dimension = 600; 600
+                Direction = Right
+                Color = 15
+                Icon = 
+                Window = 5000; 5000; 5000; 5000
+            }
+        Parameters
+            {
+            }
+        System
+            {
+                Atomic 
+				{
+		        Name = FelixServer1
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer2
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer3
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer4
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer5
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer6
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer7
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        Atomic 
+				{
+		        Name = FelixServer8
+		        Ports = 0 ; 1
+		        Path = PhaseI/FelixServer.h
+		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
+		        Graphic
+		            {
+		            Position = -9975 ; -12285
+		            Dimension = 450 ; 435
+		            Direction = Right
+		            Color = 15
+		            Icon = %sinks%scilab.ico
+		            }
+		        Parameters
+		            {
+		            }
+		        }
+		        }
+    }
