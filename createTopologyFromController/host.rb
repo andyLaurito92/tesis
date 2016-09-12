@@ -39,7 +39,7 @@ hosts is an array of elements of this kind
 		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
 		        Graphic
 		            {
-		            Position = -9975 ; -12285
+		            Position = #{-9975 + 550 * (Host.quantity_of_hosts - 1)} ; -12285
 		            Dimension = 450 ; 435
 		            Direction = Right
 		            Color = 15

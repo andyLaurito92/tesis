@@ -8,7 +8,7 @@ require './device.rb'
 require 'rgl/adjacency'
 
 graph_elements = []
-resources = [Host]
+resources = [Host,Device]
 
 resources.each do |resource|
     response = Typhoeus.get(resource.uri_resource,userpwd:"onos:rocks")
