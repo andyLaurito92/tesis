@@ -2,13 +2,14 @@ require 'json'
 require 'typhoeus'
 require 'byebug'
 require 'fileutils.rb'
+require './network_element.rb'
 require './host.rb'
 require './link.rb'
 require './device.rb'
 require 'rgl/adjacency'
 
 graph_elements = []
-resources = [Link]
+resources = [Host]
 
 resources.each do |resource|
     response = Typhoeus.get(resource.uri_resource,userpwd:"onos:rocks")

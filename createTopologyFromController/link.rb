@@ -1,15 +1,11 @@
-class Link
+class Link < NetworkElement
+	
 	def self.uri_resource
 		'http://127.0.0.1:8181/onos/v1/links/'
 	end
 
 	def self.key_name_in_response
 		'links'
-	end
-
-	def self.quantity_of_links
-		@@quantity ||= 0
-		@@quantity += 1
 	end
 
 =begin
@@ -32,15 +28,16 @@ links is an array of elements of this kind
 	end
 
 	def transform_to_pdm_representation
+		Link.increase_quantity_in_one
 		"Coupled
 	            {
 	            Type = Coordinator
-	            Name = Link#{Link.quantity_of_links}
+	            Name = Link#{Link.quantity}
 	            Ports = 1; 1
 	            Description = Coupled DEVS model
 	            Graphic
 	                {
-	                Position = #{-9990 + 645 * (Link.quantity_of_links - 1)}; -9870
+	                Position = #{-9990 + 645 * (Link.quantity - 1)}; -9870
 	                Dimension = 645; 705
 	                Direction = Down
 	                Color = 15

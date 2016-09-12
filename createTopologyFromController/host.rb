@@ -1,16 +1,12 @@
 "An ONOS representation of a host"
-class Host
+class Host < NetworkElement
+	
 	def self.uri_resource
 		'http://127.0.0.1:8181/onos/v1/hosts/'
 	end
 
 	def self.key_name_in_response
 		'hosts'
-	end
-
-	def self.quantity_of_hosts
-		@@quantity ||= 0
-		@@quantity += 1
 	end
 
 =begin
@@ -31,15 +27,16 @@ hosts is an array of elements of this kind
 	end
 
 	def transform_to_pdm_representation
+		Host.increase_quantity_in_one
 		"Atomic 
 				{
-		        Name = FelixServer#{Host.quantity_of_hosts}
+		        Name = FelixServer#{Host.quantity}
 		        Ports = 0 ; 1
 		        Path = PhaseI/FelixServer.h
 		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
 		        Graphic
 		            {
-		            Position = #{-9975 + 550 * (Host.quantity_of_hosts - 1)} ; -12285
+		            Position = #{-9975 + 550 * (Host.quantity - 1)} ; -12285
 		            Dimension = 450 ; 435
 		            Direction = Right
 		            Color = 15

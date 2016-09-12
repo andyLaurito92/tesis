@@ -1,15 +1,13 @@
-class Device
+
+
+class Device < NetworkElement
+	
 	def self.uri_resource
 		'http://127.0.0.1:8181/onos/v1/devices/'
 	end
 
 	def self.key_name_in_response
 		'devices'
-	end
-
-	def self.quantity_of_devices
-		@@quantity ||= 0
-		@@quantity += 1
 	end
 
 =begin
@@ -36,15 +34,16 @@ devices is an array of elements of this kind
 	end
 
 	def transform_to_pdm_representation
+		Device.increase_quantity_in_one
 		"Atomic
 	            {
-	            Name = Router#{Device.quantity_of_devices}
+	            Name = Router#{Device.quantity}
 	            Ports = 2 ; 1
 	            Path = PhaseI/Router.h
 	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
 	            Graphic
 	                {
-	                Position = #{-7950 + 600 * (Device.quantity_of_devices-1)} ; -8505
+	                Position = #{-7950 + 600 * (Device.quantity-1)} ; -8505
 	                Dimension = 600 ; 675
 	                Direction = Down
 	                Color = 15

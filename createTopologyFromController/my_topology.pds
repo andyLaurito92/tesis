@@ -1,0 +1,47 @@
+Root-Coordinator
+ {
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = PhaseI/Router.h
+    Parameters = 
+   }
+  EIC
+   {
+   }
+  EOC
+   {
+   }
+  IC
+   {
+   }
+ }
