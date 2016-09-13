@@ -43,7 +43,7 @@ devices is an array of elements of this kind
 	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
 	            Graphic
 	                {
-	                Position = #{-7950 + 600 * (Device.quantity-1)} ; -8505
+	                Position = #{-9975 + 750 * (Device.quantity-1)} ; -8505
 	                Dimension = 600 ; 675
 	                Direction = Down
 	                Color = 15

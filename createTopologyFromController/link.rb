@@ -37,7 +37,7 @@ links is an array of elements of this kind
 	            Description = Coupled DEVS model
 	            Graphic
 	                {
-	                Position = #{-9990 + 645 * (Link.quantity - 1)}; -9870
+	                Position = #{-9975 + 750 * (Link.quantity - 1)}; -9870
 	                Dimension = 645; 705
 	                Direction = Down
 	                Color = 15
