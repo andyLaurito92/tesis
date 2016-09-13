@@ -1,4 +1,4 @@
-Coupled
+PDM_INITIAL_STRUCTURE = "Coupled
     {
         Type = Root
         Name = MyTopology
@@ -82,151 +82,11 @@ Coupled
                     Run at Exit = Str;  ; Scilab Job at Exit
                     }
                 }
-        Atomic 
-				{
-		        Name = FelixServer1
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -9975 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer2
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -9425 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer3
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -8875 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer4
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -8325 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer5
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -7775 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer6
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -7225 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer7
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -6675 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer8
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -6125 ; -12285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		            Atomic
+        "
+
+
+
+PDM_FINAL_STRUCTURE='    Atomic
                 {
                 Name = FinalizationCommands
                 Ports = 0 ; 0
@@ -248,4 +108,4 @@ Coupled
                     }
                 }
             }
-    }
+    }'

@@ -40,7 +40,7 @@ hosts is an array of elements of this kind
 		            Dimension = 450 ; 435
 		            Direction = Right
 		            Color = 15
-		            Icon = %sinks%scilab.ico
+		            Icon = %datanetworks%generator.png
 		            }
 		        Parameters
 		            {
