@@ -1,11 +1,12 @@
 class Link < NetworkElement
 	
-	def self.uri_resource
-		'http://127.0.0.1:8181/onos/v1/links/'
+	def self.quantity
+		@@quantity	
 	end
 
-	def self.key_name_in_response
-		'links'
+	def self.increase_quantity_in_one
+		@@quantity ||= 0
+		@@quantity += 1
 	end
 
 =begin
@@ -23,21 +24,24 @@ links is an array of elements of this kind
 	"state"=>"ACTIVE"
 }
 =end
-	def initialize(json)
-		@json_representation=json
+	def src
+		@json_representation['src']
+	end
+
+	def dst
+		@json_representation['dst']
 	end
 
 	def transform_to_pdm_representation
-		Link.increase_quantity_in_one
 		"Coupled
 	            {
 	            Type = Coordinator
-	            Name = Link#{Link.quantity}
+	            Name = Link#{@my_number}
 	            Ports = 1; 1
 	            Description = Coupled DEVS model
 	            Graphic
 	                {
-	                Position = #{-9975 + 750 * (Link.quantity - 1)}; -9870
+	                Position = #{-9975 + 750 * (@my_number - 1)}; -9870
 	                Dimension = 645; 705
 	                Direction = Down
 	                Color = 15

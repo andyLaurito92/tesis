@@ -1,42 +1,45 @@
 "An ONOS representation of a host"
 class Host < NetworkElement
 	
-	def self.uri_resource
-		'http://127.0.0.1:8181/onos/v1/hosts/'
+	def self.quantity
+		@@quantity	
 	end
 
-	def self.key_name_in_response
-		'hosts'
+	def self.increase_quantity_in_one
+		@@quantity ||= 0
+		@@quantity += 1
 	end
 
 =begin
-hosts is an array of elements of this kind
+This is the info that represents a host. This info is provided by /devices. /hosts gives
+info that, besides its usefull, is not something that can be used for the pdm build.
 {
-	"id"=>"AE:15:BC:19:CB:3D/None", 
-	"mac"=>"AE:15:BC:19:CB:3D", 
-	"vlan"=>"None", 
-	"ipAddresses"=>["10.0.0.3"], 
-	"location"=>{
-		"elementId"=>"of:0000000000000004", 
-		"port"=>"1"
-	}
+	"id"=>"of:0000000000000003", 
+	"type"=>"SWITCH", 
+	"available"=>true, 
+	"role"=>"MASTER", 
+	"mfr"=>"Nicira, Inc.", 
+	"hw"=>"Open vSwitch", 
+	"sw"=>"2.5.0", 
+	"serial"=>"None", 
+	"chassisId"=>"3", 
+	"annotations"=>{
+		"managementAddress"=>"127.0.0.1", 
+		"protocol"=>"OF_13", 
+		"channelId"=>"127.0.0.1:59170"
+		}
 }
 =end
-	def initialize(json)
-		@json_representation=json
-	end
-
 	def transform_to_pdm_representation
-		Host.increase_quantity_in_one
 		"Atomic 
 				{
-		        Name = FelixServer#{Host.quantity}
+		        Name = FelixServer#{@my_number}
 		        Ports = 0 ; 1
 		        Path = PhaseI/FelixServer.h
 		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
 		        Graphic
 		            {
-		            Position = #{-9975 + 750 * (Host.quantity - 1)} ; -10285
+		            Position = #{-9975 + 750 * (@my_number - 1)} ; -10285
 		            Dimension = 450 ; 435
 		            Direction = Right
 		            Color = 15
