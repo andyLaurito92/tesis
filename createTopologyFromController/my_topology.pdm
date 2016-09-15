@@ -118,42 +118,6 @@ Coupled
 		            {
 		            }
 		        }
-		        Atomic 
-				{
-		        Name = FelixServer3
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -8475 ; -10285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
-		        Atomic 
-				{
-		        Name = FelixServer4
-		        Ports = 0 ; 1
-		        Path = PhaseI/FelixServer.h
-		        Description = Generates jobs. Distribution for the rate and jobSize are retrieved from the Flows assigned to this server
-		        Graphic
-		            {
-		            Position = -7725 ; -10285
-		            Dimension = 450 ; 435
-		            Direction = Right
-		            Color = 15
-		            Icon = %datanetworks%generator.png
-		            }
-		        Parameters
-		            {
-		            }
-		        }
 		        Atomic
 	            {
 	            Name = Router1
@@ -181,96 +145,6 @@ Coupled
 	            Graphic
 	                {
 	                Position = -9225 ; -8505
-	                Dimension = 600 ; 675
-	                Direction = Down
-	                Color = 15
-	                Icon = %datanetworks%router.jpg
-	                }
-	            Parameters
-	                {
-	                }
-	            }
-	            Atomic
-	            {
-	            Name = Router3
-	            Ports = 2 ; 1
-	            Path = PhaseI/Router.h
-	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
-	            Graphic
-	                {
-	                Position = -8475 ; -8505
-	                Dimension = 600 ; 675
-	                Direction = Down
-	                Color = 15
-	                Icon = %datanetworks%router.jpg
-	                }
-	            Parameters
-	                {
-	                }
-	            }
-	            Atomic
-	            {
-	            Name = Router4
-	            Ports = 2 ; 1
-	            Path = PhaseI/Router.h
-	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
-	            Graphic
-	                {
-	                Position = -7725 ; -8505
-	                Dimension = 600 ; 675
-	                Direction = Down
-	                Color = 15
-	                Icon = %datanetworks%router.jpg
-	                }
-	            Parameters
-	                {
-	                }
-	            }
-	            Atomic
-	            {
-	            Name = Router5
-	            Ports = 2 ; 1
-	            Path = PhaseI/Router.h
-	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
-	            Graphic
-	                {
-	                Position = -6975 ; -8505
-	                Dimension = 600 ; 675
-	                Direction = Down
-	                Color = 15
-	                Icon = %datanetworks%router.jpg
-	                }
-	            Parameters
-	                {
-	                }
-	            }
-	            Atomic
-	            {
-	            Name = Router6
-	            Ports = 2 ; 1
-	            Path = PhaseI/Router.h
-	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
-	            Graphic
-	                {
-	                Position = -6225 ; -8505
-	                Dimension = 600 ; 675
-	                Direction = Down
-	                Color = 15
-	                Icon = %datanetworks%router.jpg
-	                }
-	            Parameters
-	                {
-	                }
-	            }
-	            Atomic
-	            {
-	            Name = Router7
-	            Ports = 2 ; 1
-	            Path = PhaseI/Router.h
-	            Description = In0: Incomming packetsInN: Outgoing packets from a single flowDemultiplexes a single packet flow in N input output streams.Each output stream contains packets belonging to a single flow identifier.
-	            Graphic
-	                {
-	                Position = -5475 ; -8505
 	                Dimension = 600 ; 675
 	                Direction = Down
 	                Color = 15
@@ -790,12 +664,61 @@ Coupled
 	            }
 				Line
                 {
-                Source = Cmp ;  4 ;  1 ; 0
+                Source = Cmp ;  6 ;  1 ; 0
                 Sink = Cmp ;  8 ;  1 ; -1
                 PointX = -9675 ; -9675 ; -9675
                 PointY = -10350 ; -10350 ; -9990
                 }
-                Atomic
+                Line
+                {
+                Source = Cmp ;  8 ;  1 ; 0
+                Sink = Cmp ;  7 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  7 ;  1 ; 0
+                Sink = Cmp ;  9 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  9 ;  1 ; 0
+                Sink = Cmp ;  6 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  4 ;  1 ; 0
+                Sink = Cmp ;  10 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  10 ;  1 ; 0
+                Sink = Cmp ;  7 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  5 ;  1 ; 0
+                Sink = Cmp ;  11 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                Line
+                {
+                Source = Cmp ;  11 ;  1 ; 0
+                Sink = Cmp ;  6 ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+                    Atomic
                 {
                 Name = FinalizationCommands
                 Ports = 0 ; 0

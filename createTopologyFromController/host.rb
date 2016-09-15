@@ -11,23 +11,18 @@ class Host < NetworkElement
 	end
 
 =begin
-This is the info that represents a host. This info is provided by /devices. /hosts gives
-info that, besides its usefull, is not something that can be used for the pdm build.
+This is the info that represents a host. 
 {
-	"id"=>"of:0000000000000003", 
-	"type"=>"SWITCH", 
-	"available"=>true, 
-	"role"=>"MASTER", 
-	"mfr"=>"Nicira, Inc.", 
-	"hw"=>"Open vSwitch", 
-	"sw"=>"2.5.0", 
-	"serial"=>"None", 
-	"chassisId"=>"3", 
-	"annotations"=>{
-		"managementAddress"=>"127.0.0.1", 
-		"protocol"=>"OF_13", 
-		"channelId"=>"127.0.0.1:59170"
-		}
+  "id": "46:E4:3C:A4:17:C8/-1",
+  "mac": "46:E4:3C:A4:17:C8",
+  "vlan": "-1",
+  "ipAddresses": [
+    "127.0.0.1"
+  ],
+  "location": {
+    "elementId": "of:0000000000000002",
+    "port": "3"
+  }
 }
 =end
 	def transform_to_pdm_representation

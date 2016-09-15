@@ -162,4 +162,16 @@ links is an array of elements of this kind
 	            }
 				"
 	end
+
+	def create_pdm_line_between_src_and_dst
+		"		Line
+                {
+                Source = Cmp ;  #{pdm_position src, number_of_pdm_models_in_structure} ;  1 ; 0
+                Sink = Cmp ;  #{pdm_position dst, number_of_pdm_models_in_structure} ;  1 ; -1
+                PointX = -9675 ; -9675 ; -9675
+                PointY = -10350 ; -10350 ; -9990
+                }
+        "
+	end
+
 end

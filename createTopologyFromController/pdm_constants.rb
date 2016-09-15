@@ -84,7 +84,7 @@ PDM_INITIAL_STRUCTURE = "Coupled
                 }
         "
 
-
+NUMBER_OF_PDM_MODELS_IN_STRUCTURE = 3
 
 PDM_FINAL_STRUCTURE='    Atomic
                 {
