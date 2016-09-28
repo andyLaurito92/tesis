@@ -2,4 +2,7 @@
 source "https://rubygems.org"
 
 gem 'byebug'
-gem 'treetop'
+gem 'rspec', '~> 3.4'
+gem 'spec'
+gem 'rspec-mocks' 
+gem 'simplecov', :require => false, :group => :test
