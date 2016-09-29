@@ -2,6 +2,7 @@
 source "https://rubygems.org"
 
 gem 'byebug'
+gem 'commander'
 gem 'rspec', '~> 3.4'
 gem 'spec'
 gem 'rspec-mocks' 
