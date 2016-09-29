@@ -7,7 +7,7 @@ class Haikunet
 		my_command_line_arguments.run
 		program_lexeme = File.open(my_command_line_arguments.file_name).read
 
-		Lexer.new 
+		Lexer.new program_lexeme
 	end
 	
 end
