@@ -8,11 +8,13 @@ class Haikunet
 		@program_lexeme = File.open(my_command_line_arguments.file_name).read
 	end
 	
-	def tokenize
+	def interpretate
 		my_lexer = Lexer.new @program_lexeme
 		my_lexer.tokenize_lexeme
+
+		
 	end
 end
 
 my_haikunet_interpreter = Haikunet.new
-my_haikunet_interpreter.tokenize
+my_haikunet_interpreter.interpretate
