@@ -1,5 +1,5 @@
 require 'byebug'
-require_relative 'tokens.rb'
+require_relative 'token.rb'
 require_relative 'keywords.rb'
 
 class Lexer
@@ -10,32 +10,47 @@ class Lexer
 		@program_lexeme = program_lexeme
         @program_lexeme_lines = @program_lexeme.gsub(/\r\n?/, "\n")
         @tokens = []
+        @line_to_tokenize = ''
+        @line_number = 0
+        @current_index = 0
 	end
 
     def tokenize_lexeme
-        line_number = 0
+        @line_number = 0
         @program_lexeme_lines.each_line do |line|
-            line_to_tokenize = line
-            @tokens.push (get_next_token line_to_tokenize, line_number) while line_to_tokenize.size > 0
-            line_number += 1
+            @line_to_tokenize = line
+            while @line_to_tokenize.size > @current_index
+                byebug
+                @tokens.push get_next_token
+            end
+            @line_number += 1
         end
     end
 
-    def get_next_token(line_to_tokenize, line_number)
+    def get_next_token
         current_read_entry = ''
-        current_index = 0
         while not (is_a_token? current_read_entry)
-            current_read_entry += line_to_tokenize[current_index]
+            raise StandardError, "In line number #{@line_number}: No token could be found in the program, please correct the syntax error." if @current_index >= @line_number.size
+            current_read_entry += read_one_more_character
         end
+        keyword = is_a_token? current_read_entry
+        Token.new keyword, current_read_entry
+    end
+
+    def read_one_more_character
+        next_character = ' '
+        while next_character == ' '
+            next_character = @line_to_tokenize[@current_index]
+            @current_index += 1
+        end
+        next_character
     end
 
     def is_a_token?(current_read_line)
-        @keywords.each do |keyword, regex|
-            current_read_line.scan regex
+        keywords_list.each do |keyword, regex|
+            current_read_line_scaned = current_read_line.scan regex
+            return keyword if (current_read_line_scaned.size > 0) && current_read_line_scaned.first == current_read_line
         end
-    end
-
-    def save_token(token)
-        @tokens_table['token':token,  }
+        false
     end
 end
