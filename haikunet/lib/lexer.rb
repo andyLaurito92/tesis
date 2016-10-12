@@ -1,56 +1,112 @@
 require 'byebug'
 require_relative 'token.rb'
-require_relative 'keywords.rb'
 
 class Lexer
-    include Keywords
-	attr_reader :current_token, :program_lexeme, :tokens_table
+	attr_reader :program_lexeme, :tokens
 
 	def initialize(program_lexeme)
 		@program_lexeme = program_lexeme
         @program_lexeme_lines = @program_lexeme.gsub(/\r\n?/, "\n")
-        @tokens = []
         @line_to_tokenize = ''
-        @line_number = 0
+        @end_of_line_reached = false
         @current_index = 0
+        @tokens = []
 	end
 
     def tokenize_lexeme
-        @line_number = 0
+        line_number = 0
         @program_lexeme_lines.each_line do |line|
             @line_to_tokenize = line
-            while @line_to_tokenize.size > @current_index
-                byebug
-                @tokens.push get_next_token
+            while !@end_of_line_reached
+                @tokens.push get_next_token line_number
             end
-            @line_number += 1
+            byebug
+            line_number += 1
         end
+        @tokens
     end
 
-    def get_next_token
-        current_read_entry = ''
-        while not (is_a_token? current_read_entry)
-            raise StandardError, "In line number #{@line_number}: No token could be found in the program, please correct the syntax error." if @current_index >= @line_number.size
-            current_read_entry += read_one_more_character
+    def get_next_token(line_number)
+        token = nil
+        current_read_lexeme = ''
+        @end_of_line_reached = false
+        while not token
+            current_read_lexeme += @line_to_tokenize[@current_index]
+            case current_read_lexeme
+            when '='
+                token = create_token_with_value_and_move_forward 'EQUAL_PARAMETERS', '=', 1
+            when '('
+                token = create_token_with_value_and_move_forward 'LEFT_PARENTHESIS', '(', 1
+            when ')'
+                token = create_token_with_value_and_move_forward 'RIGHT_PARENTHESIS', ')', 1
+            when '"'
+                token = create_token_with_value_and_move_forward 'DOUBLE_QUOTE', '"', 1
+            when '['
+                token = create_token_with_value_and_move_forward 'LEFT_BRACE', '[', 1
+            when ']'
+                token = create_token_with_value_and_move_forward 'RIGHT_BRACE', ']', 1
+            when ','
+                token = create_token_with_value_and_move_forward 'COMMA', ',', 1
+            when ':'
+                token = create_token_with_value_and_move_forward 'ASSIGN', ':=', 2  if looking_forward_is_keyword? ':=' 
+            when /[:A-Za-z0-9_-]+/
+                #We are in and identifier, host, link, flow, device, intent, select, action, condition case
+                token = create_token_with_value_and_move_forward 'HOST', 'HOST', 4 if looking_forward_is_keyword? 'HOST'
+                token = create_token_with_value_and_move_forward 'LINK', 'LINK', 4 if looking_forward_is_keyword? 'LINK'
+                token = create_token_with_value_and_move_forward 'DEVICE', 'DEVICE', 6 if looking_forward_is_keyword? 'DEVICE'
+                token = create_token_with_value_and_move_forward 'FLOW', 'FLOW', 4 if looking_forward_is_keyword? 'FLOW'
+                token = create_token_with_value_and_move_forward 'INTENT', 'INTENT', 6 if looking_forward_is_keyword? 'INTENT'
+                token = create_token_with_value_and_move_forward 'SELECT', 'SELECT', 6 if looking_forward_is_keyword? 'SELECT'
+                token = create_token_with_value_and_move_forward 'ACTION', 'ACTION', 6 if looking_forward_is_keyword? 'ACTION'
+                token = create_token_with_value_and_move_forward 'CONDITION', 'CONDITION', 9 if looking_forward_is_keyword? 'CONDITION'
+
+                return token if token
+
+                #If we are here, then it means that is an identifier. We should pick the longest 
+                #identifier that we can, and keep going.
+                value = pick_longest_identifier 
+                token = create_token_with_value_and_move_forward 'IDENTIFIER', value, value.length
+            when ' ' #When we have a space, we just keep going
+                current_read_lexeme = ''
+                @current_index += 1
+            when /$/
+                @end_of_line_reached = true
+                return
+            else
+                raise_sintaxis_eror "No matching token for lexeme #{current_read_lexeme}\n", line_number
+            end
         end
-        keyword = is_a_token? current_read_entry
-        Token.new keyword, current_read_entry
+        token
     end
 
-    def read_one_more_character
-        next_character = ' '
-        while next_character == ' '
-            next_character = @line_to_tokenize[@current_index]
-            @current_index += 1
-        end
-        next_character
+    def create_token_with_value_and_move_forward(keyword, value, move_forward)
+        new_token = Token.new keyword, value
+        @current_index += move_forward
+        new_token
     end
 
-    def is_a_token?(current_read_line)
-        keywords_list.each do |keyword, regex|
-            current_read_line_scaned = current_read_line.scan regex
-            return keyword if (current_read_line_scaned.size > 0) && current_read_line_scaned.first == current_read_line
-        end
-        false
+    def looking_forward_is_keyword?(keyword)
+        #TODO: FIND A BETTER WAY TO DO THIS. :(
+        keyword_regex = (keyword == ':=') ? keyword : /\b#{keyword}\b/i
+        
+        lexeme_found = @line_to_tokenize[@current_index,keyword.size].scan keyword_regex
+        lexeme_found.size == 1
+    end
+
+    def pick_longest_identifier
+        index_read_identifier = @current_index
+        current_read_identifier = @line_to_tokenize[index_read_identifier]
+        identifiers_found = current_read_identifier.scan /[:A-Za-z0-9_-]+/
+            while identifiers_found.size == 1 && identifiers_found.first == current_read_identifier
+                index_read_identifier +=1
+                current_read_identifier += @line_to_tokenize[index_read_identifier]
+                identifiers_found = current_read_identifier.scan /[:A-Za-z0-9_-]+/
+            end
+        identifiers_found.first
+    end
+
+    def raise_sintaxis_eror(message, line_number)
+        lexeme_with_error = @line_to_tokenize[[0,@current_index-5].max, @current_index+5]
+        raise "A syntaxis error was found on line:#{line_number}, on column #{@current_index} near #{lexeme_with_error}. The problem is #{message}. Please correct this error in order to run the program ;)."
     end
 end
