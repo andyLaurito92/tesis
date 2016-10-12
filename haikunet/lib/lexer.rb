@@ -25,7 +25,6 @@ class Lexer
             while !@end_of_line_reached
                 @tokens.push get_next_token line_number
             end
-            byebug
             line_number += 1
         end
         @tokens
