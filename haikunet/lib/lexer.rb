@@ -2,6 +2,9 @@ require 'byebug'
 require_relative 'token.rb'
 
 class Lexer
+    #TODO: IF THIS IS A CONST, SHOULDN'T I DEFINE A KEYWORDS CLASS ??
+    IDENTIFIER_REGEX = /[.:A-Za-z0-9_-]+/
+
 	attr_reader :program_lexeme, :tokens
 
 	def initialize(program_lexeme)
@@ -17,6 +20,8 @@ class Lexer
         line_number = 0
         @program_lexeme_lines.each_line do |line|
             @line_to_tokenize = line
+            @current_index = 0
+            @end_of_line_reached = false
             while !@end_of_line_reached
                 @tokens.push get_next_token line_number
             end
@@ -29,7 +34,6 @@ class Lexer
     def get_next_token(line_number)
         token = nil
         current_read_lexeme = ''
-        @end_of_line_reached = false
         while not token
             current_read_lexeme += @line_to_tokenize[@current_index]
             case current_read_lexeme
@@ -49,7 +53,7 @@ class Lexer
                 token = create_token_with_value_and_move_forward 'COMMA', ',', 1
             when ':'
                 token = create_token_with_value_and_move_forward 'ASSIGN', ':=', 2  if looking_forward_is_keyword? ':=' 
-            when /[:A-Za-z0-9_-]+/
+            when IDENTIFIER_REGEX
                 #We are in and identifier, host, link, flow, device, intent, select, action, condition case
                 token = create_token_with_value_and_move_forward 'HOST', 'HOST', 4 if looking_forward_is_keyword? 'HOST'
                 token = create_token_with_value_and_move_forward 'LINK', 'LINK', 4 if looking_forward_is_keyword? 'LINK'
@@ -69,9 +73,12 @@ class Lexer
             when ' ' #When we have a space, we just keep going
                 current_read_lexeme = ''
                 @current_index += 1
-            when /$/
+            when /\t/ #When we have a tab, we just keep going
+                current_read_lexeme = ''
+                @current_index += 1
+            when /\n/
                 @end_of_line_reached = true
-                return
+                token = create_token_with_value_and_move_forward 'END_OF_LINE', '\n', 0
             else
                 raise_sintaxis_eror "No matching token for lexeme #{current_read_lexeme}\n", line_number
             end
@@ -96,11 +103,11 @@ class Lexer
     def pick_longest_identifier
         index_read_identifier = @current_index
         current_read_identifier = @line_to_tokenize[index_read_identifier]
-        identifiers_found = current_read_identifier.scan /[:A-Za-z0-9_-]+/
+        identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
             while identifiers_found.size == 1 && identifiers_found.first == current_read_identifier
                 index_read_identifier +=1
                 current_read_identifier += @line_to_tokenize[index_read_identifier]
-                identifiers_found = current_read_identifier.scan /[:A-Za-z0-9_-]+/
+                identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
             end
         identifiers_found.first
     end

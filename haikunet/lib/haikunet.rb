@@ -10,8 +10,8 @@ class Haikunet
 	
 	def interpretate
 		my_lexer = Lexer.new @program_lexeme
-		my_lexer.tokenize_lexeme
-
+		lexeme_tokenized = my_lexer.tokenize_lexeme
+		
 		
 	end
 end
