@@ -10,7 +10,7 @@ class Parser
     def parse(lexeme_tokenize)
         @lexeme_to_tokenize = lexeme_tokenize
         lookahead_token = get_lookahead
-        while lookahead_token
+        while @index_actual_token < @lexeme_to_tokenize.size
             initial_symbol
             lookahead_token = get_lookahead
         end
@@ -20,6 +20,7 @@ class Parser
     def initial_symbol
         @abstract_syntax_tree.push 'INITIAL_SYMBOL'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'IDENTIFIER'
             match 'IDENTIFIER'
@@ -39,6 +40,7 @@ class Parser
     def intent_production_with_action
         @abstract_syntax_tree.push 'INTENT_PRODUCTION_WITH_ACTION'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'ACTION'
             match 'ACTION'
@@ -50,6 +52,7 @@ class Parser
     def intent_production_with_condition
         @abstract_syntax_tree.push 'INTENT_PRODUCTION_WITH_CONDITION'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'CONDITION'
             match 'CONDITION'
@@ -60,6 +63,7 @@ class Parser
     def network_elem_definition
         @abstract_syntax_tree.push 'NETWORK_ELEM_DEFINITION'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'HOST'
             match 'HOST'
@@ -99,6 +103,7 @@ class Parser
     def params
         @abstract_syntax_tree.push 'PARAMS'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'IDENTIFIER'
             match 'IDENTIFIER'
@@ -110,10 +115,11 @@ class Parser
     def second_part_equal
         @abstract_syntax_tree.push 'SECOND_PART_EQUAL'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'DOUBLE_QUOTE'
             match 'DOUBLE_QUOTE'
-            match 'IDENTIFIER'
+            match 'STRING'
             match 'DOUBLE_QUOTE'
             add_more_parameters
         when 'IDENTIFIER'
@@ -132,6 +138,7 @@ class Parser
     def add_more_parameters
         @abstract_syntax_tree.push 'ADD_MORE_PARAMETERS'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'COMMA'
             match 'COMMA'
@@ -142,9 +149,15 @@ class Parser
     def elems_of_array
         @abstract_syntax_tree.push 'ELEMS_OF_ARRAY'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'IDENTIFIER' 
             match 'IDENTIFIER'
+            add_more_elements_to_array
+        when 'DOUBLE_QUOTE'
+            match 'DOUBLE_QUOTE'
+            match 'STRING'
+            match 'DOUBLE_QUOTE'
             add_more_elements_to_array
         else
             raise_syntaxis_error "It was suppossed to found an identifier inside the array, but instead #{lookahead_token.value} was found."
@@ -154,6 +167,7 @@ class Parser
     def add_more_elements_to_array
         @abstract_syntax_tree.push 'ADD_MORE_ELEMENTS_TO_ARRAY'
         lookahead_token = get_lookahead
+        return unless lookahead_token
         case lookahead_token.keyword
         when 'COMMA' 
             match 'COMMA'
@@ -172,7 +186,8 @@ class Parser
        else
             raise_syntaxis_error "It was suppossed to match token #{keyword}, but instead #{token.keyword} was found."
        end
-       if @lexeme_to_tokenize[@index_actual_token].keyword == 'END_OF_LINE'
+
+       while @index_actual_token < @lexeme_to_tokenize.length && @lexeme_to_tokenize[@index_actual_token].keyword == 'END_OF_LINE'
             @line_number += 1 
             @index_actual_token += 1
        end

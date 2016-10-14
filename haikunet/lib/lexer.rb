@@ -79,11 +79,11 @@ class Lexer
                 # otherwise is an identifier
                 if !@tokens.last.nil? && @tokens.last.keyword == 'DOUBLE_QUOTE'
                     value = pick_longest_identifier STRING_REGEX
+                    token = create_token_with_value_and_move_forward 'STRING', value, value.length
                 else
                     value = pick_longest_identifier IDENTIFIER_REGEX
+                    token = create_token_with_value_and_move_forward 'IDENTIFIER', value, value.length
                 end
-
-                token = create_token_with_value_and_move_forward 'IDENTIFIER', value, value.length
             when ' ' #When we have a space, we just keep going
                 current_read_lexeme = ''
                 @current_index += 1
