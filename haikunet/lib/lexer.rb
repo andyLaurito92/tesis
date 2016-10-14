@@ -3,7 +3,8 @@ require_relative 'token.rb'
 
 class Lexer
     #TODO: IF THIS IS A CONST, SHOULDN'T I DEFINE A KEYWORDS CLASS ??
-    IDENTIFIER_REGEX = /[.:A-Za-z0-9_-]+/
+    IDENTIFIER_REGEX = /[.A-Za-z0-9_-]+/ #This matchs alpha numeric symbols, allowing : . _ -. (But cannot end in : .)
+    STRING_REGEX = /[:.A-Za-z0-9_-]+/
 
 	attr_reader :program_lexeme, :tokens
 
@@ -72,8 +73,16 @@ class Lexer
                 return token if token
 
                 #If we are here, then it means that is an identifier. We should pick the longest 
-                #identifier that we can, and keep going.
-                value = pick_longest_identifier 
+                #identifier that we can, and keep going. 
+
+                #If the previous token was a double quote, then we are in front of a string, 
+                # otherwise is an identifier
+                if !@tokens.last.nil? && @tokens.last.keyword == 'DOUBLE_QUOTE'
+                    value = pick_longest_identifier STRING_REGEX
+                else
+                    value = pick_longest_identifier IDENTIFIER_REGEX
+                end
+
                 token = create_token_with_value_and_move_forward 'IDENTIFIER', value, value.length
             when ' ' #When we have a space, we just keep going
                 current_read_lexeme = ''
@@ -104,14 +113,14 @@ class Lexer
         lexeme_found.size == 1
     end
 
-    def pick_longest_identifier
+    def pick_longest_identifier(regex)
         index_read_identifier = @current_index
         current_read_identifier = @line_to_tokenize[index_read_identifier]
-        identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
+        identifiers_found = current_read_identifier.scan regex
             while identifiers_found.size == 1 && identifiers_found.first == current_read_identifier && index_read_identifier + 1 < @line_to_tokenize.length 
                 index_read_identifier += 1
                 current_read_identifier += @line_to_tokenize[index_read_identifier]
-                identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
+                identifiers_found = current_read_identifier.scan regex
             end
         identifiers_found.first
     end

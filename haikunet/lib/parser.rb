@@ -32,7 +32,7 @@ class Parser
             match 'IDENTIFIER'
             intent_production_with_action
         else
-            raise_syntaxis_error 'It was suppossed to found either an identifier or an intent, but none was found.'
+            raise_syntaxis_error "it was suppossed to found either an identifier or an intent, but instead was found #{lookahead_token.value}"
         end
     end
 
@@ -92,7 +92,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
         else
-            raise_syntaxis_error 'It was suppossed to found either a Host, or a Link, or a Device, bleh.. but none was found.'
+            raise_syntaxis_error "It was suppossed to found either a Host, or a Link, or a Device, bleh.. but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -125,7 +125,7 @@ class Parser
             match 'RIGHT_BRACE'
             add_more_parameters
         else
-            raise_syntaxis_error 'It was suppossed to found either a " or [ or and identifier, but none was found.'
+            raise_syntaxis_error "It was suppossed to found either a \" or [ or and identifier, but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -147,7 +147,7 @@ class Parser
             match 'IDENTIFIER'
             add_more_elements_to_array
         else
-            raise_syntaxis_error 'It was suppossed to found an identifier inside the array, but it was not found.'
+            raise_syntaxis_error "It was suppossed to found an identifier inside the array, but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -170,10 +170,9 @@ class Parser
        if token.keyword == keyword
             @index_actual_token += 1
        else
-            raise_syntaxis_error "It was suppossed to match token #{keyword}, but #{token.keyword} was found."
+            raise_syntaxis_error "It was suppossed to match token #{keyword}, but instead #{token.keyword} was found."
        end
-
-       if @lexeme_to_tokenize[@index_actual_token] == 'END_OF_LINE'
+       if @lexeme_to_tokenize[@index_actual_token].keyword == 'END_OF_LINE'
             @line_number += 1 
             @index_actual_token += 1
        end
