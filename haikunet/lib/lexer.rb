@@ -53,7 +53,7 @@ class Lexer
             when ':'
                 token = create_token_with_value_and_move_forward 'ASSIGN', ':=', 2  if looking_forward_is_keyword? ':=' 
             when IDENTIFIER_REGEX
-                #We are in and identifier, host, link, flow, device, intent, select, action, condition case
+                #We are in an identifier, host, link, flow, device, intent, select, action, condition case
                 token = create_token_with_value_and_move_forward 'HOST', 'HOST', 4 if looking_forward_is_keyword? 'HOST'
                 token = create_token_with_value_and_move_forward 'LINK', 'LINK', 4 if looking_forward_is_keyword? 'LINK'
                 token = create_token_with_value_and_move_forward 'DEVICE', 'DEVICE', 6 if looking_forward_is_keyword? 'DEVICE'
@@ -86,9 +86,8 @@ class Lexer
     end
 
     def create_token_with_value_and_move_forward(keyword, value, move_forward)
-        new_token = Token.new keyword, value
         @current_index += move_forward
-        new_token
+        Token.new keyword, value
     end
 
     def looking_forward_is_keyword?(keyword)
@@ -113,6 +112,6 @@ class Lexer
 
     def raise_sintaxis_eror(message, line_number)
         lexeme_with_error = @line_to_tokenize[[0,@current_index-5].max, @current_index+5]
-        raise "A syntaxis error was found on line:#{line_number}, on column #{@current_index} near #{lexeme_with_error}. The problem is #{message}. Please correct this error in order to run the program ;)."
+        raise "A lexical error was found on line:#{line_number}, on column #{@current_index} near #{lexeme_with_error}. The problem is #{message}. Please correct this error in order to run the program ;)."
     end
 end

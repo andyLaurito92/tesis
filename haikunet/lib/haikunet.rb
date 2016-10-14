@@ -12,6 +12,8 @@ class Haikunet
 		my_lexer = Lexer.new @program_lexeme
 		lexeme_tokenized = my_lexer.tokenize_lexeme
 		
+		my_parser = Parser.new 
+		abstract_syntax_tree = my_parser.parse lexeme_tokenized
 		
 	end
 end
