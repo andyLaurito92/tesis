@@ -34,6 +34,12 @@ class Lexer
         token = nil
         current_read_lexeme = ''
         while not token
+            unless @current_index < @line_to_tokenize.length
+                #This can happens when no end of line is found in the line. Probably meaning that is the 
+                #last line of the program
+                @end_of_line_reached = true
+                return create_token_with_value_and_move_forward 'END_OF_LINE', '\n', 0
+            end
             current_read_lexeme += @line_to_tokenize[@current_index]
             case current_read_lexeme
             when '='
@@ -102,8 +108,8 @@ class Lexer
         index_read_identifier = @current_index
         current_read_identifier = @line_to_tokenize[index_read_identifier]
         identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
-            while identifiers_found.size == 1 && identifiers_found.first == current_read_identifier
-                index_read_identifier +=1
+            while identifiers_found.size == 1 && identifiers_found.first == current_read_identifier && index_read_identifier + 1 < @line_to_tokenize.length 
+                index_read_identifier += 1
                 current_read_identifier += @line_to_tokenize[index_read_identifier]
                 identifiers_found = current_read_identifier.scan IDENTIFIER_REGEX
             end
