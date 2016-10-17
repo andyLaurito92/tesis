@@ -18,10 +18,10 @@ class Haikunet
         parse_tree = my_parser.parse lexeme_tokenized
         byebug
         my_semantic_analyzer = SemanticAnalyzer.new
-        abstract_sintax_tree = my_semantic_analyzer.build_ast_from parse_tree
+        abstract_syntax_tree = my_semantic_analyzer.build_ast_from parse_tree
 
         #my_semantic_checker = SemanticRulesChecker.new
-        #my_semantic_checker.check abstract_sintax_tree
+        #my_semantic_checker.check abstract_syntax_tree
     end
 end
 
