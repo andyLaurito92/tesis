@@ -4,7 +4,7 @@ class Parser
         @lexeme_to_tokenize = nil
         @index_actual_token = 0
         @line_number = 0
-        @abstract_syntax_tree = []
+        @parse_tree = []
     end
 
     def parse(lexeme_tokenize)
@@ -14,11 +14,11 @@ class Parser
             initial_symbol
             lookahead_token = get_lookahead
         end
-        @abstract_syntax_tree
+        @parse_tree
     end
 
     def initial_symbol
-        @abstract_syntax_tree.push 'INITIAL_SYMBOL'
+        @parse_tree.push 'INITIAL_SYMBOL'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -38,7 +38,7 @@ class Parser
     end
 
     def intent_production_with_action
-        @abstract_syntax_tree.push 'INTENT_PRODUCTION_WITH_ACTION'
+        @parse_tree.push 'INTENT_PRODUCTION_WITH_ACTION'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -46,22 +46,26 @@ class Parser
             match 'ACTION'
             match 'IDENTIFIER'
             intent_production_with_condition
+        else
+            @parse_tree.push 'LAMBDA'
         end  
     end
 
     def intent_production_with_condition
-        @abstract_syntax_tree.push 'INTENT_PRODUCTION_WITH_CONDITION'
+        @parse_tree.push 'INTENT_PRODUCTION_WITH_CONDITION'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
         when 'CONDITION'
             match 'CONDITION'
             match 'IDENTIFIER'
+        else
+            @parse_tree.push 'LAMBDA'
         end
     end
 
     def network_elem_definition
-        @abstract_syntax_tree.push 'NETWORK_ELEM_DEFINITION'
+        @parse_tree.push 'NETWORK_ELEM_DEFINITION'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -101,7 +105,7 @@ class Parser
     end
 
     def params
-        @abstract_syntax_tree.push 'PARAMS'
+        @parse_tree.push 'PARAMS'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -109,11 +113,13 @@ class Parser
             match 'IDENTIFIER'
             match 'EQUAL_PARAMETERS'
             second_part_equal
+        else
+            @parse_tree.push 'LAMBDA'
         end
     end
 
     def second_part_equal
-        @abstract_syntax_tree.push 'SECOND_PART_EQUAL'
+        @parse_tree.push 'SECOND_PART_EQUAL'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -136,18 +142,20 @@ class Parser
     end
 
     def add_more_parameters
-        @abstract_syntax_tree.push 'ADD_MORE_PARAMETERS'
+        @parse_tree.push 'ADD_MORE_PARAMETERS'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
         when 'COMMA'
             match 'COMMA'
             params
+        else
+            @parse_tree.push 'LAMBDA'
         end
     end
 
     def elems_of_array
-        @abstract_syntax_tree.push 'ELEMS_OF_ARRAY'
+        @parse_tree.push 'ELEMS_OF_ARRAY'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
@@ -165,13 +173,15 @@ class Parser
     end
 
     def add_more_elements_to_array
-        @abstract_syntax_tree.push 'ADD_MORE_ELEMENTS_TO_ARRAY'
+        @parse_tree.push 'ADD_MORE_ELEMENTS_TO_ARRAY'
         lookahead_token = get_lookahead
         return unless lookahead_token
         case lookahead_token.keyword
         when 'COMMA' 
             match 'COMMA'
             elems_of_array
+        else
+            @parse_tree.push 'LAMBDA'
         end 
     end
 

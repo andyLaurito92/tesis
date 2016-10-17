@@ -1,6 +1,7 @@
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
 require_relative 'parser.rb'
+require_relative 'semantic_analyzer.rb'
 
 class Haikunet
     def initialize
@@ -10,13 +11,17 @@ class Haikunet
     end
     
     def interpretate
-        my_lexer = Lexer.new @program_lexeme
-        lexeme_tokenized = my_lexer.tokenize_lexeme
+        my_lexer = Lexer.new
+        lexeme_tokenized = my_lexer.tokenize_lexeme @program_lexeme
 
         my_parser = Parser.new 
-        abstract_syntax_tree = my_parser.parse lexeme_tokenized
+        parse_tree = my_parser.parse lexeme_tokenized
         byebug
-        puts abstract_syntax_tree
+        my_semantic_analyzer = SemanticAnalyzer.new
+        abstract_sintax_tree = my_semantic_analyzer.build_ast_from parse_tree
+
+        #my_semantic_checker = SemanticRulesChecker.new
+        #my_semantic_checker.check abstract_sintax_tree
     end
 end
 

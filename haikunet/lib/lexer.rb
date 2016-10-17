@@ -6,19 +6,16 @@ class Lexer
     IDENTIFIER_REGEX = /[.A-Za-z0-9_-]+/ #This matchs alpha numeric symbols, allowing : . _ -. (But cannot end in : .)
     STRING_REGEX = /[:.A-Za-z0-9_-]+/
 
-	attr_reader :program_lexeme, :tokens
-
-	def initialize(program_lexeme)
-		@program_lexeme = program_lexeme
-        @program_lexeme_lines = @program_lexeme.gsub(/\r\n?/, "\n")
+    def initialize
         @line_to_tokenize = ''
         @end_of_line_reached = false
         @current_index = 0
         @tokens = []
-	end
+    end
 
-    def tokenize_lexeme
+    def tokenize_lexeme(program_lexeme)
         line_number = 0
+        @program_lexeme_lines = program_lexeme.gsub(/\r\n?/, "\n")
         @program_lexeme_lines.each_line do |line|
             @line_to_tokenize = line
             @current_index = 0
