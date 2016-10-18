@@ -1,4 +1,4 @@
-module OnosCodeGenerator
+module DevsCodeGenerator
     def generate_output
         code = ''
         @identifiers.each do |identifier|
@@ -19,19 +19,14 @@ module OnosCodeGenerator
                     \"src\" : \"#{src}\", \n
                     \"dst\" : \"#{dst}\", \n
                 }\n"
-            end
-        end
-
-        @intents.each do |intent|
-            flow_params = intent.select.value.params
-            src = value_from 'src', flow_params
-            dst = value_from 'dst', flow_params
-            code += "{
+            when Intent
+                code += "{
                     \"type\" : \"HostToHostIntent\", \n
-                    \"appId\" : \"#{intent.name}\", \n
+                    \"appId\" : \"#{identifier.name}\", \n
                     \"one\" : \"#{src}\", \n
                     \"two\" : \"#{dst}\"\n
                 }\n"
+            end
         end
         code
     end

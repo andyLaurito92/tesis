@@ -10,7 +10,8 @@ class Haikunet
     def initialize
         my_command_line_arguments = CommandLineArguments.new
         my_command_line_arguments.run
-        @program_lexeme = File.open(my_command_line_arguments.file_name).read
+        @file_name = my_command_line_arguments.file_name
+        @program_lexeme = File.open(@file_name).read
         @destiny_name = my_command_line_arguments.destiny_name
     end
     
@@ -27,7 +28,7 @@ class Haikunet
         my_code_generator = CodeGenerator.new
         interpretetated_program = my_code_generator.generate_code my_parser.context, @destiny_name
 
-        write_file  "../output/#{file_name[0,file_name.length-3]}_requests",
+        write_file  "../output/#{@file_name[0,@file_name.length-3]}_requests",
                     interpretetated_program
     end
 end
