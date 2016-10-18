@@ -182,7 +182,6 @@ class Parser
             match 'EQUAL_PARAMETERS'
 
             @actual_identifier = Identifier.new @lexeme_tokenize[index_identifier].value
-            @identifiers.push @actual_identifier
             second_part_equal
         else
             @parse_tree.push 'LAMBDA'

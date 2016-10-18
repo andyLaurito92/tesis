@@ -1,9 +1,12 @@
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
 require_relative 'parser.rb'
-require_relative 'semantic_analyzer.rb'
+require_relative 'code_generator.rb'
+require_relative 'utils/custom_file_utils.rb'
 
 class Haikunet
+    include CustomFileUtils
+    
     def initialize
         my_command_line_arguments = CommandLineArguments.new
         my_command_line_arguments.run
@@ -18,12 +21,14 @@ class Haikunet
         my_parser = Parser.new 
         parse_tree = my_parser.parse lexeme_tokenized
         
-        byebug
         #my_semantic_checker = SemanticRulesChecker.new
-        #my_semantic_checker.check interpretetated_program
+        #my_semantic_checker.check my_parser.context
 
-        my_semantic_analyzer = SemanticAnalyzer.new
-        interpretetated_program = my_semantic_analyzer.generate_intermediate_code_from my_parser.context
+        my_code_generator = CodeGenerator.new
+        interpretetated_program = my_code_generator.generate_code my_parser.context, @destiny_name
+
+        write_file  "../output/#{file_name[0,file_name.length-3]}_requests",
+                    interpretetated_program
     end
 end
 
