@@ -1,7 +1,11 @@
 class SemanticAnalyzer
-    def build_ast_from(parse_tree)
-        @parse_tree = parse_tree
+    def initialize
+        @variables = {}
+        @parse_tree = nil
+    end
 
+    def generate_intermediate_code_from(parse_tree)
+        
     end
 
 end
