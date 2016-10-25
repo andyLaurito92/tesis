@@ -352,6 +352,79 @@ curl --X POST {
 	\end{itemize}	 
 \end{itemize}
 
+\section{Semantic's rules}
+
+In this section we introduce the semantic's rules used in Haikunet.
+
+\begin{itemize}
+	\item Array semantic's rules \\
+	\\
+	\noindent\rule{7cm}{0.4pt} Array definition\\
+	$\Gamma\rhd$ [] : Array[$\Phi$]\\
+	\\
+	(Ac\'a $\Phi$ es o Device o Link o Flow) \\
+	\\
+	$\Gamma \rhd$x:Elem, $\Gamma \rhd$y:Array[$\Phi$] \\
+	\noindent\rule{7cm}{0.4pt}  Adding elements to Array\\
+	$\Gamma \rhd$ y + x : Array[$\Phi$]\\	
+	
+	\item Definition semantic rule \\	
+	\\ 
+	$\Gamma \rhd $ y : $\Phi$ \\
+	\noindent\rule{7cm}{0.4pt} \\
+	$\Gamma \rhd$ x := y : $\Phi$\\
+	\\
+	
+	\item Link semantic's rules \\
+	\\
+	$\Gamma \rhd$x:Bandwith, $\Gamma \rhd$y:ID, $\Delta \rhd$ $tag_{1}$, $tag_{2}$:TAG \\
+	\noindent\rule{7cm}{0.4pt} Link definition\\
+	$\Gamma, \Delta \rhd$Link($tag_{1}$ = x, $tag_{2}$ = y) : Link\\
+	
+	\item Device semantic's rules (A device can be either a Host or a Router) \\
+	\\
+	$\Gamma \rhd$x:Device\_ID, $\Delta \rhd$ $tag_{1}$:TAG \\
+	\noindent\rule{7cm}{0.4pt} Host definition\\
+	$\Gamma, \Delta \rhd$Host($tag_{1}$ = x) : Host\\	
+	
+	\item Action semantic's rules \\
+	\\
+	?????	
+	\\
+	\item Condition semantic's rules \\
+	\\
+	?????	
+	\\
+	\item Flow semantic's rules \\
+	\\
+	$\Gamma \rhd$w, x : Device, $\Gamma \rhd$y:ID, $\Gamma \rhd$z:Priority, $\Delta \rhd$ $tag_{1}$, $tag_{2}$, $tag_{3}$, $tag_{4}$:TAG \\
+	\noindent\rule{10cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Flow($tag_{1}$ = w, $tag_{2}$ = x, $tag_{3}$ = y, $tag_{4}$ = z) : Flow\\		
+	\\
+	$\Gamma \rhd$w: Array[Device], $\Gamma \rhd$x:Device, $\Gamma \rhd$y:ID, $\Gamma \rhd$z:Priority $\Delta \rhd$ $tag_{1}$, $tag_{2}$, $tag_{3}$, $tag_{4}$:TAG \\
+	\noindent\rule{10cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Flow($tag_{1}$ = w, $tag_{2}$ = x, $tag_{3}$ = y, $tag_{4}$ = z) : Flow\\		
+	\\
+	$\Gamma \rhd$w: Device, $\Gamma \rhd$x:Array[Device], $\Gamma \rhd$y:ID, $\Gamma \rhd$z:Priority $\Delta \rhd$ $tag_{1}$, $tag_{2}$, $tag_{3}$, $tag_{4}$:TAG \\
+	\noindent\rule{10cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Flow($tag_{1}$ = w, $tag_{2}$ = x, $tag_{3}$ = y, $tag_{4}$ = z) : Flow\\		
+	\\
+	\item Intents semantic's rules \\
+	\\
+	$\Delta \rhd$x:TAG, $\Gamma \rhd$y:Flow\\
+	\noindent\rule{7cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Intent x Select y : Intent\\		
+	\\
+	$\Delta \rhd$x:TAG, $\Gamma \rhd$y:Flow, $\Gamma \rhd$z:Action\\
+	\noindent\rule{7cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Intent x Select y Action z : Intent\\		
+	\\		
+	$\Delta \rhd$w:TAG, $\Gamma \rhd$x:Flow, $\Gamma \rhd$y:Action, $\Gamma \rhd$z:Condition\\
+	\noindent\rule{7cm}{0.4pt} \\
+	$\Gamma, \Delta \rhd$Intent w Select x Action y Condition z : Intent\\		
+	\\		
+	
+\end{itemize}
 
 
 \section{Graph grammar production's}
