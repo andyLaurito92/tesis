@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'colorize'
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
 require_relative 'parser.rb'
@@ -38,5 +39,11 @@ class Haikunet
     end
 end
 
-my_haikunet_interpreter = Haikunet.new
-my_haikunet_interpreter.interpretate 
+begin
+    my_haikunet_interpreter = Haikunet.new
+    my_haikunet_interpreter.interpretate 
+rescue Exception => ex
+  puts "#{ex.class}".red 
+  puts "#{ex.message}".blue
+end
+    

@@ -1,5 +1,6 @@
 require 'byebug'
 require_relative 'token.rb'
+require_relative 'errors/lexical_error.rb'
 
 class Lexer
     #TODO: IF THIS IS A CONST, SHOULDN'T I DEFINE A KEYWORDS CLASS ??
@@ -91,7 +92,7 @@ class Lexer
                 @end_of_line_reached = true
                 token = create_token_with_value_and_move_forward 'END_OF_LINE', '\n', 0
             else
-                raise_sintaxis_eror "No matching token for lexeme #{current_read_lexeme}\n", line_number
+                raise_sintaxis_eror "there is no matching token for lexeme #{current_read_lexeme}\n", line_number
             end
         end
         token
@@ -124,6 +125,6 @@ class Lexer
 
     def raise_sintaxis_eror(message, line_number)
         lexeme_with_error = @line_to_tokenize[[0,@current_index-5].max, @current_index+5]
-        raise "A lexical error was found on line:#{line_number}, on column #{@current_index} near #{lexeme_with_error}. The problem is #{message}. Please correct this error in order to run the program ;)."
+        raise LexicalError, "A lexical error was found on line:#{line_number + 1}, on column #{@current_index} near #{lexeme_with_error}. The problem is that #{message}. Please correct this error in order to run the program ;)."
     end
 end

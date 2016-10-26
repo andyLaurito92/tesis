@@ -6,6 +6,8 @@ require_relative 'haikunet_objects/network_objects/device.rb'
 require_relative 'haikunet_objects/network_objects/flow.rb'
 require_relative 'haikunet_objects/network_objects/action.rb'
 require_relative 'haikunet_objects/network_objects/condition.rb'
+require_relative 'errors/syntactical_error.rb'
+require_relative 'errors/semantical_error.rb'
 
 class Parser
     attr_reader :context
@@ -167,7 +169,7 @@ class Parser
 
             return Condition.new @actual_params
         else
-            raise_syntaxis_error "It was suppossed to found either a Host, or a Link, or a Device, bleh.. but instead #{lookahead_token.value} was found."
+            raise_syntaxis_error "it was suppossed to found either a Host, or a Link, or a Device, bleh.. but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -221,7 +223,7 @@ class Parser
             @actual_params.push @actual_identifier
             add_more_parameters
         else
-            raise_syntaxis_error "It was suppossed to found either a \" or [ or and identifier, but instead #{lookahead_token.value} was found."
+            raise_syntaxis_error "it was suppossed to found either a \" or [ or and identifier, but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -258,7 +260,7 @@ class Parser
             @elems_of_array.push @lexeme_tokenize[index_string].value
             add_more_elements_to_array
         else
-            raise_syntaxis_error "It was suppossed to found an identifier inside the array, but instead #{lookahead_token.value} was found."
+            raise_syntaxis_error "it was suppossed to found an identifier inside the array, but instead #{lookahead_token.value} was found."
         end
     end
 
@@ -291,7 +293,7 @@ class Parser
             @parse_tree.push token
             @index_actual_token += 1
        else
-            raise_syntaxis_error "It was suppossed to match token #{keyword}, but instead #{token.keyword} was found."
+            raise_syntaxis_error "it was suppossed to match token #{keyword}, but instead #{token.keyword} was found."
        end
 
        while @index_actual_token < @lexeme_tokenize.length && @lexeme_tokenize[@index_actual_token].keyword == 'END_OF_LINE'
@@ -301,10 +303,10 @@ class Parser
     end
 
     def raise_syntaxis_error(message)
-        raise "A syntactical error was found on line:#{@line_number}. The problem is #{message}\n Please correct this error in order to run the program ;)."
+        raise SyntacticalError, "A syntactical error was found on line:#{@line_number + 1}. The problem is that #{message}\n Please correct this error in order to run the program ;)."
     end
 
     def raise_semantic_error(message)
-        raise "A semantic error was found on line:#{@line_number}. The problem is #{message}\n Please correct this error in order to run the program ;)."
+        raise SemanticalError, "A semantic error was found on line:#{@line_number + 1}. The problem is that #{message}\n Please correct this error in order to run the program ;)."
     end
 end
