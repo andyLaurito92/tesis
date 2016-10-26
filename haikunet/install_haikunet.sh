@@ -11,10 +11,11 @@ if [ -z "${RUBY_VERSION// }" ]
 
     if [ -z "${CURL_VERSION// }"]
     	then
-    	apt-get install curl
+    	yes | apt-get install curl
     fi
 
-    \curl -sSL https://get.rvm.io | bash
+    RVM_SCRIPT=$(\curl -sSL https://get.rvm.io)
+    eval RVM_SCRIPT
     source /etc/profile.d/rvm.sh
 
     #installing ruby
@@ -22,10 +23,21 @@ if [ -z "${RUBY_VERSION// }" ]
     rvm use 2.3
 fi
 
-#installation and configuration steps for haikunet
+#Installation and configuration steps for haikunet
+
+#First we create the binary in order to be run from console
 HAIKUNET_DIRECTORY=$(pwd)
 if [[ $EUID -ne 0 ]]; then
 	sudo ln -s "$HAIKUNET_DIRECTORY/lib/haikunet.rb" /usr/bin/haikunet
 else
 	ln -s "$HAIKUNET_DIRECTORY/lib/haikunet.rb" /usr/bin/haikunet
 fi
+
+#Second, we install bundler if not installed
+BUNDLER_INSTALLED=$(gem query -i -n bundler)
+if [[ !BUNDLER_INSTALLED ]]; then
+	gem install bundler
+fi
+
+#Finally, we install all gems
+bundler install
