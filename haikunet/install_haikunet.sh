@@ -18,6 +18,7 @@ if [ -z "${RVM_INSTALLED// }" ]
 
     curl -sSL https://get.rvm.io | bash -s stable --ruby
     echo "export PATH=\"$PATH:$HOME/.rvm/bin\" # Add RVM to PATH for scripting" >> ~/.bashrc
+    source /etc/profile.d/rvm.sh
     source /usr/local/rvm/scripts/rvm
     source ~/.bashrc
     rvm  
