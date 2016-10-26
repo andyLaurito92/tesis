@@ -33,7 +33,7 @@ class Haikunet
         my_code_generator = CodeGenerator.new
         interpretetated_program = my_code_generator.generate_code my_parser.context, @destiny_name
 
-        write_file  "../output/#{@file_name[0,@file_name.length-3]}_requests",
+        write_file  "#{@file_name[0,@file_name.length-3]}_requests",
                     interpretetated_program
     end
 end
