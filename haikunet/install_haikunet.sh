@@ -1,27 +1,28 @@
 #!/bin/bash
 
 #Installation script for UBUNTU
-RUBY_VERSION=$(which ruby)
-if [ -z "${RUBY_VERSION// }" ]
+
+#We install rvm if not installed
+RVM_INSTALLED=$(which rvm)
+if [ -z "${RVM_INSTALLED// }" ]
  then
     #installation and configuration of rvm
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
     CURL_VERSION=$(which curl)
 
-    if [ -z "${CURL_VERSION// }"]
+    if [ -z "${CURL_VERSION// }" ]
     	then
     	yes | apt-get install curl
     fi
 
-    RVM_SCRIPT=$(\curl -sSL https://get.rvm.io)
-    eval RVM_SCRIPT
-    source /etc/profile.d/rvm.sh
-
-    #installing ruby
-    rvm install 2.3
-    rvm use 2.3
+    \curl -sSL https://get.rvm.io | bash
 fi
+
+#installing ruby
+. /etc/profile.d/rvm.sh
+rvm install 2.3
+rvm use 2.3
 
 #Installation and configuration steps for haikunet
 
@@ -35,7 +36,7 @@ fi
 
 #Second, we install bundler if not installed
 BUNDLER_INSTALLED=$(gem query -i -n bundler)
-if [[ !BUNDLER_INSTALLED ]]; then
+if [[ !$BUNDLER_INSTALLED ]]; then
 	gem install bundler
 fi
 
