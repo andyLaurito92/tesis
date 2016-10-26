@@ -20,7 +20,7 @@ if [ -z "${RVM_INSTALLED// }" ]
     echo "export PATH=\"$PATH:$HOME/.rvm/bin\" # Add RVM to PATH for scripting" >> ~/.bashrc
     source /usr/local/rvm/scripts/rvm
     source ~/.bashrc
-    
+    rvm  
 fi
 
 #installing ruby
