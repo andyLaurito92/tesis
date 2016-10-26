@@ -16,11 +16,13 @@ if [ -z "${RVM_INSTALLED// }" ]
     	yes | apt-get install curl
     fi
 
-    \curl -sSL https://get.rvm.io | bash
+    curl -sSL https://get.rvm.io | bash
+    echo "export PATH=\"$PATH:$HOME/.rvm/bin\" # Add RVM to PATH for scripting" >> ~/.bashrc
+    source ~/.bashrc
+    . /etc/profile.d/rvm.sh
 fi
 
 #installing ruby
-. /etc/profile.d/rvm.sh
 rvm install 2.3
 rvm use 2.3
 
@@ -36,7 +38,7 @@ fi
 
 #Second, we install bundler if not installed
 BUNDLER_INSTALLED=$(gem query -i -n bundler)
-if [[ !$BUNDLER_INSTALLED ]]; then
+if [[ ! $BUNDLER_INSTALLED ]]; then
 	gem install bundler
 fi
 
