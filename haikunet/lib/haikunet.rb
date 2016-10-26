@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
 require_relative 'parser.rb'
@@ -10,7 +12,10 @@ class Haikunet
     def initialize
         my_command_line_arguments = CommandLineArguments.new
         my_command_line_arguments.run
+        
         @file_name = my_command_line_arguments.file_name
+        abort unless @file_name #User asked for help
+        
         @program_lexeme = File.open(@file_name).read
         @destiny_name = my_command_line_arguments.destiny_name
     end
