@@ -21,7 +21,7 @@ if [ -z "${RVM_INSTALLED// }" ]
     source /etc/profile.d/rvm.sh
     source /usr/local/rvm/scripts/rvm
     source ~/.bashrc
-    rvm  
+    rvmsudo rvm get stable 
 fi
 
 #installing ruby
