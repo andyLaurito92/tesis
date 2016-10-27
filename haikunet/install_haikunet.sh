@@ -38,11 +38,13 @@ else
 	ln -s "$HAIKUNET_DIRECTORY/lib/haikunet.rb" /usr/bin/haikunet
 fi
 
+gem install bundler
+
 #Second, we install bundler if not installed
-BUNDLER_INSTALLED=$(gem list -i bundler)
-if [[ ! $BUNDLER_INSTALLED ]]; then
-	gem install bundler
-fi
+#BUNDLER_INSTALLED=$(gem list -i bundler)
+#if [[ ! $BUNDLER_INSTALLED ]]; then IS NOT WORKING, IT RETURNS TRUE BESIDES BUNDLER IS NOT INSTALLED
+#	gem install bundler
+#fi
 
 #Finally, we install all gems
 bundler install
