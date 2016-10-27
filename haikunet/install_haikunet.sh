@@ -39,7 +39,7 @@ else
 fi
 
 #Second, we install bundler if not installed
-BUNDLER_INSTALLED=$(gem query -i -n bundler)
+BUNDLER_INSTALLED=$(gem list -i bundler)
 if [[ ! $BUNDLER_INSTALLED ]]; then
 	gem install bundler
 fi
