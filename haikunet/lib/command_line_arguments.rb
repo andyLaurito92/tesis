@@ -18,9 +18,9 @@ class CommandLineArguments
           c.summary = 'Specify the file name of the haikunet program'
           c.description = 'Specify the file name of the haikunet program'
           c.example 'Interpretating a file called hellohaikunet.hk heading the output to ONOS', 'haikunet progran -n hellohaikunet.hk -d ONOS'
-          c.example 'Interpretating the same file hellohaikunet.hk heading the output to DEVS', 'haikunet progran -n hellohaikunet.hk -d DEVS'
+          c.example 'Interpretating the same file hellohaikunet.hk heading the output to DEBUG', 'haikunet progran -n hellohaikunet.hk -d DEBUG'
           c.option '-n', '--name NAME', String, 'Specify the file name'
-          c.option '-d', '--destiny NAME', String, 'Specify the current destiny for the intent. Haikunet currently support for ONOS and DEVS'
+          c.option '-d', '--destiny NAME', String, 'Specify the current destiny for the intent. Haikunet currently support ONOS, OPENDAYLIGHT and DEBUG modes'
           c.action do |args, options|
             @file_name = options.name
             @destiny_name = options.destiny

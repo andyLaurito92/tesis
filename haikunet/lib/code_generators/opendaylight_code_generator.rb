@@ -1,4 +1,4 @@
-module OnosCodeGenerator
+module OpenDayLightCodeGenerator
     def generate_output
         code = ''
         @identifiers.each do |identifier|
@@ -14,33 +14,11 @@ module OnosCodeGenerator
                 flow_params = identifier.value.params
                 src = value_from 'src', flow_params
                 dst = value_from 'dst', flow_params
-                priority = value_from 'priority', flow_params
                 code += "{
-                      \"flows\": [
-                        {
-                          \"priority\": #{priority},
-                          \"timeout\": 0,
-                          \"isPermanent\": true,
-                          \"deviceId\": \"of:0000000000000001\",
-                          \"treatment\": {
-                            \"instructions\": [
-                              {
-                                \"type\": \"OUTPUT\",
-                                \"port\": \"CONTROLLER\"
-                              }
-                            ]
-                          },
-                          \"selector\": {
-                            \"criteria\": [
-                              {
-                                \"type\": \"ETH_TYPE\",
-                                \"ethType\": \"0x88cc\"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }"
+                    \"id\" : \"#{identifier.name}\", \n
+                    \"src\" : \"#{src}\", \n
+                    \"dst\" : \"#{dst}\", \n
+                }\n"
             end
         end
 

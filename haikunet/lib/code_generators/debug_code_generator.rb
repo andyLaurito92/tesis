@@ -1,4 +1,5 @@
-module DevsCodeGenerator
+module DebugCodeGenerator
+    #For debugging we use DEVS 
     def generate_output
         code = ''
         @identifiers.each do |identifier|
