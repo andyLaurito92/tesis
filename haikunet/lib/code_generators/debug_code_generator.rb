@@ -1,6 +1,6 @@
 module DebugCodeGenerator
     #For debugging we use DEVS 
-    def generate_output
+    def generate_output(file_name)
         code = ''
         @identifiers.each do |identifier|
             case identifier.value

@@ -1,14 +1,21 @@
 module OpenDayLightCodeGenerator
-    def generate_output
+    def generate_output(file_name)
         code = ''
         @identifiers.each do |identifier|
             case identifier.value
             when Host
                 host_params = identifier.value.params
                 mac = value_from 'mac', host_params
+                ips = value_from 'ip', host_params
+                vlan = value_from 'vlan', host_params
                 code += "{
-                    \"id\" : \"#{identifier.name}\", \n
-                    \"mac\" : \"#{mac}\"
+                    \"mac\" : \"#{mac}\", \n
+                    \"vlan\" : \"#{vlan}\", \n
+                    \"ipAddresses\" : #{ips}, \n
+                    \"location\" : {
+                        \"elementId\" : , \n
+                        \"port\" : 
+                    }
                 }\n"
             when Flow
                 flow_params = identifier.value.params
@@ -38,5 +45,9 @@ module OpenDayLightCodeGenerator
 
     def value_from(value_name, array)
         array.select { |elem| elem.name == value_name }.first.value
+    end
+
+    def get_host_params(host_params)
+
     end
 end

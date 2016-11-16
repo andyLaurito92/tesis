@@ -1,15 +1,18 @@
 require 'typhoeus'
-require 'cgi'
 
 module OnosCodeGenerator
-    def generate_output
+    include CustomFileUtils
+    
+    def generate_output(file_name)
         code = ''
+        requests = []
+        json = ''
         @identifiers.each do |identifier|
             case identifier.value
             when Host
                 host_params = get_host_params identifier
                 next if is_defined_in_topology host_params
-                code += "{
+                json = "{
                     \"mac\" : \"#{host_params['mac']}\", \n
                     \"vlan\" : \"#{host_params['vlan']}\", \n
                     \"ipAddresses\" : #{host_params['ips']}, \n
@@ -18,8 +21,26 @@ module OnosCodeGenerator
                         \"port\" : #{host_params['port']}
                     }
                 }\n"
+                requests.push json
+                code += json
             when Flow
                 flow_params = get_flow_params identifier
+                flow_params['src'].each do |src_mac|
+                  flow_params['dst'].each do |dst_mac|
+                    json = "{
+                          \"type\": \"HostToHostIntent\",
+                          \"appId\": \"org.onosproject.ovsdb\",
+                          \"priority\": #{flow_params['priority']},
+                          \"one\": \"#{src_mac}/-1\",
+                          \"two\": \"#{dst_mac}/-1\"
+                        }
+                      "
+                    requests.push json
+                    code += json
+                  end
+                end
+=begin
+This is the flow implemented with HostToHostIntent. 
                 code += "{
                           \"type\": \"HostToHostIntent\",
                           \"appId\": \"org.onosproject.ovsdb\",
@@ -28,9 +49,76 @@ module OnosCodeGenerator
                           \"two\": \"#{flow_params['dst']}/-1\"
                         }
                       "
+
+Another way, is using PointToPointIntent. The apparently improvmenten here is that 
+we have selector and treatment, what can be translated into PERHAPS actions and conditions
+
+                code += "{
+                          "type": "PointToPointIntent",
+                          "appId": "org.onosproject.ovsdb",
+                           "treatment": {
+                                "instructions": [
+                                      {
+                                       "type": "OUTPUT",
+                                       "port": "3"
+                                      }
+                                ],
+                                "deferred": []
+                          },
+                          "selector": {
+                            "criteria": [
+                              {
+                                "type": "ETH_SRC",
+                                "mac": "4E:6D:A2:71:18:C9"
+                              }
+                            ]
+                          },
+                          "priority": 55,
+                          "ingressPoint": {"port": "1","device": "of:0000000000000002"},
+                          "egressPoint": {"port": "1","device": "of:0000000000000003"}
+                        },
+
+
+                        {
+                          "type": "PointToPointIntent",
+                          "appId": "org.onosproject.ovsdb",
+                           "treatment": {
+                                "instructions": [
+                                      {
+                                       "type": "OUTPUT",
+                                       "port": "3"
+                                      }
+                                ],
+                                "deferred": []
+                          },
+                          "selector": {
+                            "criteria": [
+                              {
+                                "type": "ETH_SRC",
+                                "mac": "5E:B5:79:3D:2A:12"
+                              }
+                            ]
+                          },
+                          "priority": 55,
+                          "ingressPoint": {"port": "1","device": "of:0000000000000002"},
+                          "egressPoint": {"port": "1","device": "of:0000000000000003"}
+                        }"
+
+=end
             end
         end
-        code
+
+        requests.each do |request|
+          response = Typhoeus.post "http://127.0.0.1:8181/onos/v1/intents",
+                        headers: { 'Accept-Encoding' => 'application/json', 'Content-Type' => 'application/json'},
+                        body: request,
+                        userpwd:"onos:rocks"
+
+          raise OnosCodeGeneratorError, "When posting the intent #{request} to the api, the following error was raised #{response.body}" unless response.success?
+        end
+
+        write_file  "#{file_name[0,file_name.length-3]}_requests",
+                    code
     end
 
     def value_from(value_name, array)
@@ -50,12 +138,24 @@ module OnosCodeGenerator
 
     def get_flow_params(flow_identifier)
         src = value_from 'src', flow_identifier.value.params
-        src_mac = value_from 'mac', src.value.params
+        src_mac = get_macs_from src
         dst = value_from 'dst', flow_identifier.value.params
-        dst_mac = value_from 'mac', dst.value.params
+        dst_mac = get_macs_from dst
         priority = value_from 'priority', flow_identifier.value.params
 
         {'src' => src_mac, 'dst' => dst_mac, 'priority' => priority}
+    end
+
+    def get_macs_from(resource)
+      macs = []
+      if resource.is_a? Array
+        resource.each do |identifier|
+          macs.push value_from 'mac', identifier.value.params
+        end
+      else
+        macs.push value_from 'mac', resource.value.params
+      end
+      macs
     end
 
     def is_defined_in_topology(host_params)
