@@ -3,6 +3,7 @@
 require 'colorize'
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
+require_relative 'topology_generator.rb'
 require_relative 'parser.rb'
 require_relative 'code_generator.rb'
 require_relative 'utils/custom_file_utils.rb'
@@ -19,6 +20,7 @@ class Haikunet
         
         @program_lexeme = File.open(@file_name).read
         @destiny_name = my_command_line_arguments.destiny_name
+        @uri_initial_topo = my_command_line_arguments.uri_initial_topo
     end
     
     def interpretate
@@ -28,8 +30,11 @@ class Haikunet
         my_parser = Parser.new 
         parse_tree = my_parser.parse lexeme_tokenized
         
+        topology_generator = TopologyGenerator.new 
+        initial_topology = topology_generator.obtain_from @uri_initial_topo
+
         #my_semantic_checker = SemanticRulesChecker.new
-        #my_semantic_checker.check my_parser.context
+        #my_semantic_checker.check my_parser.context, initial_topology
 
         my_code_generator = CodeGenerator.new
         my_code_generator.generate_code my_parser.context, @destiny_name, @file_name        

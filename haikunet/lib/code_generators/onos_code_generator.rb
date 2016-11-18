@@ -1,4 +1,5 @@
 require 'typhoeus'
+require_relative '../errors/onos_code_generator_error.rb'
 
 module OnosCodeGenerator
     include CustomFileUtils
