@@ -1,6 +1,0 @@
-# A sample Gemfile
-source "https://rubygems.org"
-
-gem "typhoeus"
-gem 'byebug'
-gem 'rgl', '~> 0.5.2'
