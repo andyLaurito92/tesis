@@ -1,8 +1,0 @@
-one_host := Host(mac="A2:37:46:4C:E2:0D")
-
-second_host := Host(mac="42:93:93:79:19:AE")
-
-my_flow := Flow (src=one_host, dst=second_host, priority="55")
-
-Intent firstExample
-	Select my_flow
