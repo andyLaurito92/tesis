@@ -1,0 +1,6 @@
+myFelixServer := Host(mac="00:00:00:00")
+
+myControlFlow := Flow (src=myFelixServer, dst=["10.0.0.2", "10.0.0.3", "10.0.0.4"])
+
+Intent multicastAtlas
+	Select myControlFlow
