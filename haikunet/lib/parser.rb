@@ -1,11 +1,11 @@
-require_relative 'haikunet_objects/gramatic_objects/identifier.rb'
-require_relative 'haikunet_objects/network_objects/intent.rb'
-require_relative 'haikunet_objects/network_objects/host.rb'
-require_relative 'haikunet_objects/network_objects/link.rb'
-require_relative 'haikunet_objects/network_objects/device.rb'
-require_relative 'haikunet_objects/network_objects/flow.rb'
-require_relative 'haikunet_objects/network_objects/action.rb'
-require_relative 'haikunet_objects/network_objects/condition.rb'
+require_relative 'haikunet_objects/gramatic_objects/haikunet_identifier.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_intent.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_host.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_link.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_device.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_flow.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_action.rb'
+require_relative 'haikunet_objects/network_objects/haikunet_condition.rb'
 require_relative 'errors/syntactical_error.rb'
 require_relative 'errors/semantical_error.rb'
 
@@ -48,7 +48,7 @@ class Parser
             match 'IDENTIFIER'
             match 'ASSIGN'
 
-            identifier = Identifier.new @lexeme_tokenize[index_identifier].value
+            identifier = HaikunetIdentifier.new @lexeme_tokenize[index_identifier].value
             @identifiers.push identifier
             identifier.value = network_elem_definition
         when 'INTENT'
@@ -60,7 +60,7 @@ class Parser
             match 'IDENTIFIER'
 
             action_and_condition = intent_production_with_action
-            new_intent = Intent.new @lexeme_tokenize[index_intent_identifier].value
+            new_intent = HaikunetIntent.new @lexeme_tokenize[index_intent_identifier].value
             new_intent.select = get_identifier @lexeme_tokenize[index_select_identifier].value
             @intents.push new_intent
 
