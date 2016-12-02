@@ -1,0 +1,15 @@
+{
+                          "type": "HostToHostIntent",
+                          "appId": "org.onosproject.ovsdb",
+                          "priority": 55,
+                          "one": "5E:B5:79:3D:2A:12/-1",
+                          "two": "2A:C9:AB:70:ED:9B/-1"
+                        }
+                      {
+                          "type": "HostToHostIntent",
+                          "appId": "org.onosproject.ovsdb",
+                          "priority": 55,
+                          "one": "5E:B5:79:3D:2A:12/-1",
+                          "two": "4E:6D:A2:71:18:C9/-1"
+                        }
+                      
