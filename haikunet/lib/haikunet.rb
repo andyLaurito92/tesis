@@ -30,15 +30,13 @@ class Haikunet
         my_parser = Parser.new 
         parse_tree = my_parser.parse lexeme_tokenized
         
-        byebug
-
         topology_generator = Topologygenerator.new ({
             "source" => "ONOS",
             "directory_concrete_builders" => "#{File.dirname(File.realpath(__FILE__))}/haikunet_topology_generator_builder",
             "output_directory" => "lib/initial_topo",
             "uri_resource" => @uri_initial_topo 
         })
-        initial_topology = topology_generator.generate
+        topology_generator.generate
 
         #my_semantic_checker = SemanticRulesChecker.new
         #my_semantic_checker.check my_parser.context, initial_topology
@@ -48,11 +46,11 @@ class Haikunet
     end
 end
 
-#begin
+begin
     my_haikunet_interpreter = Haikunet.new
     my_haikunet_interpreter.interpretate 
-#rescue Exception => ex
-#  puts "#{ex.class}".red 
-#  puts "#{ex.message}".blue
-#end
+rescue Exception => ex
+  puts "#{ex.class}".red 
+  puts "#{ex.message}".blue
+end
     
