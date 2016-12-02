@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'colorize'
-require 'topologygenerator'
 require_relative 'command_line_arguments.rb'
 require_relative 'lexer.rb'
 require_relative 'parser.rb'
+require_relative 'network_provider.rb'
+require_relative 'semantic_rules_checker.rb'
 require_relative 'code_generator.rb'
 require_relative 'utils/custom_file_utils.rb'
 
@@ -30,27 +31,22 @@ class Haikunet
         my_parser = Parser.new 
         parse_tree = my_parser.parse lexeme_tokenized
         
-        topology_generator = Topologygenerator.new ({
-            "source" => "ONOS",
-            "directory_concrete_builders" => "#{File.dirname(File.realpath(__FILE__))}/haikunet_topology_generator_builder",
-            "output_directory" => "lib/initial_topo",
-            "uri_resource" => @uri_initial_topo 
-        })
-        topology_generator.generate
+        topology_provider = NetworkProvider.new @file_name, @uri_initial_topo
+        initial_topology = topology_provider.get_initial_topology
 
-        #my_semantic_checker = SemanticRulesChecker.new
-        #my_semantic_checker.check my_parser.context, initial_topology
+        my_semantic_checker = SemanticRulesChecker.new
+        my_semantic_checker.check my_parser.context, initial_topology
 
         my_code_generator = CodeGenerator.new
         my_code_generator.generate_code my_parser.context, @destiny_name, @file_name        
     end
 end
 
-begin
+#begin
     my_haikunet_interpreter = Haikunet.new
     my_haikunet_interpreter.interpretate 
-rescue Exception => ex
-  puts "#{ex.class}".red 
-  puts "#{ex.message}".blue
-end
+#rescue Exception => ex
+#  puts "#{ex.class}".red 
+#  puts "#{ex.message}".blue
+#end
     
