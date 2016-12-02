@@ -1,6 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
+gem 'ipaddress'
 gem 'topologygenerator'
 gem 'byebug'
 gem 'commander'
