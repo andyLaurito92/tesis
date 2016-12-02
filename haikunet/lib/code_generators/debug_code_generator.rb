@@ -4,14 +4,14 @@ module DebugCodeGenerator
         code = ''
         @identifiers.each do |identifier|
             case identifier.value
-            when Host
+            when HaikunetHost
                 host_params = identifier.value.params
                 mac = value_from 'mac', host_params
                 code += "{
                     \"id\" : \"#{identifier.name}\", \n
                     \"mac\" : \"#{mac}\"
                 }\n"
-            when Flow
+            when HaikunetFlow
                 flow_params = identifier.value.params
                 src = value_from 'src', flow_params
                 dst = value_from 'dst', flow_params
@@ -20,7 +20,7 @@ module DebugCodeGenerator
                     \"src\" : \"#{src}\", \n
                     \"dst\" : \"#{dst}\", \n
                 }\n"
-            when Intent
+            when HaikunetIntent
                 code += "{
                     \"type\" : \"HostToHostIntent\", \n
                     \"appId\" : \"#{identifier.name}\", \n

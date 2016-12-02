@@ -10,7 +10,7 @@ module OnosCodeGenerator
         json = ''
         @identifiers.each do |identifier|
             case identifier.value
-            when Host
+            when HaikunetHost
                 host_params = get_host_params identifier
                 next if is_defined_in_topology host_params
                 json = "{
@@ -24,7 +24,7 @@ module OnosCodeGenerator
                 }\n"
                 requests.push json
                 code += json
-            when Flow
+            when HaikunetFlow
                 flow_params = get_flow_params identifier
                 flow_params['src'].each do |src_mac|
                   flow_params['dst'].each do |dst_mac|

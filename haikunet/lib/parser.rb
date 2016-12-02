@@ -127,7 +127,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Host.new @actual_params
+            return HaikunetHost.new @actual_params
         when 'LINK'
             match 'LINK'
             match 'LEFT_PARENTHESIS'
@@ -135,7 +135,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Link.new @actual_params
+            return HaikunetLink.new @actual_params
         when 'DEVICE'
             match 'DEVICE'
             match 'LEFT_PARENTHESIS'
@@ -143,7 +143,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Device.new @actual_params
+            return HaikunetDevice.new @actual_params
         when 'ACTION'
             match 'ACTION'
             match 'LEFT_PARENTHESIS'
@@ -151,7 +151,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Action.new @actual_params
+            return HaikunetAction.new @actual_params
         when 'FLOW'
             match 'FLOW'
             match 'LEFT_PARENTHESIS'
@@ -159,7 +159,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Flow.new @actual_params
+            return HaikunetFlow.new @actual_params
         when 'CONDITION'
             match 'CONDITION'
             match 'LEFT_PARENTHESIS'
@@ -167,7 +167,7 @@ class Parser
             params
             match 'RIGHT_PARENTHESIS'
 
-            return Condition.new @actual_params
+            return HaikunetCondition.new @actual_params
         else
             raise_syntaxis_error "it was suppossed to found either a Host, or a Link, or a Device, bleh.. but instead #{lookahead_token.value} was found."
         end
@@ -183,7 +183,7 @@ class Parser
             match 'IDENTIFIER'
             match 'EQUAL_PARAMETERS'
 
-            @actual_identifier = Identifier.new @lexeme_tokenize[index_identifier].value
+            @actual_identifier = HaikunetIdentifier.new @lexeme_tokenize[index_identifier].value
             second_part_equal
         else
             @parse_tree.push 'LAMBDA'

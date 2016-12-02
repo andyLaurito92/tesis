@@ -1,4 +1,4 @@
-class Identifier
+class HaikunetIdentifier
 	attr_accessor :name, :value
 	def initialize(name)
 		@name = name

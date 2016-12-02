@@ -3,7 +3,7 @@ module OpenDayLightCodeGenerator
         code = ''
         @identifiers.each do |identifier|
             case identifier.value
-            when Host
+            when HaikunetHost
                 host_params = identifier.value.params
                 mac = value_from 'mac', host_params
                 ips = value_from 'ip', host_params
@@ -17,7 +17,7 @@ module OpenDayLightCodeGenerator
                         \"port\" : 
                     }
                 }\n"
-            when Flow
+            when HaikunetFlow
                 flow_params = identifier.value.params
                 src = value_from 'src', flow_params
                 dst = value_from 'dst', flow_params

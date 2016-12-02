@@ -1,4 +1,4 @@
-class Flow
+class HaikunetCondition
 	attr_accessor :params
 	def initialize(params)
 		@params = params

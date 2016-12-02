@@ -1,4 +1,4 @@
-class Host
+class HaikunetAction
 	attr_accessor :params
 	def initialize(params)
 		@params = params
