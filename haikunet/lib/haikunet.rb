@@ -32,10 +32,9 @@ class Haikunet
         parse_tree = my_parser.parse lexeme_tokenized
         
         topology_provider = NetworkProvider.new @file_name, @uri_initial_topo
-        initial_topology = topology_provider.get_initial_topology
 
         my_semantic_checker = SemanticRulesChecker.new
-        my_semantic_checker.check my_parser.context, initial_topology
+        my_semantic_checker.check my_parser.context, topology_provider
 
         my_code_generator = CodeGenerator.new
         my_code_generator.generate_code my_parser.context, @destiny_name, @file_name        
