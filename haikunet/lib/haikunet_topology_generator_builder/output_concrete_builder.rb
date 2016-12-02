@@ -1,5 +1,5 @@
 module OutputConcreteBuilder
-    OUTPUT_RUBY_FILE_NAME = 'ruby_network_topology.rb'
+    OUTPUT_RUBY_FILE_NAME = 'initial_network_topology.rb'
 
     def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
         @topology_provider = topology_provider
@@ -15,7 +15,7 @@ module OutputConcreteBuilder
         ruby_network_topology = "module NetworkTopology \n"
 
         get_topology_function_def ="    def get_topology \n "
-        get_topology_function_def +="       return @topology.topology_elements if @topology.topology_elements.size != 0 \n"
+        get_topology_function_def +="       @topology = Topology.new \n "
         get_topology_function_def +="       hosts = [] \n "
         get_topology_function_def +="       routers = [] \n" 
         get_topology_function_def +="       links = [] \n" 
