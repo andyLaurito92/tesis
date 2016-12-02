@@ -18,11 +18,11 @@ module OnosCodeGenerator
                     \"vlan\" : \"#{host_params['vlan']}\", \n
                     \"ipAddresses\" : #{host_params['ips']}, \n
                     \"location\" : {
-                        \"elementId\" : #{host_params['elementId']}, \n
-                        \"port\" : #{host_params['port']}
+                        \"elementId\" : \"#{host_params['elementId']}\", \n
+                        \"port\" : \"#{host_params['port']}\"
                     }
                 }\n"
-                requests.push json
+                requests.push({ "end_point" => "hosts", "message" => json })
                 code += json
             when HaikunetFlow
                 flow_params = get_flow_params identifier
@@ -36,7 +36,7 @@ module OnosCodeGenerator
                           \"two\": \"#{dst_mac}/-1\"
                         }
                       "
-                    requests.push json
+                    requests.push({ "end_point" => "intents", "message" => json })
                     code += json
                   end
                 end
@@ -110,12 +110,12 @@ we have selector and treatment, what can be translated into PERHAPS actions and 
         end
 
         requests.each do |request|
-          response = Typhoeus.post "http://127.0.0.1:8181/onos/v1/intents",
+          response = Typhoeus.post "http://127.0.0.1:8181/onos/v1/#{request['end_point']}",
                         headers: { 'Accept-Encoding' => 'application/json', 'Content-Type' => 'application/json'},
-                        body: request,
+                        body: request["message"],
                         userpwd:"onos:rocks"
 
-          raise OnosCodeGeneratorError, "When posting the intent #{request} to the api, the following error was raised #{response.body}" unless response.success?
+          raise OnosCodeGeneratorError, "When posting the following request: #{request['message']} to the endpoint #{request['end_point']}, the following error was raised #{response.body}" unless response.success?
         end
 
         write_file  "#{file_name[0,file_name.length-3]}_requests",
@@ -130,7 +130,7 @@ we have selector and treatment, what can be translated into PERHAPS actions and 
     def get_host_params(host_identifier)
         mac = value_from 'mac', host_identifier.value.params
         vlan = value_from 'vlan', host_identifier.value.params
-        ips = value_from 'ips', host_identifier.value.params
+        ips = value_from 'ipAddresses', host_identifier.value.params
         elementId = value_from 'elementId', host_identifier.value.params
         port = value_from 'port', host_identifier.value.params
 
