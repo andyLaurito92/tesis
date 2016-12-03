@@ -34,8 +34,12 @@ class SemanticRulesChecker
         #of the program)
 
         identifiers_in_flow_parameters = flows_parameters_of_type flows_identifiers_defined, String 
+
+        #We just want an array of string, since this is the only case in which a mac or an ip could 
+        #be used for destiny or source. If the array is of HaikunetHostIdentifiers, the we keep going
         identifiers_in_flow_parameters += (flows_parameters_of_type flows_identifiers_defined, Array)
         identifiers_in_flow_parameters = identifiers_in_flow_parameters.flatten
+        identifiers_in_flow_parameters = identifiers_in_flow_parameters.select { |parameter| parameter.is_a? String }
 
         identifiers_in_flow_parameters.each do |identifierValue|
             if IPAddress.valid? identifierValue
