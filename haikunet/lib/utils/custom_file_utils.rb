@@ -14,3 +14,9 @@ module CustomFileUtils
         end
     end
 end
+
+module MacAddress
+    def self.valid?(string)
+        (string =~ /^(?:[[:xdigit:]]{2}([-:]))(?:[[:xdigit:]]{2}\1){4}[[:xdigit:]]{2}$/) == 0
+    end
+end
