@@ -51,9 +51,12 @@ class SemanticRulesChecker
     end
 
     def paths_for_flows_exists
+        flows_identifiers_defined = @context['identifiers'].select{ |identifier| identifier.value.is_a? HaikunetFlow }
 
+        flows_identifiers_defined.each do |flow_identifier|
+            check_if_path_exist_in flow_identifier
+        end
     end
-
 
     def flows_parameters_of_type(flows, resource)
         resources = []
@@ -71,6 +74,34 @@ class SemanticRulesChecker
             return if condition_to_check.call host, value
         end
         raise_semantic_error error_message
+    end
+
+    def check_if_path_exist_in(flow)
+        src_identifier = flow.value.params.select{ |param| param.name == 'src' }.first.value
+        destiny_identifier = flow.value.params.select{ |param| param.name == 'dst' }.first.value
+
+        sources = obtain_host_topology_representation_of src_identifier
+        destinies = obtain_host_topology_representation_of src_identifier
+
+        sources.each do |source|
+            destinies.each do |destiny|
+                @topology_provider.get_path_between source destiny
+            end
+        end        
+    end
+
+    def obtain_host_topology_representation_of(haikunet_host_identifier)
+        mac_value = haikunet_host_identifier.params.select{ |param| param.name == 'mac' }.first.value
+        hosts_in_topology = @topology.select{ |elem| elem.is_a? Host }
+        hosts_in_topology.each do |host|
+            return host if host.mac == mac_value
+        end
+
+        #If we are here, then it means that the host is not defined in the actual topology!. This means that
+        #we have first to define it in the topology, and afterwards check if there is a path between him and
+        #the destiny.
+
+        
     end
 
     def raise_semantic_error(message)
