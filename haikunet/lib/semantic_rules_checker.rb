@@ -5,7 +5,7 @@ class SemanticRulesChecker
     def check(context, topology_provider)
         @context = context
         @topology_provider = topology_provider
-        @topology = @topology_provider.get_initial_topology
+        @topology = @topology_provider.initial_topology
 
         hosts_are_well_defined
 
@@ -77,31 +77,61 @@ class SemanticRulesChecker
     end
 
     def check_if_path_exist_in(flow)
-        src_identifier = flow.value.params.select{ |param| param.name == 'src' }.first.value
-        destiny_identifier = flow.value.params.select{ |param| param.name == 'dst' }.first.value
+        sources_identifier = flow.value.params.select{ |param| param.name == 'src' }.first.value
+        destinies_identifier = flow.value.params.select{ |param| param.name == 'dst' }.first.value
 
-        sources = obtain_host_topology_representation_of src_identifier
-        destinies = obtain_host_topology_representation_of src_identifier
+        sources = []
+        destinies = []
+        if sources_identifier.is_a? Array then
+            sources_identifier.each do |source_identifier|
+                sources.push obtain_host_topology_representation_of source_identifier
+            end
+        else
+            sources.push obtain_host_topology_representation_of sources_identifier
+        end
 
-        sources.each do |source|
-            destinies.each do |destiny|
-                @topology_provider.get_path_between source destiny
+        if destinies_identifier.is_a? Array then
+            destinies_identifier.each do |destiny_identifier|
+                destinies.push obtain_host_topology_representation_of destiny_identifier
+            end
+        else
+            destinies.push obtain_host_topology_representation_of destinies_identifier
+        end
+
+        sources.each do |one_src|
+            destinies.each do |one_dst|
+                path = @topology_provider.source_provider.get_path_between one_src, one_dst
+                raise_semantic_error "there is no path between the source with mac #{one_src.mac} and the destiny with mac #{one_dst.mac}" if path.links.size == 0
             end
         end        
     end
 
-    def obtain_host_topology_representation_of(haikunet_host_identifier)
-        mac_value = haikunet_host_identifier.params.select{ |param| param.name == 'mac' }.first.value
+    def obtain_host_topology_representation_of(host_identifier)
         hosts_in_topology = @topology.select{ |elem| elem.is_a? Host }
-        hosts_in_topology.each do |host|
-            return host if host.mac == mac_value
+        #A host_identifier can be either a property of the host in the topology, or a HaikunetHostIdentifier or an Array!. 
+        #In this second case, it can happens that the host is not defined in the initial topology!.
+        if host_identifier.is_a? HaikunetIdentifier
+            mac_value = host_identifier.value.params.select{ |param| param.name == 'mac' }.first.value
+            hosts_in_topology.each do |host|
+                return host if host.mac == mac_value
+            end
+            #If we are here, then it means that the host is not defined in the actual topology!. This means that
+            #we have first to define it in the topology, and afterwards check if there is a path between him and
+            #the destiny.
+
+            #TODO: Implement the semantic check for hosts that are not yet defined in the topology. Probably the 
+            #topology of the topologygenerator gem will have to be more intelligent (transform it to a graph would 
+            #be the best solution I think).
+
+        elsif host_identifier.is_a? String #Is a property of a host 
+            if IPAddress.valid? host_identifier
+                return hosts_in_topology.select{ |host| host.ips.include? host_identifier }.first
+            elsif MacAddress.valid? host_identifier
+                return hosts_in_topology.select{ |host| host.mac == host_identifier }.first
+            end
+        else
+            raise_semantic_error "the identifier #{host_identifier} is not a valid identifier for a host."
         end
-
-        #If we are here, then it means that the host is not defined in the actual topology!. This means that
-        #we have first to define it in the topology, and afterwards check if there is a path between him and
-        #the destiny.
-
-        
     end
 
     def raise_semantic_error(message)
