@@ -80,23 +80,20 @@ class SemanticRulesChecker
         sources_identifier = flow.value.params.select{ |param| param.name == 'src' }.first.value
         destinies_identifier = flow.value.params.select{ |param| param.name == 'dst' }.first.value
 
-        sources = []
-        destinies = []
-        if sources_identifier.is_a? Array then
-            sources_identifier.each do |source_identifier|
-                sources.push obtain_host_topology_representation_of source_identifier
-            end
-        else
-            sources.push obtain_host_topology_representation_of sources_identifier
-        end
+        sources_identifier = [sources_identifier] unless sources_identifier.is_a? Array
+        destinies_identifier = [destinies_identifier] unless destinies_identifier.is_a? Array
 
-        if destinies_identifier.is_a? Array then
-            destinies_identifier.each do |destiny_identifier|
-                destinies.push obtain_host_topology_representation_of destiny_identifier
+        obtaining_host_representation_from_identifiers = lambda{ |hosts_identifiers| 
+            hosts_representations = []
+            hosts_identifiers.each do |host_identifier|
+                host_representation = obtain_host_topology_representation_of host_identifier
+                hosts_representations.push host_representation if host_representation != "NONE"
             end
-        else
-            destinies.push obtain_host_topology_representation_of destinies_identifier
-        end
+            return hosts_representations
+        }
+        
+        sources = obtaining_host_representation_from_identifiers.call sources_identifier
+        destinies = obtaining_host_representation_from_identifiers.call destinies_identifier
 
         sources.each do |one_src|
             destinies.each do |one_dst|
@@ -132,6 +129,7 @@ class SemanticRulesChecker
         else
             raise_semantic_error "the identifier #{host_identifier} is not a valid identifier for a host."
         end
+        return "NONE"
     end
 
     def raise_semantic_error(message)
