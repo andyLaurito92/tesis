@@ -1,2 +1,0 @@
-class OnosCodeGeneratorError < StandardError 
-end

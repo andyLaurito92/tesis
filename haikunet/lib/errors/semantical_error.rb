@@ -1,2 +1,0 @@
-class SemanticalError < StandardError 
-end
