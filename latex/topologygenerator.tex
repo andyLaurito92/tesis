@@ -1,0 +1,24 @@
+\section{Base concept}
+
+The topologygenerator is a tool for building a custom output file format out of a given network topology. The key concepts in this tool are the followings:
+\begin{itemize}
+\item Provider \\
+A provider will be in charge of everything which is concerned to the network topology, meanning that it will have to provide information about it's elements, how they are connected between each other, general properties of each of the elements, etc., as well as has the ability to change it's content, for example adding new elements to the network, creating new connections, deleting elements, etc.\\
+It's clear that in the eyes of the tool, the provider's abstraction will be the network and all the information concerned to it.
+
+\item Builder \\
+
+
+\item Output \\
+
+\end{itemize}
+
+\section{Tutorial}
+
+The topology can be retrieved from a custom file written in ruby by the user, or from an SDN controller (by specifying the API uri). The ONOS controller is currently supported, while the API for OpenDayLight is in progress. When building your output, you have to write a module that describes how to each class defined in the network topology. The topologygenerator gem will then use the defined modules to generate the output desired. You can see examples of how to use this gem in the public github webpage.
+
+\section{Architecture}
+
+\section{Implementation}
+
+\section{Limits}
