@@ -4,9 +4,14 @@
 \contentsline {chapter}{\numberline {2.}Background}{3}
 \contentsline {chapter}{\numberline {3.}TopologyGenerator}{5}
 \contentsline {section}{\numberline {3.1}Key Concepts}{5}
+\contentsline {subsection}{\numberline {3.1.1}Examples of use}{5}
 \contentsline {section}{\numberline {3.2}Tutorial}{9}
-\contentsline {section}{\numberline {3.3}Implementation}{9}
-\contentsline {section}{\numberline {3.4}Limits}{9}
-\contentsline {section}{\numberline {3.5}Future work}{9}
+\contentsline {subsection}{\numberline {3.2.1}Installation}{9}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Installation as a gem}{9}
+\contentsline {subsubsection}{\numberline {3.2.1.2}Installation as a binary}{9}
+\contentsline {subsection}{\numberline {3.2.2}Use as a gem}{10}
+\contentsline {subsection}{\numberline {3.2.3}Use as a binary}{10}
+\contentsline {section}{\numberline {3.3}Implementation}{10}
+\contentsline {section}{\numberline {3.4}Limitations}{10}
 \contentsline {chapter}{\numberline {4.}Haikunet}{11}
 \contentsline {chapter}{\numberline {5.}Conclusions}{13}
