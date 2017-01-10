@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  9 JAN 2017 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  10 JAN 2017 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -61,10 +61,18 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count91
+\float@exts=\toks15
+\float@box=\box26
+\@float@everytoks=\toks16
+\@floatcapt=\box27
+)
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
-\inpenc@prehook=\toks15
-\inpenc@posthook=\toks16
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
@@ -379,11 +387,11 @@ Language: spanish.ldf 2016/01/15 v5.0o Spanish support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2016/02/24 3.9q Babel common definitions
-\babel@savecnt=\count91
+\babel@savecnt=\count92
 \U@D=\dimen105
 )
-\es@quottoks=\toks17
-\es@quotdepth=\count92
+\es@quottoks=\toks19
+\es@quotdepth=\count93
 Package babel Info: Making " an active character on input line 533.
 Package babel Info: Making . an active character on input line 634.
 Package babel Info: Making < an active character on input line 679.
@@ -403,9 +411,9 @@ Package ifvtex Info: VTeX not detected.
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count93
-\Gm@cntv=\count94
-\c@Gm@tempcnt=\count95
+\Gm@cnth=\count94
+\Gm@cntv=\count95
+\c@Gm@tempcnt=\count96
 \Gm@bindingoffset=\dimen106
 \Gm@wd@mp=\dimen107
 \Gm@odd@mp=\dimen108
@@ -414,39 +422,39 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutheight=\dimen111
 \Gm@layouthoffset=\dimen112
 \Gm@layoutvoffset=\dimen113
-\Gm@dimlist=\toks18
+\Gm@dimlist=\toks20
 ) (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
 \openout1 = `tesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count96
+\scratchcounter=\count97
 \scratchdimen=\dimen114
-\scratchbox=\box26
-\nofMPsegments=\count97
-\nofMParguments=\count98
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count99
+\scratchbox=\box28
+\nofMPsegments=\count98
+\nofMParguments=\count99
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count100
 \MPscratchDim=\dimen115
-\MPnumerator=\count100
-\makeMPintoPDFobject=\count101
-\everyMPtoPDFconversion=\toks20
+\MPnumerator=\count101
+\makeMPintoPDFobject=\count102
+\everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -491,8 +499,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 10.
-LaTeX Info: Redefining \% on input line 10.
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -503,14 +511,14 @@ LaTeX Info: Redefining \% on input line 10.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: twoside 
 * h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
-* v-part:(T,H,B)=(99.58464pt, 645.87756pt, 99.58464pt)
+* v-part:(T,H,B)=(56.9055pt, 731.23584pt, 56.9055pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=426.79135pt
-* \textheight=645.87756pt
+* \textheight=731.23584pt
 * \oddsidemargin=13.08827pt
 * \evensidemargin=13.08827pt
-* \topmargin=-4.55914pt
+* \topmargin=-47.23828pt
 * \headheight=12.0pt
 * \headsep=19.8738pt
 * \topskip=11.0pt
@@ -577,48 +585,137 @@ Cap\'{\i }tulo 1.
 (./introduction.tex) [1
 
 ]
-LaTeX Info: Redefining \. on input line 52.
-LaTeX Info: Redefining \% on input line 52.
+LaTeX Info: Redefining \. on input line 53.
+LaTeX Info: Redefining \% on input line 53.
  [2
 
 ]
 Cap\'{\i }tulo 2.
 (./background.tex) [3]
-LaTeX Info: Redefining \. on input line 55.
-LaTeX Info: Redefining \% on input line 55.
+LaTeX Info: Redefining \. on input line 56.
+LaTeX Info: Redefining \% on input line 56.
  [4
 
 ]
 Cap\'{\i }tulo 3.
-(./topologygenerator.tex) [5]
-LaTeX Info: Redefining \. on input line 58.
-LaTeX Info: Redefining \% on input line 58.
- [6
+(./topologygenerator.tex
+Underfull \hbox (badness 10000) in paragraph at lines 9--12
+
+ []
+
+
+<images/topologygenerator/topologygenerator_abstract_multiple.png, id=65, 534.9
+9875pt x 355.3275pt>
+File: images/topologygenerator/topologygenerator_abstract_multiple.png Graphic 
+file (type png)
+
+<use images/topologygenerator/topologygenerator_abstract_multiple.png>
+Package pdftex.def Info: images/topologygenerator/topologygenerator_abstract_mu
+ltiple.png used on input line 20.
+(pdftex.def)             Requested size: 426.79135pt x 283.47078pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+<images/topologygenerator/topologygenerator_abstract_single.png, id=70, 675.523
+74pt x 355.3275pt>
+File: images/topologygenerator/topologygenerator_abstract_single.png Graphic fi
+le (type png)
+
+<use images/topologygenerator/topologygenerator_abstract_single.png>
+Package pdftex.def Info: images/topologygenerator/topologygenerator_abstract_si
+ngle.png used on input line 29.
+(pdftex.def)             Requested size: 426.79135pt x 224.49727pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+LaTeX Info: Redefining \. on input line 34.
+LaTeX Info: Redefining \% on input line 34.
+[6 <./images/topologygenerator/topologygenerator_abstract_multiple.png> <./imag
+es/topologygenerator/topologygenerator_abstract_single.png>]
+<images/topologygenerator/controller_example.png, id=76, 715.67375pt x 365.365p
+t>
+File: images/topologygenerator/controller_example.png Graphic file (type png)
+ <use images/topologygenerator/controller_example.png>
+Package pdftex.def Info: images/topologygenerator/controller_example.png used o
+n input line 40.
+(pdftex.def)             Requested size: 426.79135pt x 217.88826pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+
+ []
+
+<images/topologygenerator/ruby_provider.png, id=77, 715.67375pt x 365.365pt>
+File: images/topologygenerator/ruby_provider.png Graphic file (type png)
+
+<use images/topologygenerator/ruby_provider.png>
+Package pdftex.def Info: images/topologygenerator/ruby_provider.png used on inp
+ut line 52.
+(pdftex.def)             Requested size: 426.79135pt x 217.88826pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 55.
+LaTeX Info: Redefining \% on input line 55.
+ [7 <./images/topologygenerator/controller_example.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
+
+ []
+
+<images/topologygenerator/onos_builder.png, id=83, 765.86125pt x 365.365pt>
+File: images/topologygenerator/onos_builder.png Graphic file (type png)
+
+<use images/topologygenerator/onos_builder.png>
+Package pdftex.def Info: images/topologygenerator/onos_builder.png used on inpu
+t line 65.
+(pdftex.def)             Requested size: 426.79135pt x 203.61064pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
+
+ []
+
+LaTeX Info: Redefining \. on input line 71.
+LaTeX Info: Redefining \% on input line 71.
+[8 <./images/topologygenerator/ruby_provider.png> <./images/topologygenerator/o
+nos_builder.png>])
+LaTeX Info: Redefining \. on input line 59.
+LaTeX Info: Redefining \% on input line 59.
+ [9]
+LaTeX Info: Redefining \. on input line 59.
+LaTeX Info: Redefining \% on input line 59.
+ [10
 
 ]
 Cap\'{\i }tulo 4.
-(./haikunet.tex) [7]
-LaTeX Info: Redefining \. on input line 61.
-LaTeX Info: Redefining \% on input line 61.
- [8
+(./haikunet.tex) [11]
+LaTeX Info: Redefining \. on input line 62.
+LaTeX Info: Redefining \% on input line 62.
+ [12
 
 ]
 Cap\'{\i }tulo 5.
-(./conclusions.tex) [9]
-LaTeX Info: Redefining \. on input line 65.
-LaTeX Info: Redefining \% on input line 65.
- [10
+(./conclusions.tex) [13]
+LaTeX Info: Redefining \. on input line 66.
+LaTeX Info: Redefining \% on input line 66.
+ [14
 
 ] (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
- 3304 strings out of 493029
- 43370 string characters out of 6136234
- 117161 words of memory out of 5000000
- 6777 multiletter control sequences out of 15000+600000
- 9843 words of font info for 34 fonts, out of 8000000 for 9000
+ 3394 strings out of 493029
+ 45478 string characters out of 6136234
+ 119533 words of memory out of 5000000
+ 6856 multiletter control sequences out of 15000+600000
+ 10196 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,10n,30p,1858b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
@@ -629,10 +726,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmti10.pfb>
-Output written on tesis.pdf (22 pages, 159347 bytes).
+Output written on tesis.pdf (26 pages, 290265 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 135 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
