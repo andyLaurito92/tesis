@@ -71,15 +71,15 @@ In this example we would like to have our ruby provider, as in the previous case
 Each of the builder's in this case will generate requests to the ONOS Api that will create each of the elements in the SDN enviorment (this is a good example of the capability of SDN, since the enviorment allow us to create elements in the network). \\
 In this example, it's important to notice how malleable and easy results to change ONOS, which was though as a provider in previous examples, to a desired output.\\
 
-With the examples showed, we have a good understanding in the power of the tool and how it is supposed to be used. In the following section we will provide a tutorial for using the topologygenerator, and we will implement some of the examples that we have shown until now.
+With the examples showed, we have a good understanding in the power of the tool and how it is supposed to be used. In the following section we will provide a tutorial for using the topologygenerator, and we will implement some of the examples showed before.
 
 \section{Tutorial}
 
-In this tutorial we will demonstrate how to install and use the topologygenerator tool. The tutorial was ran in a machine running Ubuntu 16.04, however should work in any machine which has a ruby version of 2.0 or major installed. \\
+In this tutorial we will demonstrate how to install and use the topologygenerator tool. The tutorial was tested in a machine running Ubuntu 16.04, however should work in any machine which has a ruby version of 2.0 or major installed. \\
 
 \subsection{Installation}
 
-You will first need to have Ruby installed in your machine. We recommend for this installing the ruby version manager (RVM), however any installation should be fine.\\
+You will need to have Ruby installed in your machine. We recommend for this installing the ruby version manager (RVM), however any installation should be fine.\\
 
 Once ruby is installed, you can proceed now to install the topologygenerator. For doing this, you will have two options: 
 \begin{itemize}
@@ -89,7 +89,7 @@ You should go for this option in case you are thinking in using the topologygene
 Select this option in case you are not interested in adding the topologygenerator as a library of any project. In this case, you will use the topologygenerator as a binary.
 \end{itemize}
 
-Per each option please refer to the corresponding subsection in below.
+Per each option please refer to the corresponding subsection listed below.
 
 \subsubsection{Installation as a gem}
 
@@ -117,7 +117,7 @@ $ gem install topologygenerator
 
 \subsubsection{Installation as a binary}
 
-\textbf{Pre-requisite}: For this installation, you will have to already have installed and configured a git client. \\
+\textbf{Pre-requisite}: Have installed and configured a git client. \\
 
 Execute the followings lines (replace \textbf{TOPOLOGY\_DIRECTORY} with the corresponding path):
 
@@ -126,11 +126,116 @@ $ git clone git@github.com:andyLaurito92/topologygenerator.git
 $ sudo ln -s "$TOPOLOGY_DIRECTORY/lib/createTopology.rb" /usr/bin/topologygenerator
 \end{lstlisting}
 
-\subsection{Use as a gem}
+\subsection{Using the tool}
+
+How to use the topologygenerator will depend in which of the installation's guide you have done, however both ways are not so different and remember that you can always have the tool installed as a gem and a binary at the same time. In case you have installed the tool as a binary, we encourage you to first read the Use as a gem section, and then proceed to the Use as a binary section, since it still will be useful. \\
+Both tutorials require you to have installed either Onos or OpenDayLight Controller and mininet. \\
+First we will guide you in how to use the tool using the builders and providers implemented as examples, and then you will get hands on into the code and implement a provider and a builder. In both using examples, we will use the ONOS and OpenDayLight providers, and the PDM and Ruby builders. \\
+
+NO ESTOY SEGURO SI SE PUEDEN USAR LOS BUILDERS Y PROVIDERS POR DEFECTO EN LA INSTALACIÓN DE LA GEMA, PORQUE NO SE SI RUBY TE DEJA ACCEDER A TODO EL PROYECTO DE LA GEMA, O SOLO AL BINARIO. TENGO QUE PROBAR ESTO, PERO EN CASO DE QUE NO SE PUEDA, ENTONCES EN LA INSTALACIÓN DE LA GEMA NO TENGO LOS BUILDERS Y PROVIDERS DE EJEMPLO, POR LO QUE TENGO QUE PENSAR EN COMO HACERLO ACCESIBLE PARA ESTOS MUCHACHOS.
+
+\subsubsection{Use as a gem}
+
+We will use the topologygenerator as a gem, meaning that will be part of your ruby code. \\
+Using the tool is really straightforward, first we require the gem in the script as follows:
+
+\begin{lstlisting}[language=Ruby]
+require 'topologygenerator'
+\end{lstlisting}
+
+And now we can create a new topologygenerator instance as follows:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator = TopologyGenerator.new({
+        "source" => "ONOS", #Actually ONOS, OPENDAYLIGHT,  OBJECT and CUSTOM are the options supported
+        "directory_concrete_builders" => "builders_examples/pdm_builders", #The directory where builders are located
+        "output_directory" => "output_directory", #The directory where the output will be saved
+        "uri_resource" => "http://127.0.0.1/onos/v1/" #Must be the rest api uri if either ONOS or OpenDayLight is choosed or the path of a file if CUSTOM is choosed. In case OBJECT is choosed, you will have to provide a valid instance of Topology.
+    })
+\end{lstlisting}
+
+Let's go through the code in more detailed. What we are doing in this example is to tell the topologygenerator that we are going to use the ONOS provider, this is done just by passing as argument "ONOS" to the \textbf{source} key, and the DEVS builders, for doing this you just need to detailed the path where the builders are located to the \textbf{directory\_concrete\_builders} key. Since we have the topologygenerator gem installed, the enviorment has already loaded the path to the project, so there is no need to use the full path.\\
+The next thing that you have to do is set the path where the output is going to be stored, for doing you just need to define the \textbf{output\_directory} key.\\
+Finally since we are using the ONOS provider, we need to provide the uri from the ONOS's api. As you can see, this is done just by defining the \textbf{uri\_resource} key in the constructor. \\
+
+After creating our topologygenerator instance, we can now proceed to generate the desired output by writing the following line in the code:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator.generate
+\end{lstlisting}
+ 
+The reader can have already noticed that what we are doing in this example, is implement the Controller's use case detailed in the previous section.\\
+
+Before getting into the next example, let's go in more detailed in two of the four providers detailed above, the \textbf{CUSTOM} and \textbf{OBJECT} providers.\\
+For using the \textbf{CUSTOM} provider, you will need to provide the path to the ruby network topology model file, which it would contain a valid model. Assuming that your model is in the following path: \textit{models/my\_network\_model/my\_network.rb}, this is how you have to create the topologygenerator's instance:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator = TopologyGenerator.new({
+        "source" => "CUSTOM",
+        "directory_concrete_builders" => "builders_examples/pdm_builders",
+        "output_directory" => "output_directory",
+        "uri_resource" => "models/my_network_model/my_network.rb"
+    })
+\end{lstlisting}
+
+For further information of what is this model and how you can program one, please go ahead to the \textit{Network topology model} section.\\
+
+For using the \textbf{OBJECT} provider, you will need to provide a valid instance of topology. Let's suppose that you have a variable called \textit{my\_topology} with a valid instance class, this is how you have to create your topologygenerator's instance:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator = TopologyGenerator.new({
+        "source" => "OBJECT",
+        "directory_concrete_builders" => "builders_examples/pdm_builders",
+        "output_directory" => "output_directory",
+        "uri_resource" => my_topology
+    })
+\end{lstlisting}
+
+We encourage you to read more about the Topology class in the the topologygenerator API. In there you will be able to find examples in how to build a valid instance of this class.\\
+
+Now that we have understood the providers, let's go trhough another example. Suppose that you want to use the tree topology network model located at \textit{network\_topologies\_examples}, for creating a simulation in PowerDevs. This is the way of doing this:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator = Topologygenerator.new({
+        "source" => "CUSTOM",
+        "directory_concrete_builders" => "builders_examples/pdm_builders",
+        "output_directory" => "output",
+        "uri_resource" => "network_topologies_examples/tree_topology.rb" 
+    })
+my_custom_topology = topology_generator.generate
+\end{lstlisting}
+
+What about if you want to use an OpenDayLight controller running in your local host, and from this network get a ruby representation model?. Then you will have to do as follow:
+
+\begin{lstlisting}[language=Ruby]
+my_topology_generator = Topologygenerator.new({
+        "source" => "OPENDAYLIGHT",
+        "directory_concrete_builders" => "builders_examples/ruby_builders",
+        "output_directory" => "output",
+        "uri_resource" => "http://localhost:8080/restconf/operational/network-topology:network-topology/topology/flow:1/" 
+    }) 
+my_custom_topology = topology_generator.generate
+\end{lstlisting}
+
+As you may have already noticed, using the topologygenerator tool is really straightforward and flexible. We encourage you to keep on trying the tool with another builders and providers!. When you think that you are ready, you can jump on to code your first provider in the \textbf{Implementing your provider} section!.
+
+\subsubsection{Use as a binary}
+
+These are the commands that you need to know for using the topologygenerator as a binary:
+
+\begin{itemize}
+\item \textbf{-n (name)} : The name of the provider source. You can select one between \textit{ONOS}
+
+\end{itemize}
+
+\subsection{Implementing your provider}
+
+\subsection{Implementing your builder}
+
+\subsection{Network topology model}
+
+\subsubsection{Implementing your network topology model}
 
 
-\subsection{Use as a binary}
-
-\section{Implementation}
 
 \section{Limitations}
