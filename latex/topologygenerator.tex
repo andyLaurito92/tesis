@@ -421,6 +421,9 @@ module OutputConcreteBuilder
     
     	ruby_network_topology = "module NetworkTopology \n"
     	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "       hosts = [] \n "
+    	ruby_network_topology += "       routers = [] \n "
+    	ruby_network_topology += "       links = [] \n "
     	ruby_network_topology += "    end \n "
     	ruby_network_topology += "    \n "
     	ruby_network_topology += "    def get_path_between(source,destination) \n "
@@ -432,6 +435,80 @@ module OutputConcreteBuilder
     end
 end
 \end{lstlisting}
+
+Now per each instance of elements that we are trying to add to the topology (let's remember that we have routers, hosts and links ), we will call the \textit{transform\_to\_output\_representation} method as follow:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+		@topology_provider = topology_provider
+		@output_directory = output_directory
+		@directory_concrete_builders = directory_concrete_builders
+	end
+    
+    def build_output_content
+		network_elements = @topology_provider.get_topology
+        
+        network_elements = network_elements.select { |elem| [Host,Link,Router].include? elem.class }    
+    
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "       hosts = [] \n "
+    	ruby_network_topology += "       routers = [] \n "
+	ruby_network_topology += "       links = [] \n "
+	network_elements.each do |element|
+		ruby_network_topology += "      #{element.transform_to_output_representation @directory_concrete_builders} \n"
+        end
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    	
+    	write_file "#{@output_directory}/#{OUTPUT_RUBY_FILE_NAME}",
+                    ruby_network_topology
+    end
+end
+\end{lstlisting}
+
+As you can see, we have defined the new instance variable \textit{@directory\_concrete\_builders} for using it as argument to the \textit{transform\_to\_output\_representation} method. We now proceed to define each of the builder's class file per each type of element as it was explained above. We will explain in better detailed the \textit{Host\_concrete\_builder.rb} builder, and for the other's one we will give directly the code. 
+
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Host\_concrete\_builder.rb]
+module HostConcreteBuilder    
+    def build_output_representation
+    	"hosts.push @topology.add_host \"#{id}\""
+    end      
+end
+\end{lstlisting}
+
+The code is straightforward, the function just add the host with it's corresponding id to the topology, and then pushes the result of this function to the hosts array previous defined. Notice that the function returns a string, since the idea is to serialize the host in the ruby model. \\
+It's important to remark that the context in which this function is called, is the same as if it were a method defined in the Host class, meaning that we can access to every property and method defined in the Host class (in this case, we are accessing the id method). This behaviour is repeated in both \textit{Router\_concrete\_builder.rb} and \textit{Link\_concrete\_builder.rb}.\\
+
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Router\_concrete\_builder.rb]
+module RouterConcreteBuilder    
+    def build_output_representation
+    	"routers.push @topology.add_router \"#{id}\", #{priority_weights}"
+    end      
+end
+\end{lstlisting}
+
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Link\_concrete\_builder.rb]
+module LinkConcreteBuilder    
+    def build_output_representation
+    	"links.push @topology.add_link \"#{id}\", #{src_element.id}, #{src_port}, #{dst_element.id}, #{dst_port}, #{bandwith}"
+    end      
+end
+\end{lstlisting}
+
+Remember that these files should be in the same folder as the \textit{output\_concrete\_builder.rb} file.\\
+
+That's it!, you can now use your builder by specifying the path to the folder where the files are. You may have noticed that we didn't have implemented the \textit{get\_path\_between} method. This is something that we left you to do it with some helps:
+\begin{itemize}
+\item Is your topology static?, if it is, you may want just to hardcode the path between each of the hosts/routers in the network
+\item Is your topology dynamic?, if it is you perhaps need to implement a search path algorithm like Dijkstra.
+\end{itemize}
+
+Hope you have understood everything and you are interested in making your own builders!. If that is so, please don't hesitate to contact me to add them in the repository.
 
 \subsection{Network topology model}
 
