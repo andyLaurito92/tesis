@@ -319,9 +319,119 @@ module OutputConcreteBuilder
 end
 \end{lstlisting}
 
-As you can see, the \textit{write\_file} function is at the end of the \textit{build\_output\_content} since we know that this is our builder purpouse. Another thing to remark is the definition of the instance variable \textit{@output\_directory}, since we need to use it in the \textit{build\_output\_content} function. \\
+Two things were modified in the previous code, first the \textit{write\_file} function was added at the \textit{build\_output\_content} method, and the definition of the instance variable \textit{@output\_directory} was done in the \textit{initialize\_concrete\_builder} method. This instance variable was defined since we need to use it in the \textit{build\_output\_content} function. \\
 
-Let's start now but defining what would be the content of the topology.
+Right now we have a builder which generates as output an empty, but still valid, ruby model. We want basically to create from the provider, which was given to us in the \textit{initialize\_concrete\_builder}, a network topology model. For doing this, we will need to get the elements of the network that the providers know, elements such as Host, Devices, Links, etc., and define this elements in our \textit{NetworkTopology} model. Some things to consider before keep going are: 
+\begin{itemize}
+\item We will just take into account the Host, Link and Router type in the Network. (Having different types as the mentioned above is not possible right know, however is not hard to extend the topologygenerator tool to have them. Please refer to the \textbf{Limitiations} section in this chapter for a better explanaition).
+\item 
+\end{itemize}
+
+Understanding our assumptions and considerations, let's keep going in defining an instance variable for the \textit{topology\_provider} instance that we have recieved in the initialize function:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+		@topology_provider = topology_provider
+		@output_directory = output_directory
+	end
+    
+    def build_output_content
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    	
+    	write_file "#{@output_directory}/#{OUTPUT_RUBY_FILE_NAME}",
+                    ruby_network_topology
+    end
+end
+\end{lstlisting}
+
+Now we can access the network topology elements from the \textit{build\_output\_content} function using the \textit{get\_topology} method from the \textit{topology\_provider} variable (as we have seen in the \textbf{Implementing your provider} section, all providers have defined this method). While doing this, we will get all the elements of type Host, Link and Router as mentioned above. 
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+		@topology_provider = topology_provider
+		@output_directory = output_directory
+	end
+    
+    def build_output_content
+		network_elements = @topology_provider.get_topology
+        
+        network_elements = network_elements.select { |elem| [Host,Link,Router].include? elem.class }    
+    
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    	
+    	write_file "#{@output_directory}/#{OUTPUT_RUBY_FILE_NAME}",
+                    ruby_network_topology
+    end
+end
+\end{lstlisting}
+
+The class Host, Link and Router are directly provided by the topologygenerator when the module is included. These classes have implemented a method called \textit{transform\_to\_output\_representation} which recieves as argument a path to a directory, and can be called to ask for an instance of this classes to be serialize. The calling of this method will triggered a loader which would try to load in the directories path provided as argument, a file name after it's class with "concrete\_builder.rb" appended at the end. For example, if we ask an instance of a host to be serialize (this means to call the method previous mentioned), the loader will try to load a file called \textit{Host\_concrete\_builder.rb} in the directory provide as argument. If the method is called by a Link's instance, the loader will try to load a file called \textit{Link\_concrete\_builder.rb}, and finally if the method is called by a Router's instance, the loader will try to load a file called \textit{Router\_concrete\_builder.rb}.\\
+We show next what is the least expected content of these files:
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Router\_concrete\_builder.rb]
+module RouterConcreteBuilder    
+    def build_output_representation
+    end      
+end
+\end{lstlisting}
+
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Host\_concrete\_builder.rb]
+module HostConcreteBuilder    
+    def build_output_representation
+    end      
+end
+\end{lstlisting}
+
+\begin{lstlisting}[language=Ruby,breaklines=true,title=Link\_concrete\_builder.rb]
+module LinkConcreteBuilder    
+    def build_output_representation
+    end      
+end
+\end{lstlisting}
+
+In each of the \textit{build\_output\_representation} functions is where you will have to program the code for serialize the instance. We will come back to this classes later. \\
+
+Now that we have been provided of the network elements, it's time to define each of them as it is expected in the ruby model. Let's remember that in every ruby model we have the \textit{@topology} instance variable, which is the place in where we are supposed to add the network elements.\\
+We first define three arrays, one per each type of element that we have in the topology. This arrays will be defined in the \textit{get\_topology} function of the ruby model as follow:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+		@topology_provider = topology_provider
+		@output_directory = output_directory
+	end
+    
+    def build_output_content
+		network_elements = @topology_provider.get_topology
+        
+        network_elements = network_elements.select { |elem| [Host,Link,Router].include? elem.class }    
+    
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    	
+    	write_file "#{@output_directory}/#{OUTPUT_RUBY_FILE_NAME}",
+                    ruby_network_topology
+    end
+end
+\end{lstlisting}
 
 \subsection{Network topology model}
 

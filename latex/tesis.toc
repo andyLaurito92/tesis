@@ -14,8 +14,8 @@
 \contentsline {subsubsection}{\numberline {3.2.2.2}Use as a binary}{12}
 \contentsline {subsection}{\numberline {3.2.3}Implementing your provider}{13}
 \contentsline {subsection}{\numberline {3.2.4}Implementing your builder}{13}
-\contentsline {subsection}{\numberline {3.2.5}Network topology model}{14}
-\contentsline {subsubsection}{\numberline {3.2.5.1}Implementing your network topology model}{14}
-\contentsline {section}{\numberline {3.3}Limitations}{14}
-\contentsline {chapter}{\numberline {4.}Haikunet}{15}
-\contentsline {chapter}{\numberline {5.}Conclusions}{17}
+\contentsline {subsection}{\numberline {3.2.5}Network topology model}{16}
+\contentsline {subsubsection}{\numberline {3.2.5.1}Implementing your network topology model}{16}
+\contentsline {section}{\numberline {3.3}Limitations}{16}
+\contentsline {chapter}{\numberline {4.}Haikunet}{17}
+\contentsline {chapter}{\numberline {5.}Conclusions}{19}
