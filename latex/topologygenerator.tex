@@ -250,7 +250,78 @@ Now that you know how to use the tool, let's proceed to get hands on and program
 
 \subsection{Implementing your provider}
 
+
+
+
 \subsection{Implementing your builder}
+
+As explained before, builders are the ones that will generate your desired output, but for doing this we first need to know what we we want as output!. In this example, we will implement the ruby builder which we have already been talking about (It's recommended that you have read \textbf{Network topology model} section before jumping into this tutorial). \\
+
+We have already seen when we use the tool, that every time we called the topologygenerator, doesn't matter if it's as a binary or a gem, we have to specify a directory where the builders are located. In this directory, the topologygenerator will always try first to load a file called \textit{output\_concrete\_builder.rb}. This file has to contain a ruby module called \textbf{OtputConcreteBuilder}, with at least the following two methods: 
+\begin{itemize}
+\item \textit{initialize\_concrete\_builder}: This method will receive and instance of the topology provider being used in the ran, the path of the directory where the builders are (MAKE SENSES? WHY DID I DO THIS?) and the path of the output directory, that is where the desired output should be stored.
+\item \textit{build\_output\_content}: This method will be called in the process of generation, and it's expected to generate the output in the specified folder.
+\end{itemize}
+
+So let's start then by creating a folder called \textit{ruby\_builders}, and creating in there our first file called \textit{output\_concrete\_builder.rb} . We already know some of the code that our file should have!, so let's start coding what we know up to know:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+	end
+    
+    def build_output_content
+    end
+end
+\end{lstlisting}
+
+Great!, we have our base code. We know that our builder will generate a ruby model, and as how it was explained in the \textbf{Network topology model} section, this implies that we will be generating a module called \textit{NetworkTopology}, which will have to methods: \textit{get\_topology} and \textit{get\_path\_between(source,destination)}. This model that we are going to generate is going to be written in a file that we will call \textit{ruby\_network\_topology.rb}, and that we know that will be saved in the output directory. Using this knowledge let's start adding some generation code of what we know:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+	end
+    
+    def build_output_content
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    end
+end
+\end{lstlisting}
+
+We have just defined a variable called \textit{ruby\_network\_topology}, which will contain the content of our ruby model. Since know, we just defined the definition of the module, and the functions that we know that are going to be present. \\
+An useful function for builders that the tool provides us is the \textit{write\_file} function. This function expect two arguments, first a string which would be the path where the file is going to be created in case it doesn't exist (it won't delete the file in case it already exsist), and second the content of the file to be created. In case the file already existed, the content will be overwritten.\\
+Knowing that we can use this function, we can add the following lines to our \textit{output\_concrete\_builder.rb} file:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module OutputConcreteBuilder
+	def initialize_concrete_builder(topology_provider, directory_concrete_builders, output_directory)
+		@output_directory = output_directory
+	end
+    
+    def build_output_content
+    	ruby_network_topology = "module NetworkTopology \n"
+    	ruby_network_topology += "    def get_topology \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "    \n "
+    	ruby_network_topology += "    def get_path_between(source,destination) \n "
+    	ruby_network_topology += "    end \n "
+    	ruby_network_topology += "end \n "
+    	
+    	write_file "#{@output_directory}/#{OUTPUT_RUBY_FILE_NAME}",
+                    ruby_network_topology
+    end
+end
+\end{lstlisting}
+
+As you can see, the \textit{write\_file} function is at the end of the \textit{build\_output\_content} since we know that this is our builder purpouse. Another thing to remark is the definition of the instance variable \textit{@output\_directory}, since we need to use it in the \textit{build\_output\_content} function. \\
+
+Let's start now but defining what would be the content of the topology.
 
 \subsection{Network topology model}
 

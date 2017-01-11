@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  11 JAN 2017 16:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  11 JAN 2017 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -813,17 +813,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
 LaTeX Info: Redefining \. on input line 247.
 LaTeX Info: Redefining \% on input line 247.
-[12])
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
+
+ []
+
+LaTeX Info: Redefining \. on input line 288.
+LaTeX Info: Redefining \% on input line 288.
+[13]
+Overfull \hbox (50.12196pt too wide) in paragraph at lines 297--300
+\OT1/cmr/m/n/10.95 Knowing that we can use this fun-ction, we can add the fo-ll
+o-wing li-nes to our \OT1/cmr/m/it/10.95 out-put[]concrete[]builder.rb
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
+
+ []
+
+)
 LaTeX Info: Redefining \. on input line 77.
 LaTeX Info: Redefining \% on input line 77.
- [13]
-LaTeX Info: Redefining \. on input line 77.
-LaTeX Info: Redefining \% on input line 77.
- [14
+ [14]
+Cap\'{\i }tulo 4.
+(./haikunet.tex) [15
 
 ]
-Cap\'{\i }tulo 4.
-(./haikunet.tex) [15]
 LaTeX Info: Redefining \. on input line 80.
 LaTeX Info: Redefining \% on input line 80.
  [16
@@ -840,13 +855,13 @@ LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
- 6091 strings out of 493029
- 80042 string characters out of 6136234
- 246545 words of memory out of 5000000
- 9515 multiletter control sequences out of 15000+600000
+ 6099 strings out of 493029
+ 80242 string characters out of 6136234
+ 266545 words of memory out of 5000000
+ 9523 multiletter control sequences out of 15000+600000
  10364 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,47p,1858b,1834s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,47p,1858b,1868s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/te
@@ -857,7 +872,7 @@ ts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb>
-Output written on tesis.pdf (30 pages, 337438 bytes).
+Output written on tesis.pdf (30 pages, 343933 bytes).
 PDF statistics:
  156 PDF objects out of 1000 (max. 8388607)
  101 compressed objects within 2 object streams
