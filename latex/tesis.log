@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  11 JAN 2017 19:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  12 JAN 2017 13:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -870,40 +870,74 @@ Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
 LaTeX Info: Redefining \. on input line 508.
 LaTeX Info: Redefining \% on input line 508.
-[18])
-LaTeX Info: Redefining \. on input line 77.
-LaTeX Info: Redefining \% on input line 77.
+[18]
+<images/topologygenerator/newtork_example.png, id=123, 335.2525pt x 463.7325pt>
+File: images/topologygenerator/newtork_example.png Graphic file (type png)
+<use images/topologygenerator/newtork_example.png>
+Package pdftex.def Info: images/topologygenerator/newtork_example.png used on i
+nput line 525.
+(pdftex.def)             Requested size: 301.1261pt x 416.5275pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 528.
+LaTeX Info: Redefining \% on input line 528.
  [19]
+Underfull \hbox (badness 10000) in paragraph at lines 529--530
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 543--545
+
+ []
+
+LaTeX Info: Redefining \. on input line 545.
+LaTeX Info: Redefining \% on input line 545.
+[20 <./images/topologygenerator/newtork_example.png>]
+LaTeX Info: Redefining \. on input line 585.
+LaTeX Info: Redefining \% on input line 585.
+ [21]
+LaTeX Info: Redefining \. on input line 638.
+LaTeX Info: Redefining \% on input line 638.
+ [22]
+Underfull \hbox (badness 10000) in paragraph at lines 684--685
+
+ []
+
+LaTeX Info: Redefining \. on input line 686.
+LaTeX Info: Redefining \% on input line 686.
+[23])
 LaTeX Info: Redefining \. on input line 77.
 LaTeX Info: Redefining \% on input line 77.
- [20
+ [24]
+Cap\'{\i }tulo 4.
+(./haikunet.tex) [25
 
 ]
-Cap\'{\i }tulo 4.
-(./haikunet.tex) [21]
 LaTeX Info: Redefining \. on input line 80.
 LaTeX Info: Redefining \% on input line 80.
- [22
+ [26
 
 ]
 Cap\'{\i }tulo 5.
-(./conclusions.tex) [23]
+(./conclusions.tex) [27]
 LaTeX Info: Redefining \. on input line 84.
 LaTeX Info: Redefining \% on input line 84.
- [24
+ [28
 
 ] (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
- 6114 strings out of 493029
- 80513 string characters out of 6136234
+ 6147 strings out of 493029
+ 81078 string characters out of 6136234
  337545 words of memory out of 5000000
- 9538 multiletter control sequences out of 15000+600000
+ 9570 multiletter control sequences out of 15000+600000
  10364 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,47p,1858b,1870s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,47p,1858b,1872s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/te
@@ -915,10 +949,10 @@ ts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1
 amsfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmtt10.pfb>
-Output written on tesis.pdf (36 pages, 366777 bytes).
+Output written on tesis.pdf (40 pages, 388041 bytes).
 PDF statistics:
- 179 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
+ 196 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

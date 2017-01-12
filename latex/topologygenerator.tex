@@ -508,12 +508,185 @@ That's it!, you can now use your builder by specifying the path to the folder wh
 \item Is your topology dynamic?, if it is you perhaps need to implement a search path algorithm like Dijkstra.
 \end{itemize}
 
-Hope you have understood everything and you are interested in making your own builders!. If that is so, please don't hesitate to contact me to add them in the repository.
+Hope you have understood everything and you are interested in making your own builders!. If that is the case, please don't hesitate to contact me to add them in the repository.
 
-\subsection{Network topology model}
+\subsection{Network Topology Model}
+
+The Network Topology Model (NTM from now on), it's a way to model networks in the ruby language. It was invented to fulfill the need of describing all the elements in a network, meaning that we wanted to model not just the physical elements (as for example Hosts, Routers, Links, etc.), but also the abstract elements (flows and paths for example). The way of describing a network in this model is really straightforward, and is totally dependent on the topologygenerator tool (as we will see in the following section). \\
+You should use this model everytime that you want to describe, test some properties (as you will find out in the following chapter), or just discover a network. \\
+Now that you know what the NTM is and why it was program, go ahead to the implementing section and get your hands into the code!.
 
 \subsubsection{Implementing your network topology model}
 
+We will cover in this tutorial how we can manage to program in our NTM the following network 
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=300px]{images/topologygenerator/newtork_example.png}
+\caption{Network to model}
+\end{figure}
+
+But first, let's understand the context in which we are going to use the model. \\
+
+When you use the topologygenerator, between the provider's option there is one of the options that is \textit{CUSTOM}. This options is thought for recieving as uri's argument a path to a file where the NTM model will be program, meaning that the model which will be program in this tutorial will be used as resource of the topologygenerator. The NTM is a ruby module with \textit{NetworkTopology} as name, and two functions in it: \textit{get\_topology} and \textit{get\_path\_between(source, destination)}. The basic expected structure of this module is as follows:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module NetworkTopology
+	def get_topology
+	end
+    
+    def get_path_between(source, destination)
+    end
+end
+\end{lstlisting}
+
+Let's describe more into detailed both functions. The \textit{get\_topology} function will be the one, as it names remark, which will provide the network topology representation with all the elements described in the previous section (Host, Routers, Links, Paths, and Flows). This elements will have to be added to the instance variable \textit{@topology} which is already available in the module (to understand better why this happens, we encouraged the reader to study the \textit{CustomTopologyProvider} class from the \textbf{Appendix}).\\
+The \textit{get\_path\_between(source,destination)} function will receive two instances from either Router or Host classes, and is expected to return an instance of Path with the corresponding path between both nodes (in case more than one exist, is the user responsability to select one). Since our network is harcoded, meaning that we already know the topological structure of it, this function will be trivial. \\
+
+Let's describe then our desired topology. We have three hosts and one router, and every host will be connected to the router, and no host will be connected between each other. Let's first start by adding the routers and host to the topology.
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module NetworkTopology
+	def get_topology
+		routers = []
+        hosts = []
+
+        router = @topology.add_router "MyRouter1"
+        routers.push router
+
+        for i in 0..2  
+          host = @topology.add_host "Host#{i}"
+          hosts.push host     
+        end
+	end
+    
+    def get_path_between(source, destination)
+    end
+end
+\end{lstlisting}
+
+Easy right?, we just need to add our elements with the desired properties to the topology and that's it!. We encouraged the reader to stop now this tutorial, and go and check the Topology api to see what properties can be set to each of the elements in the network. As you will se from the api, we are just setting the basics properties.\\
+As you may have noticed, we have created two arrays, one per each element. This arrays will help us now in the creation of links, since we now have to create a link which has to receieve at least as argument it's source node, the port in which the link is connected in the source, it's destination node, and the port in which the link is connected in the destination node. By default adding a links is half duplex, meaning that if you want to have double communication you have either to add two links or use the \textit{add\_full\_duplex\_link} method from \textit{@topology}. In this example we will assume that we want the double connection, and we will use the first way of adding two links just to show how you should do this. The code will look as follow:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module NetworkTopology
+	def get_topology
+		routers = []
+        hosts = []
+
+        router = @topology.add_router "MyRouter1"
+        routers.push router
+
+        for i in 0..2  
+          host = @topology.add_host "Host#{i}"
+          hosts.push host     
+        end
+        
+        #Links (starting from the flows that goes from top to bottom)    
+        link1 = @topology.add_link "Link1", hosts[0], 0, routers[0], 0
+        link2 = @topology.add_link "Link2", hosts[1], 0, routers[0], 1
+
+        link3 = @topology.add_link "Link3", routers[0], 0, hosts[2], 0
+
+        #Links (flows that goes from bottom to top)    
+        link4 = @topology.add_link "Link4", hosts[2], 0, routers[0], 2
+
+        link5 = @topology.add_link "Link5", routers[0], 1, hosts[0], 0
+        link6 = @topology.add_link "Link6", routers[0], 2, hosts[1], 0
+        
+	end
+    
+    def get_path_between(source, destination)
+    end
+end
+\end{lstlisting}
+
+Here you can see how the host and router's arrays defined before take an important role for the link's definition. Looks a bit tricky at first, but if you stop a minute and see what we are doing here, is just to identify each host name per it's index, and then connect it to the router as we were supposed to by the model's image above. \\
+This function must always return the elements of the topology, this is how you do it:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module NetworkTopology
+	def get_topology
+		routers = []
+        hosts = []
+
+        router = @topology.add_router "MyRouter1"
+        routers.push router
+
+        for i in 0..2  
+          host = @topology.add_host "Host#{i}"
+          hosts.push host     
+        end
+        
+        #Links (starting from the flows that goes from top to bottom)    
+        link1 = @topology.add_link "Link1", hosts[0], 0, routers[0], 0
+        link2 = @topology.add_link "Link2", hosts[1], 0, routers[0], 1
+
+        link3 = @topology.add_link "Link3", routers[0], 0, hosts[2], 0
+
+        #Links (flows that goes from bottom to top)    
+        link4 = @topology.add_link "Link4", hosts[2], 0, routers[0], 2
+
+        link5 = @topology.add_link "Link5", routers[0], 1, hosts[0], 0
+        link6 = @topology.add_link "Link6", routers[0], 2, hosts[1], 0
+        
+        @topology.topology_elements
+	end
+    
+    def get_path_between(source, destination)
+    end
+end
+\end{lstlisting}
+
+And that's it for the \textit{get\_topology} function. We can now finish this tutorial by implementing our \textit{get\_path\_between(source, destination)} function. Like we said before, this would be really straightforward, since everyone is connected to everyone in either one or two steps!. This is an example of implementation of the get\_path function (and it's not the only possible!).
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+module NetworkTopology
+	def get_topology
+		routers = []
+        hosts = []
+
+        router = @topology.add_router "MyRouter1"
+        routers.push router
+
+        for i in 0..2  
+          host = @topology.add_host "Host#{i}"
+          hosts.push host     
+        end
+        
+        #Links (starting from the flows that goes from top to bottom)    
+        link1 = @topology.add_link "Link1", hosts[0], 0, routers[0], 0
+        link2 = @topology.add_link "Link2", hosts[1], 0, routers[0], 1
+
+        link3 = @topology.add_link "Link3", routers[0], 0, hosts[2], 0
+
+        #Links (flows that goes from bottom to top)    
+        link4 = @topology.add_link "Link4", hosts[2], 0, routers[0], 2
+
+        link5 = @topology.add_link "Link5", routers[0], 1, hosts[0], 0
+        link6 = @topology.add_link "Link6", routers[0], 2, hosts[1], 0
+        
+        @topology.topology_elements
+	end
+    
+    def get_path_between(source, destination)
+    	first_link = @topology.topology_elements.select { |elem| (elem.is_a? Link) && (elem.src_element == source) }.first
+        second_link = @topology.topology_elements.select { |elem| (elem.is_a? Link) && (elem.dst_element == destination) }.first
+
+        path = Path.new(source,destination)        
+        path.add_link first_link
+        path.add_link second_link unless first_link.dst_element == destination
+        path
+    end
+end
+\end{lstlisting}
+
+In this implementation we are just looking for the links that match the source and destiny nodes, add the first link always, and check if the second link should be added (remember that we can be asked by a host and router's path, which in this case means that only one link should be added). \\
+
+Congratulations!, you have implemented your first ruby NTM!, you can now go ahead and check it out, and start playing around with the example programed. In the next subsection we will cover how to add Paths with Flows in the network implemented.
+
+\subsubsection{Adding Paths with Flows}
+
+We will cover now how to add paths and flows in the following context: Suppose that we are thinking on setting up the enviorment previous model, this means buying all the equipment for the hosts, think in which would be the best links for the network, which type of router should we buy?, 
 
 \section{Limitations}
