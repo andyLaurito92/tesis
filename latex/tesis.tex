@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{titlesec}
+\usepackage{hyperref}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{listings}
@@ -77,11 +78,23 @@ stringstyle=\color{orange}}
 \chapter{Haikunet}
 \input{haikunet.tex}
 
-\chapter{Conclusions}
+\chapter{Conclusions and Future Work}
 \input{conclusions.tex}
 
 %%%% BIBLIOGRAFIA
 \backmatter
-%\bibliography{tesis}
+\bibliography{tesis}
+\begin{thebibliography}{9}
+\bibitem{topologyzoo} 
+http://www.topology-zoo.org, \textit{The Internet Topology Zoo}, University of ADELAIDE 
+
+\bibitem{topologyzoo} 
+https://omnetpp.org/, \textit{OMNeT++}
+
+\bibitem{infiniband} 
+http://www.mellanox.com/pdf/whitepapers/IB\_Intro\_WP\_190.pdf, \textit{Introduction to InfiniBand}, Mellanox Technologies, White Paper
+
+
+\end{thebibliography}
 
 \end{document}
