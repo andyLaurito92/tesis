@@ -19,11 +19,12 @@
 \BOOKMARK [1][-]{section.3.3}{Future work}{chapter.3}% 19
 \BOOKMARK [0][-]{chapter.4}{Haikunet}{}% 20
 \BOOKMARK [1][-]{section.4.1}{Conceptual Idea}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.2}{Tutorial}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.3}{Formal Definition}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.4}{Implementation}{chapter.4}% 24
-\BOOKMARK [2][-]{subsection.4.4.1}{Lexer/Parser}{section.4.4}% 25
-\BOOKMARK [2][-]{subsection.4.4.2}{Semantic Checker}{section.4.4}% 26
-\BOOKMARK [2][-]{subsection.4.4.3}{Code Generation}{section.4.4}% 27
-\BOOKMARK [1][-]{section.4.5}{Limitations}{chapter.4}% 28
-\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 29
+\BOOKMARK [1][-]{section.4.2}{Why Haikunet?}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{Tutorial}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.4}{Formal Definition}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.5}{Implementation}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 26
+\BOOKMARK [2][-]{subsection.4.5.2}{Semantic Checker}{section.4.5}% 27
+\BOOKMARK [2][-]{subsection.4.5.3}{Code Generation}{section.4.5}% 28
+\BOOKMARK [1][-]{section.4.6}{Limitations}{chapter.4}% 29
+\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 30
