@@ -102,7 +102,7 @@ Select this option in case you are not interested in adding the topologygenerato
 
 Per each option please refer to the corresponding subsection listed below.
 
-\subsubsection{Installation as a gem}
+\subsubsection{As a gem}
 
 Add this line to your application's Gemfile:
 
@@ -122,7 +122,7 @@ Or install it yourself as:
 $ gem install topologygenerator
 \end{lstlisting}
 
-\subsubsection{Installation as a binary}
+\subsubsection{As a binary}
 
 \textbf{Pre-requisite}: Have installed and configured a git client. \\
 
@@ -141,7 +141,7 @@ First we will guide you in how to use the tool using the builders and providers 
 
 NO ESTOY SEGURO SI SE PUEDEN USAR LOS BUILDERS Y PROVIDERS POR DEFECTO EN LA INSTALACIÓN DE LA GEMA, PORQUE NO SE SI RUBY TE DEJA ACCEDER A TODO EL PROYECTO DE LA GEMA, O SOLO AL BINARIO. TENGO QUE PROBAR ESTO, PERO EN CASO DE QUE NO SE PUEDA, ENTONCES EN LA INSTALACIÓN DE LA GEMA NO TENGO LOS BUILDERS Y PROVIDERS DE EJEMPLO, POR LO QUE TENGO QUE PENSAR EN COMO HACERLO ACCESIBLE PARA ESTOS MUCHACHOS.
 
-\subsubsection{Use as a gem}
+\subsubsection{As a gem}
 
 We will use the topologygenerator as a gem, meaning that will be part of your ruby code. \\
 Using the tool is really straightforward, first we require the gem in the script as follows:
@@ -226,7 +226,7 @@ my_custom_topology = topology_generator.generate
 
 As you may have already noticed, using the topologygenerator tool is really straightforward and flexible. We encourage you to keep on trying the tool with another builders and providers!. When you think that you are ready, you can jump on to code your first provider in the \textbf{Implementing your provider} section!.
 
-\subsubsection{Use as a binary}
+\subsubsection{As a binary}
 
 These are the commands that you need to know for using the topologygenerator as a binary:
 
@@ -784,8 +784,6 @@ flow_1_path = Path.new hosts[0], hosts[2]
 
 The first one correspond to the flow's source, and the next one corresponds to the flow's destination. We then add a valid path between both nodes, and we finally use the \textit{add\_flow} method from the Topology class to define a new flow between these nodes. If you want a better explanaition of each of the arguments received by the function, we encouraged you to read the \textbf{Topology} API.
 
-\section{Limitations}
-
 \section{Future work}
 
 There are a lot of things that still need to be done in this tool:
@@ -799,6 +797,4 @@ Providers and builders are very similar in code as you have already seen. Both s
 The number of providers and builders that are now implemented is really small. Providers that would be interest to have would be: a provider for the \textit{Topology Zoo} topologies \cite{topologyzoo}, another for InfiniBand \cite{infiniband}, Can this last provider be done?, What changes would it imply?. In the other hand, it would be interest to have builders for the controller's, for OMNeT++ \cite{omnet} in order to extend the reacheability of the tool
 \item Allow the posibility to extend network entities\\
 If we can manage to allow the user to extend the network entities, or even use different entities, we would make the tool much more abstract and powerful. What would be needed for doing this?, Can we do something similar as we did with the builders?
-\item Add more abstract entities\\
-\item Extend the Network Topology Model 
 \end{itemize}

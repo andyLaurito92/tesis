@@ -7,18 +7,17 @@
 \contentsline {subsection}{\numberline {3.1.1}Examples of use}{7}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Tutorial}{9}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Installation}{9}{subsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.1.1}Installation as a gem}{9}{subsubsection.3.2.1.1}
-\contentsline {subsubsection}{\numberline {3.2.1.2}Installation as a binary}{9}{subsubsection.3.2.1.2}
+\contentsline {subsubsection}{\numberline {3.2.1.1}As a gem}{9}{subsubsection.3.2.1.1}
+\contentsline {subsubsection}{\numberline {3.2.1.2}As a binary}{9}{subsubsection.3.2.1.2}
 \contentsline {subsection}{\numberline {3.2.2}Using the tool}{10}{subsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.2.1}Use as a gem}{10}{subsubsection.3.2.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2.2}Use as a binary}{12}{subsubsection.3.2.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.1}As a gem}{10}{subsubsection.3.2.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2.2}As a binary}{12}{subsubsection.3.2.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Implementing your provider}{13}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Implementing your builder}{13}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Network Topology Model}{19}{subsection.3.2.5}
 \contentsline {subsubsection}{\numberline {3.2.5.1}Implementing your network topology model}{19}{subsubsection.3.2.5.1}
 \contentsline {subsubsection}{\numberline {3.2.5.2}Adding Paths with Flows}{24}{subsubsection.3.2.5.2}
-\contentsline {section}{\numberline {3.3}Limitations}{25}{section.3.3}
-\contentsline {section}{\numberline {3.4}Future work}{25}{section.3.4}
+\contentsline {section}{\numberline {3.3}Future work}{25}{section.3.3}
 \contentsline {chapter}{\numberline {4.}Haikunet}{27}{chapter.4}
 \contentsline {section}{\numberline {4.1}Conceptual Idea}{27}{section.4.1}
 \contentsline {section}{\numberline {4.2}Tutorial}{27}{section.4.2}
