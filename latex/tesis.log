@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  12 JAN 2017 16:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  12 JAN 2017 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -926,111 +926,120 @@ Underfull \hbox (badness 10000) in paragraph at lines 240--241
 LaTeX Info: Redefining \. on input line 258.
 LaTeX Info: Redefining \% on input line 258.
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 269--270
+Underfull \hbox (badness 10000) in paragraph at lines 264--265
 
  []
 
-LaTeX Info: Redefining \. on input line 299.
-LaTeX Info: Redefining \% on input line 299.
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
+
+ []
+
+LaTeX Info: Redefining \. on input line 295.
+LaTeX Info: Redefining \% on input line 295.
 [13]
-Overfull \hbox (50.12196pt too wide) in paragraph at lines 308--311
+Overfull \hbox (50.12196pt too wide) in paragraph at lines 314--317
 \OT1/cmr/m/n/10.95 Knowing that we can use this fun-ction, we can add the fo-ll
 o-wing li-nes to our \OT1/cmr/m/it/10.95 out-put[]concrete[]builder.rb
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+LaTeX Info: Redefining \. on input line 336.
+LaTeX Info: Redefining \% on input line 336.
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 339--340
 
  []
 
-LaTeX Info: Redefining \. on input line 339.
-LaTeX Info: Redefining \% on input line 339.
-[14]
-LaTeX Info: Redefining \. on input line 385.
-LaTeX Info: Redefining \% on input line 385.
- [15]
-Overfull \hbox (77.18279pt too wide) in paragraph at lines 393--395
+LaTeX Info: Redefining \. on input line 378.
+LaTeX Info: Redefining \% on input line 378.
+[15]
+Overfull \hbox (77.18279pt too wide) in paragraph at lines 399--401
 \OT1/cmr/m/n/10.95 the mo-du-le is in-clu-ded. The-se clas-ses ha-ve im-ple-men
 -ted a met-hod ca-lled \OT1/cmr/m/it/10.95 trans-form[]to[]output[]representati
 on
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 416--417
+Underfull \hbox (badness 10000) in paragraph at lines 422--423
 
  []
 
-LaTeX Info: Redefining \. on input line 429.
-LaTeX Info: Redefining \% on input line 429.
+LaTeX Info: Redefining \. on input line 423.
+LaTeX Info: Redefining \% on input line 423.
 [16]
-Overfull \hbox (32.19649pt too wide) in paragraph at lines 450--451
+Overfull \hbox (32.19649pt too wide) in paragraph at lines 456--457
 \OT1/cmr/m/n/10.95 mem-ber that we ha-ve rou-ters, hosts and links ), we will c
 all the \OT1/cmr/m/it/10.95 trans-form[]to[]output[]representation
  []
 
-LaTeX Info: Redefining \. on input line 476.
-LaTeX Info: Redefining \% on input line 476.
+LaTeX Info: Redefining \. on input line 471.
+LaTeX Info: Redefining \% on input line 471.
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 495--497
+Underfull \hbox (badness 10000) in paragraph at lines 501--503
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 514--515
-
- []
-
-LaTeX Info: Redefining \. on input line 519.
-LaTeX Info: Redefining \% on input line 519.
+LaTeX Info: Redefining \. on input line 514.
+LaTeX Info: Redefining \% on input line 514.
 [18]
-<images/topologygenerator/newtork_example.png, id=549, 335.2525pt x 463.7325pt>
+Underfull \hbox (badness 10000) in paragraph at lines 520--521
+
+ []
+
+
+<images/topologygenerator/newtork_example.png, id=543, 335.2525pt x 463.7325pt>
 File: images/topologygenerator/newtork_example.png Graphic file (type png)
 <use images/topologygenerator/newtork_example.png>
 Package pdftex.def Info: images/topologygenerator/newtork_example.png used on i
-nput line 536.
+nput line 542.
 (pdftex.def)             Requested size: 301.1261pt x 416.5275pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 539.
-LaTeX Info: Redefining \% on input line 539.
+LaTeX Info: Redefining \. on input line 545.
+LaTeX Info: Redefining \% on input line 545.
  [19]
-Underfull \hbox (badness 10000) in paragraph at lines 540--541
+Underfull \hbox (badness 10000) in paragraph at lines 546--547
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 554--556
+Underfull \hbox (badness 10000) in paragraph at lines 560--562
 
  []
 
-LaTeX Info: Redefining \. on input line 556.
-LaTeX Info: Redefining \% on input line 556.
+LaTeX Info: Redefining \. on input line 562.
+LaTeX Info: Redefining \% on input line 562.
 [20 <./images/topologygenerator/newtork_example.png>]
-LaTeX Info: Redefining \. on input line 596.
-LaTeX Info: Redefining \% on input line 596.
+LaTeX Info: Redefining \. on input line 602.
+LaTeX Info: Redefining \% on input line 602.
  [21]
-LaTeX Info: Redefining \. on input line 649.
-LaTeX Info: Redefining \% on input line 649.
+LaTeX Info: Redefining \. on input line 655.
+LaTeX Info: Redefining \% on input line 655.
  [22]
-Underfull \hbox (badness 10000) in paragraph at lines 695--696
+Underfull \hbox (badness 10000) in paragraph at lines 701--702
 
  []
 
-LaTeX Info: Redefining \. on input line 697.
-LaTeX Info: Redefining \% on input line 697.
+LaTeX Info: Redefining \. on input line 703.
+LaTeX Info: Redefining \% on input line 703.
 [23]
-LaTeX Info: Redefining \. on input line 739.
-LaTeX Info: Redefining \% on input line 739.
+LaTeX Info: Redefining \. on input line 745.
+LaTeX Info: Redefining \% on input line 745.
  [24]
-LaTeX Info: Redefining \. on input line 790.
-LaTeX Info: Redefining \% on input line 790.
+LaTeX Info: Redefining \. on input line 796.
+LaTeX Info: Redefining \% on input line 796.
  [25]
 
-LaTeX Warning: Citation `omnet' on page 26 undefined on input line 791.
+LaTeX Warning: Citation `omnet' on page 26 undefined on input line 799.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 794--795
+Underfull \hbox (badness 10000) in paragraph at lines 802--803
 
  []
 
@@ -1092,7 +1101,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 100.
 Here is how much of TeX's memory you used:
  10148 strings out of 493029
  141702 string characters out of 6136234
- 414575 words of memory out of 5000000
+ 405606 words of memory out of 5000000
  13039 multiletter control sequences out of 15000+600000
  10364 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1108,7 +1117,7 @@ public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mtt10.pfb>
-Output written on tesis.pdf (43 pages, 415402 bytes).
+Output written on tesis.pdf (43 pages, 417200 bytes).
 PDF statistics:
  957 PDF objects out of 1000 (max. 8388607)
  879 compressed objects within 9 object streams

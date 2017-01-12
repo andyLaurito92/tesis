@@ -263,8 +263,12 @@ Now that you know how to use the tool, let's proceed to get hands on and program
 
 Provider's are one of the most important elements in the topologygenerator. Knowing how to implement a provider will give you the ability to extend the tool, and also to adapt the topologygenerator to your custom problem, are you ready to get started?. \\
 
+In this tutorial we will show how to implement an OnosTopologyProvider, the only pre-requisite is to have ONOS installed either locally or remotely in order to test the implementation. \\
+
+Every provider must inherit from a common interface called ITopologyProvider, this interface settles the methods that have to be implemented in the inherit classes. The methods mentioned are \textit{get\_topology} and \textit{get\_path\_between(source, destination)}
 
 
+CAMBIAR LA IMPLEMENTACIÓN DEL PROVIDER PARA QUE SEA COMO LA DEL BUILDER!. SE PUEDE UTILIZAR LA YA CLASE IMPLEMENTADA CUSTOM Y CON ESTA HACER LO MISMO QUE HICIMOS CON EL ABSTRACT BUILDER.
 
 \subsection{Implementing your builder}
 
@@ -531,7 +535,7 @@ Now that you know what the NTM is and why it was program, go ahead to the implem
 
 \subsubsection{Implementing your network topology model}
 
-We will cover in this tutorial how we can manage to program in our NTM the following network 
+We will cover in this tutorial how we can manage to program our NTM for the following network 
 
 \begin{figure}[H]
 \centering
