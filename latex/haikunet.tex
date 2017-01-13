@@ -1,16 +1,71 @@
 \section{Conceptual Idea}
 
+Haikunet is a SDN programming langauge which was created with the main objective of fulfilling the need of debugging the network, and making an intent's oriented programming language agnostic to the controller, meaning that it's not coupled to a particular controller at all. Right now OpenDayLight and ONOS are the Controller's supported, but as you will see in following sections, enlarge this number is not hard at all and we will explain how can you manage to do this.\\
+Writing programs in Haikunet is really easy and straightforward, and this language will give you the advantage of having just one intent written in a common way for several controllers, something that up to now you weren't able to do as far as the writers of this thesis know.\\
+The language is interpretated, written in Ruby and can be ran in any machine with a Ruby major or equal version of 2.0.0. This is how a program written in Haikunet looks like:
 
+\begin{lstlisting}[language=Ruby,breaklines=true]
+one_host := Host(mac="9A:4A:43:D4:36:45", vlan="-1", ipAddresses=["10.0.0.1"], elementId="of:0000000000000002", port="4")
+
+second_host := Host(mac="72:D2:0D:24:C5:36", vlan="-1", ipAddresses=["10.0.0.4"], elementId="of:0000000000000003", port="4")
+
+my_flow := Flow (src=one_host, dst=second_host, priority="55")
+
+Intent firstExample
+	Select my_flow
+\end{lstlisting}
+
+This program describes an intent for creating a flow between two host. We will come back to explain in more detailed this program and all the elements involve in the \textbf{Learning Haikunet} section.\\
+
+For running the Haikunet interpreter, besides a program as showed before, you will need to specify one of the destinations supported and a URI from where to obtain the initial topology. Let's get into more detailed in the last two arguments.\\
+The destination argument is an option which will tell the interpreter to which destiny has to generate the code of the input program, the options current supported are \textit{ONOS}, \textit{OPENDAYLIGHT} and \textit{DEBUG}. The first two are controllers, and selecting one of them will generate a bunch of request to the corresponding API REST. The DEBUG option will generate a simulation in DEVS, taking as initial topology the one specified by argument, and will show you simulations result's once the run is complete. The idea is that with this results, you will be able to identify if the network behaviour is the one you expected. We will come back in more detailed to this simulation results in the \textbf{Learning Haikunet} section.\\
+The other argument is the URI from the Underlaying Network, and as the name remarks, will be either a URI of an API REST of a controller, or a path to a file which will contain a ruby NTM (this was explained in the previous chapter, in the \textbf{Network Topology Model} section). The reason why you have to specify this argument has beyond an important conceptual idea, which will be explained in the \textbf{Formal Definition} section. Besides the conceptual idea, we will explain in more detailed how to specify this argument in the \textbf{Learning Haikunet} section.\\
+
+Now that we have a better understanding of what the interpreter recieves, let's see which are the architectural components of the language, and how they relate one with each other.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/haikunet/arquitectura_haikunet.png}
+\caption{Haikunet architectural view}
+\end{figure}
+
+The components in the left are the expected arguments explanied above (except the topologygenerator tool which is a gem used by the language). We will come back to them in the \textit{Learning Haikunet} section.\\
+Inside the black box are the components which make up the interpreter, and finally at the right are the possible outputs that the language can provide (ONOS and OpenDayLight component's represent a generation of a bunch of request to one of these controllers, DEVS is the generation of the .pdm file, and finally ERROR represents that something went wrong while interpretating the program).\\
+
+As it can be seen in the image, Haikunet uses the topologygenerator tool which was explained in the previous chapter. The topologygenerator gives an important characteristic to the language, which is that it allows us to create a NTM model and use it as our intial network, meaning that it's not mandatory to have a real network for using Haikunet. Another important thing is one of the destinies which Haikunet support's, DEVS. Supporting this destiny gives the language an important characteristic, which is permiting to simulate from either a real network or a NTM model how would an intent react in the initial newtork.
 
 \section{Why Haikunet?}
 
-The name Haikunet comes from the join of Haiku and Network. A Haiku is a Japanese poem with a lot of themes, but in most of the cases a Haiku describes the nature from the view of an observer. This is exactly what you are going to do with Haikunet, write short programs (almost poems), which will describe the desired nature of a network, and this description will be done from the point of view of an observer of the network, meaning a person which does not necessarily knows how to interact at a system level with it, and in most of the cases, doesn't know how to. This is the intent's programmer point of view of the network. 
-
-\section{Tutorial}
+The name Haikunet comes from the join of Haiku and Network. A Haiku is a Japanese poem with a lot of themes, but in most of the cases a Haiku describes the nature from the view of an observer. This is exactly what you are going to do with Haikunet, write short programs which will describe the desired nature of a network, and this description will be done from the point of view of an observer of the network, meaning a person which does not necessarily knows how to interact at a system level with it, and in most of the cases, doesn't know how to. This is the intent's programmer point of view of the network. 
 
 \section{Formal Definition}
 
-\section{Implementation}
+URI Underlaying Network
+
+The concept of initial network comes from the following view: When you apply an intent to a network, you can see the network as a mutable element which is being transformed by the application of an intent. This abstraction allow us to identify different network states that can be pointed out in the intents process: The first one, the initial one, is where the user wants to apply the intent. Then there is a last one, which is the one in which the intent has already been applied, in case it was possible to do so, and is the newtork result of applying the intent. Since the intent can transform several times the network, we can identify all the intermediate states in which the network hd to be in order to reach the last state. 
+
+What is Debugging?
+
+What is Static Error?
+
+What is Dynamic Error?
+
+\section{Tutorial}
+
+\subsubsection{Installation}
+
+\subsubsection{Learning Haikunet}
+
+\textit{Haikunet program} component is the path to the file were the program is, and the expected extension of these type of files are ".hk". \textit{Output Destiny} is one of the destinies names supported by the language (the options are \"ONOS\", \"OPENDAYLIGHT\" and \"DEBUG\"), and finally the \textit{URI Underlaying Network} is the URI were we can find the initial newtork topology, for example if your initial network comes from a controller, you will have to provide your's controller API REST. If your initial network is a ruby NTM, you will have to provide the file where the NTM is written.\\
+
+
+Haikunet flow's work as follow: We first run the interpreter giving as argument a progam and an output destiny, this output destiny specifies to which controller the program is being interpretated, right now the options are either OpenDayLight or ONOS. The interpreter lexer's then receive the program, which will be in charge of tokenize it and give it to the parser, which will detect if the tokens are gramatically well written. After this, the semantic checker will detect either statical or dynamical errors in the program (we will explain in more detailed this erros definition's in the \textbf{Formal Definition} section), using the underlaying network which was given by the topologygenerator tool. After this two things can happen: either the program had no errors, meaning that the code generator will execute the bunch of request that have to be done to the API of the controllers specified in the input of the interpreter, or it had, this will cause an error raise exception with a message which will explain the problem. \\
+
+This short paragraph resumes the working flow of a program being interprated by Haikunet. In the \textbf{Language Implementation} section we will cover in detailed what happens in each of the components previously mentioned.\\
+
+\subsubsection{Implementing your first program}
+
+\section{Language Implementation}
 
 \subsection{Lexer/Parser}
 
@@ -18,4 +73,8 @@ The name Haikunet comes from the join of Haiku and Network. A Haiku is a Japanes
 
 \subsection{Code Generation}
 
+\section{Implementing your CodeGenerator}
+
 \section{Limitations}
+
+\section{Future work}

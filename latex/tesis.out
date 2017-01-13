@@ -20,11 +20,16 @@
 \BOOKMARK [0][-]{chapter.4}{Haikunet}{}% 20
 \BOOKMARK [1][-]{section.4.1}{Conceptual Idea}{chapter.4}% 21
 \BOOKMARK [1][-]{section.4.2}{Why Haikunet?}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.3}{Tutorial}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.4}{Formal Definition}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.5}{Implementation}{chapter.4}% 25
-\BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 26
-\BOOKMARK [2][-]{subsection.4.5.2}{Semantic Checker}{section.4.5}% 27
-\BOOKMARK [2][-]{subsection.4.5.3}{Code Generation}{section.4.5}% 28
-\BOOKMARK [1][-]{section.4.6}{Limitations}{chapter.4}% 29
-\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 30
+\BOOKMARK [1][-]{section.4.3}{Formal Definition}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.4}{Tutorial}{chapter.4}% 24
+\BOOKMARK [2][-]{subsubsection.4.4.0.1}{Installation}{section.4.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.4.0.2}{Learning Haikunet}{subsubsection.4.4.0.1}% 26
+\BOOKMARK [3][-]{subsubsection.4.4.0.3}{Implementing your first program}{subsubsection.4.4.0.1}% 27
+\BOOKMARK [1][-]{section.4.5}{Language Implementation}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 29
+\BOOKMARK [2][-]{subsection.4.5.2}{Semantic Checker}{section.4.5}% 30
+\BOOKMARK [2][-]{subsection.4.5.3}{Code Generation}{section.4.5}% 31
+\BOOKMARK [1][-]{section.4.6}{Implementing your CodeGenerator}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.7}{Limitations}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.8}{Future work}{chapter.4}% 34
+\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 35
