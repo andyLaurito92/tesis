@@ -20,11 +20,11 @@
 \contentsline {section}{\numberline {3.3}Future work}{25}{section.3.3}
 \contentsline {chapter}{\numberline {4.}Haikunet}{27}{chapter.4}
 \contentsline {section}{\numberline {4.1}Conceptual Idea}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}Why Haikunet?}{29}{section.4.2}
+\contentsline {section}{\numberline {4.2}Why Haikunet?}{28}{section.4.2}
 \contentsline {section}{\numberline {4.3}Formal Definition}{29}{section.4.3}
-\contentsline {section}{\numberline {4.4}Tutorial}{30}{section.4.4}
-\contentsline {subsubsection}{\numberline {4.4.0.1}Installation}{30}{subsubsection.4.4.0.1}
-\contentsline {subsubsection}{\numberline {4.4.0.2}Learning Haikunet}{30}{subsubsection.4.4.0.2}
+\contentsline {section}{\numberline {4.4}Tutorial}{29}{section.4.4}
+\contentsline {subsubsection}{\numberline {4.4.0.1}Installation}{29}{subsubsection.4.4.0.1}
+\contentsline {subsubsection}{\numberline {4.4.0.2}Learning Haikunet}{29}{subsubsection.4.4.0.2}
 \contentsline {subsubsection}{\numberline {4.4.0.3}Implementing your first program}{30}{subsubsection.4.4.0.3}
 \contentsline {section}{\numberline {4.5}Language Implementation}{30}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}Lexer/Parser}{30}{subsection.4.5.1}

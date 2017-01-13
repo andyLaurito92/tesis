@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  13 JAN 2017 15:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  13 JAN 2017 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1048,58 +1048,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--23
-
- []
-
-[27
-
-]
-<images/haikunet/arquitectura_haikunet.png, id=826, 850.17625pt x 451.6875pt>
+<images/haikunet/arquitectura_haikunet.png, id=813, 850.17625pt x 451.6875pt>
 File: images/haikunet/arquitectura_haikunet.png Graphic file (type png)
 
 <use images/haikunet/arquitectura_haikunet.png>
 Package pdftex.def Info: images/haikunet/arquitectura_haikunet.png used on inpu
-t line 28.
+t line 35.
 (pdftex.def)             Requested size: 426.79135pt x 226.75296pt.
+ [27
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--34
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
+]
+Underfull \hbox (badness 10000) in paragraph at lines 39--41
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
+Underfull \vbox (badness 4429) has occurred while \output is active []
 
- []
-
-LaTeX Info: Redefining \. on input line 40.
-LaTeX Info: Redefining \% on input line 40.
-[28 <./images/haikunet/arquitectura_haikunet.png>]
+LaTeX Info: Redefining \. on input line 54.
+LaTeX Info: Redefining \% on input line 54.
+ [28 <./images/haikunet/arquitectura_haikunet.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 61.
+(hyperref)                than one, level fixed on input line 64.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--71
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
+LaTeX Info: Redefining \. on input line 76.
+LaTeX Info: Redefining \% on input line 76.
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+
+ []
 
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Info: Redefining \. on input line 81.
 LaTeX Info: Redefining \% on input line 81.
- [29]
-LaTeX Info: Redefining \. on input line 81.
-LaTeX Info: Redefining \% on input line 81.
-
-[30]
+ [30]
 Cap\'{\i }tulo 5.
 (./conclusions.tex) [31
 
@@ -1145,10 +1148,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 100.
  ) 
 Here is how much of TeX's memory you used:
- 10197 strings out of 493029
- 142509 string characters out of 6136234
+ 10195 strings out of 493029
+ 142479 string characters out of 6136234
  405522 words of memory out of 5000000
- 13069 multiletter control sequences out of 15000+600000
+ 13067 multiletter control sequences out of 15000+600000
  10364 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  32i,10n,47p,1858b,1884s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1163,7 +1166,7 @@ public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mtt10.pfb>
-Output written on tesis.pdf (45 pages, 458644 bytes).
+Output written on tesis.pdf (45 pages, 461165 bytes).
 PDF statistics:
  1006 PDF objects out of 1200 (max. 8388607)
  923 compressed objects within 10 object streams
