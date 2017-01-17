@@ -336,7 +336,182 @@ Once the lexeme is tokenize, the parser component will be in charge of detect if
 
 \subsubsection{Parser}
 
+The parser implemented for the grammatic previously described is an LL(1). Since the grammar showed before is not LL(1) friendly (since the nonterminals \textit{Params}, \textit{Elems\_of\_array} and the \textit{Initial\_simbol} make the parsing with one look ahead impossible in this context), we had to rewrite it as follows:
 
+\begin{lstlisting}[breaklines=true]
+Start -> Identifier := Network_Elem_Def     | Intent Identifier Select Identifier Intent_Prod_With_Action
+
+Intent_Prod_With_Action ->	Action Identifier Intent_Prod_With_Condition | Lambda
+
+Intent_Prod_With_Condition ->	Condition Identifier | Lambda
+
+Identifier	->	[.:A-Za-z0-9_-]+
+
+Sring	->	[.:A-Za-z0-9_-]+
+
+Network_Elem_Def	->	Host(Params)| Link(Params)| Device(Params) | Action(Params) | Flow(Params) | Condition(Params)
+
+Params	->	Identifier= Second_part_Equal | Lambda
+
+Second_part_Equal	->	"String" Add_more_parameters | Identifier Add_more_parameters |  [ Elems_Of_Array ]  Add_more_parameters 
+
+Add_more_parameters	->	,Params | Lambda
+
+Elems_Of_Array	->	Identifier Add_more_elems_to_array | "String" Add_more_elems_to_array 
+
+Add_more_elems_to_array	->	, Elems_Of_Array | Lambda
+
+\end{lstlisting}
+
+It can be easily checked that this grammar generates the same language that the one detailed before. The only new element which is present in this grammar is the \textit{Lambda} nonterminal, which represents the empty string.\\
+Besides detecting programs which are not well formed, in the parser we implement the logic of constructing the abstract syntax tree, which will be used for the code generator for creating the desired output. For doing this, we extended the previous grammar to a sytax-directed translated grammar as show next:
+
+\begin{lstlisting}[breaklines=true]
+Start	->	Identifier := Network_Elem_Def  
+	{
+		identifiers.push(Identifier.new Identifier)
+		identifiers[Identifier].val = Network_Elem_Def
+	}  
+|
+Intent Identifier1 Select Identifier2 Intent_Prod_With_Action 
+	{     
+		action_and_condition = Intent_Prod_With_Action
+		intents.push (Intent.new identifier1);
+		intents[identifier1].select = identifier2
+		intents[identifier1].action = action_and_condition['action']
+		intents[identifier1].condition = action_and_condition['condition']
+	}
+	
+Intent_Prod_With_Action	->	Action Identifier Intent_Prod_With_Condition 
+		{ 
+			identifier_condition = Intent_Prod_With_Condition
+			return {'action':Identifier, 'condition':identifier_condition}
+		}
+| 
+     Lambda
+        {
+            identifier_condition = Intent_Prod_With_Condition
+            return {'action':NONE, 'condition':identifier_condition}
+		}
+
+Intent_Prod_With_Condition	->	Condition Identifier 
+    {
+        return Identifier
+	}
+| 
+Lambda
+    {
+        return NONE
+	}
+
+Identifier	->	[.:A-Za-z0-9_-]+
+
+Sring	->	[.:A-Za-z0-9_-]+
+
+Network_Elem_Def	->	Host(Params)
+    {
+		actual_params = [ ] 
+		return Host.new Params 
+	}
+| 
+Link(Params)
+    { 
+    	actual_params = [ ] 
+		return Link.new Params 
+	}
+| 
+Device(Params) 
+	{ 
+		actual_params = [ ] 
+		return Device.new Params 
+	}
+| 
+Action(Params) 
+    { 
+    	actual_params = [ ] 
+		return Action.new Params 
+	}
+|
+Flow(Params)
+    { 
+	    actual_params = [ ] 
+		return Flow.new Params 
+	}
+| 
+Condition(Params)
+    { 
+	    actual_params = [ ] 
+		return Condition.new Params 
+	}
+
+Params	->	Identifier= Second_part_Equal 
+    { 
+		actual_identifier = Identifier.new Identifier
+		Second_part_Equal
+	}
+| 
+Lambda
+    {
+        return actual_params
+    }
+
+Second_part_Equal	->	"String" Add_more_parameters 
+    { 
+        actual_identifier.val = "String"
+		actual_params.push actual_identifier
+		Add_more_parameters
+	}
+| 
+Identifier Add_more_parameters 
+    {
+        actual_identifier.val = Identifier
+		actual_params.push identifiers[actual_identifier]
+		Add_more_parameters
+	}
+|  
+[ Elems_Of_Array ]  Add_more_parameters 
+{
+    elems_of_array = []
+    actual_identifier.val = Elems_Of_Array
+	actual_params.push identifiers[actual_identifier]
+	Add_more_parameters
+}
+
+Add_more_parameters	->	,Params 
+    {
+        Params
+	}
+| 
+Lambda
+    {
+        
+    }
+
+Elems_Of_Array	->	Identifier Add_more_elems_to_array 
+    { 
+		elems_of_array.push identifiers[Identifier]
+		Add_more_elems_to_array
+ }
+| 
+"String" Add_more_elems_to_array 
+    {
+        elems_of_array.push Identifier
+		Add_more_elems_to_array
+    }
+
+Add_more_elems_to_array	->	, Elems_Of_Array 
+    {
+        Elems_Of_Array.
+	}
+| 
+Lambda
+    {
+        return elems_of_array
+    }
+\end{lstlisting}
+
+Ruby is the code showed above in the extended grammar.\\
+After having our program parsed, the next step is to check if the program is semantically correct. For doing this, we have implemented a semantic checker which will be explained next. 
 
 \subsection{Semantic Checker}
 
