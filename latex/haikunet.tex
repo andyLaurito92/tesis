@@ -182,6 +182,166 @@ From the first type of errors, an interpreter using a network model plus a defin
 The concept of initial network comes from the following view: When you apply an intent to a network, you can see the network as a mutable element which is being transformed by the application of an intent. This abstraction allow us to identify different network states that can be pointed out in the intents process: The first one, the initial one, is the network in which the user wants to apply the intent. Then there is a last one, which is the one in which the intent has already been applied, in case it was possible to do so, and is the newtork result of applying the intent. Since the intent can transform several times the network (for example first adding a host, then adding a link, etc.), we can identify all the intermediate states in which the network has to be in order to reach the last state. \\
 From the given approach, in the \textbf{Future work} section we will introduce several ideas that we have related to this important concept.
 
+\section{Language Implementation}
+
+This section is focused to describe how each of the components detailed in the Haikunet architectural view is implemented, we will follow the processing flow as it was explained in the \textbf{Conceptual Idea} section, and start explaining how is both the lexer and parser implemented.
+
+\subsection{Lexer/Parser}
+
+For a better understanding of these two components, we need first to introduce the grammar of the language. 
+
+\subsubsection{Haikunet Grammar}
+
+The grammar of the language is as follows:
+
+\begin{lstlisting}[breaklines=true]
+Start ->	New_Network_Definition | New_Intent
+
+New_Network_Definition ->	Identifier := Network_Elem_Def
+
+Identifier ->	[.:A-Za-z0-9_-]+
+
+Sring ->	[.:A-Za-z0-9_-]+
+
+Network_Elem_Def ->	Abstract_Elem_Def | Concrete_Elem_Def
+
+Abstract_Elem_Def ->	Action_Def | Flow_Def | Condition_Def
+
+Concrete_Elem_Def ->	Host_Def | Link_Def | Device_Def 
+
+Host_Def ->	Host( Params )
+
+Link_Def ->	Link( Params )
+
+Device_Def ->	Device( Params )
+
+Action_Def ->	Action( Params )
+
+Flow_Def ->	Flow( Params )
+
+Condition_Def ->	Condition( Params )
+
+Params -> 	Identifier = Identifier, Params | 
+			Identifier = Identifier |
+			Identifier = "String", Params |
+			Identifier = "String" |
+			Identifier = Array_Identifiers, Params |
+			Identifier = Array_Identifiers 
+
+Array_Identifiers ->	[ Elems_Of_Array ] 
+
+Elems_Of_Array ->	Identifier  | Identifier, Elems_Of_Array
+
+New_Intent ->				Intent Identifier
+			Select Identifier	
+			|    
+			Intent Identifier
+				Select Identifier            	
+				Action Identifier                    
+			| 
+			Intent identifier
+				Select Identifier
+				Action Identifier
+				Condition Identifier
+\end{lstlisting}
+
+It can be seen here that Haikunet is though for either defining the elements of the network, or defining the intent. The elements that can be defined are either concrete elements, where concrete stands up for defining elements which have a phisical representation in the network, as for example a Host, a Link and a Device, or abstract elements, where abstract represent elements as the flow, an action and a Condition. \\
+For defining whatever type of element in the language, we just need to create an identifier, which will represent our element in the entire execution of the program, and define the element name in camelcase follow by the parameters needed for the creation. The nonterminal Parameters is describing to us that there is not an only way of defining an element in the language, so a question comes up which is, how should we define an element?. The answer to this question relies on the destiny of the program, and will be treated in the \textbf{Code Generation} section. \textbf{PODRÍAMOS PENSAR EN UNA FORMA DE DEFINIR CHEQUEOS SEMANTICOS DEPENDIENDO DEL DESTINY, PUES LA DEFINICIÓN DE PARAMETROS ESTA TOTALMENTE SUBEDITADA A ESTO.}
+
+Actions and conditions are elements which are intended to be as parameters of the intent definition, and are think to work as follows:
+\begin{itemize}
+\item Action PENSAR MEJOR\\
+An action represents a change to be done in every element that matches the identifier provided. For example, if we have the following intent definition:
+\begin{lstlisting}[language=Ruby,breaklines=true]
+one_host := Host(mac="9A:4A:43:D4:36:45", vlan="-1", ipAddresses=["10.0.0.1"], elementId="of:0000000000000002", port="1")
+
+drop_packets := Action(from="9A:4A:43:D4:36:45", realize="DROP")
+
+Intent firstExample
+    Select one_host
+    Action drop_packets
+\end{lstlisting}
+
+We are saying that every packet that is sent from \textit{one\_host} should be dropped. The possible actions allowed are: CUALES SON? PENSAR QUE ES LO QUE QUIERO MODELAR
+\item Condition PENSAR MEJOR\\
+A condition represents the act of monitoring a property in the network, and measure it in the scale detailed in the condition definition. It is always used with an action, and when the condition is satisfied, the action is performed. This is an example of use of a condition:
+\begin{lstlisting}[language=Ruby,breaklines=true]
+one_host := Host(mac="9A:4A:43:D4:36:45", vlan="-1", ipAddresses=["10.0.0.1"], elementId="of:0000000000000002", port="1")
+
+one_device := Device(mac="9C:B1:C2:D4:36:12")
+
+drop_packets := Action(from="9A:4A:43:D4:36:45", realize="DROP")
+
+measure_of_loss_packets := Condition(one_device.packets_loss > 0.5)
+
+Intent firstExample
+    Select one_host
+    Action drop_packets
+    Condition measure_of_loss_packets
+\end{lstlisting}
+What we are doing in this case is to set an intent which describes what to do when a device starts to lose more than the 50\% of traffic. In this case, when the condition is satisfied, we start dropping packets of the host with IP \textit{10.0.0.1}.
+\end{itemize}
+
+Now that we have a better understanding of the grammar of the language, we can come back to explain in more detailed how the lexer was implemented.
+
+\subsubsection{Lexer}
+
+The lexer is in charge of recieving the program, and tokenize it's content. The tokens that we have identified from the grammatic presented above are the following ones: 
+\begin{itemize}
+\item \textbf{END\_OF\_LINE}\\
+As it names points out, this token will be replaced every time the string \textit{\\n} is found
+\item \textbf{EQUAL\_PARAMETERS}\\
+This tokens represents the equal which is put in the paramateres definition, between parenthesis.
+\item \textbf{LEFT\_PARENTHESIS}\\
+This token represents the character \textit{(}
+\item \textbf{RIGH\_PARENTHESIS}\\
+This token represents the character \textit{)}
+\item \textbf{DOUBLE\_QUOTE}\\
+This token represents the character \textit{"}
+\item \textbf{LFET\_BRACE}\\
+This token represents the character \textit{[}
+\item \textbf{RIGHT\_BRACE}\\
+This token represents the character \textit{]}
+\item \textbf{COMMA}\\
+This token represents the character \textit{,}
+\item \textbf{ASSIGN}\\
+This token represents the characters \textit{:=}
+\item \textbf{HOST}\\
+This token represents the definition of a \textit{Host} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{LINK}\\
+This token represents the definition of a \textit{Link} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{DEVICE}\\
+This token represents the definition of a \textit{Device} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{FLOW}\\
+This token represents the definition of a \textit{Flow} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{INTENT}\\
+This token represents the definition of a \textit{Intent} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{SELECT}\\
+This token represents the definition of a \textit{Select} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{ACTION}\\
+This token represents the definition of a \textit{Action} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\item \textbf{CONDITION}\\
+This token represents the definition of a \textit{Condition} element. The language does not take into account if the name was written in either upper case or lower case or a cambination of these.
+\end{itemize}
+
+This lexer was implemented with the lookahead character thecnique, and can be seen as the following state machine:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/haikunet/lexer_state_diagram.png}
+\caption{Lexer as a state machine}
+\end{figure}
+
+Once the lexeme is tokenize, the parser component will be in charge of detect if the program is well written. Let's see how this component was implemented.
+
+\subsubsection{Parser}
+
+
+
+\subsection{Semantic Checker}
+
+\subsection{Code Generation}
+
 \section{Tutorial}
 
 \subsubsection{Installation}
@@ -257,18 +417,6 @@ Now that we know how to use the interpreter, let's write our first program!.
 
 \subsubsection{Implementing your first program}
 
-
-
-\section{Language Implementation}
-
-\subsection{Lexer/Parser}
-
-\subsection{Semantic Checker}
-
-\subsection{Code Generation}
-
-\section{Implementing your CodeGenerator}
-
-\section{Limitations}
+\subsection{Implementing your CodeGenerator}
 
 \section{Future work}
