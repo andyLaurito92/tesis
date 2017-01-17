@@ -31,7 +31,7 @@
 \BOOKMARK [2][-]{subsection.4.3.4}{Initial Network}{section.4.3}% 31
 \BOOKMARK [1][-]{section.4.4}{Tutorial}{chapter.4}% 32
 \BOOKMARK [2][-]{subsubsection.4.4.0.1}{Installation}{section.4.4}% 33
-\BOOKMARK [3][-]{subsubsection.4.4.0.2}{Learning Haikunet}{subsubsection.4.4.0.1}% 34
+\BOOKMARK [3][-]{subsubsection.4.4.0.2}{Using the interpreter}{subsubsection.4.4.0.1}% 34
 \BOOKMARK [3][-]{subsubsection.4.4.0.3}{Implementing your first program}{subsubsection.4.4.0.1}% 35
 \BOOKMARK [1][-]{section.4.5}{Language Implementation}{chapter.4}% 36
 \BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 37

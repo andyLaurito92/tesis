@@ -41,6 +41,10 @@ Inside the black box are the components which make up the interpreter, these wil
 
 As it can be apreciated in the image, Haikunet uses the topologygenerator tool which was explained in the previous chapter. The topologygenerator gives an important characteristic to the language, which is that it allows us to create a NTM model and use it as our intial network, meaning that it's not mandatory to have a real network for using Haikunet. Another important thing is one of the destinies which Haikunet support's, DEVS. Supporting this destiny gives the language an important characteristic, which is permiting to simulate from either a real network or a NTM model how would an intent react in the initial newtork.\\
 
+Haikunet flow's work as follow: We first run the interpreter giving as argument a progam and an output destiny, this output destiny specifies to which controller the program is being interpretated. The interpreter lexer's then receive the program, which will be in charge of tokenize it and give it to the parser, which will detect if the tokens are gramatically well written. After this, the semantic checker will detect either statical or dynamical errors in the program (we will explain in more detailed this erros definition's in the \textbf{Formal Definition} section), using the underlaying network which was given by the topologygenerator tool. After this two things can happen: either the program had no errors, meaning that the code generator will execute the bunch of request that have to be done to the API of the controllers specified in the input of the interpreter, or it had, this will cause an error raise exception with a message which will explain the problem. \\
+
+This short paragraph resumes the working flow of a program being interprated by Haikunet. In the \textbf{Language Implementation} section we will cover in detailed what happens in each of the components previously mentioned.\\
+
 Now that we have a better idea of what Haikunet is, let's proceed to give some formal definition's before getting into the tutorial, but before this let us explain you something.
 
 \section{Why Haikunet?}
@@ -164,7 +168,6 @@ When debugging definition was made, static and dynamic errors were mentioned. We
 
 \item Static error\\
 A static error can be defined as an error which can be pointed out as one, without the need of letting time pass into the underlying network. Examples of these types of erros showed before are the \textit{Flow property definition error}, \textit{No path error} and \textit{Inconsistent host definition error}
-
 \item Dynamic error\\
 A dynamic error can be defined as an erorr which needs time to be elpased in the underlying network, in order to identify it as one. An example of this kind of error is the \textit{Percentage in loss packets error}. 
 \end{itemize} 
@@ -183,20 +186,78 @@ From the given approach, in the \textbf{Future work} section we will introduce s
 
 \subsubsection{Installation}
 
-\subsubsection{Learning Haikunet}
+\textbf{Pre-requisite:} You need to have a git client installed, a machine running a Linux distribution (it was tested in an Ubuntus machine, but should work in any Linux distribution machine), and already installed a ruby version equal or major to 2.0.0.
 
-For running the Haikunet interpreter, besides a program as showed before, you will need to specify one of the destinations supported and a URI from where to obtain the initial topology. Let's get into more detailed in the last two arguments.\\
-The destination argument is an option which will tell the interpreter to which destiny has to generate the code of the input program, the options current supported are \textit{ONOS}, \textit{OPENDAYLIGHT} and \textit{DEBUG}. The first two are controllers, and selecting one of them will generate a bunch of request to the corresponding API REST. The DEBUG option will generate a simulation in DEVS, taking as initial topology the one specified by argument, and will show you simulations result's once the run is complete. The idea is that with this results, you will be able to identify if the network behaviour is the one you expected. We will come back in more detailed to this simulation results in the \textbf{Learning Haikunet} section.\\
-The other argument is the URI from the Underlaying Network, and as the name remarks, will be either a URI of an API REST of a controller, or a path to a file which will contain a ruby NTM (this was explained in the previous chapter, in the \textbf{Network Topology Model} section). The reason why you have to specify this argument has beyond an important conceptual idea, which will be explained in the \textbf{Formal Definition} section. Besides the conceptual idea, we will explain in more detailed how to specify this argument in the \textbf{Learning Haikunet} section.\\
+For installing Haikunet, just run the following commands:
 
-\textit{Haikunet program} component is the path to the file were the program is, and the expected extension of these type of files are ".hk". \textit{Output Destiny} is one of the destinies names supported by the language (the options are \"ONOS\", \"OPENDAYLIGHT\" and \"DEBUG\"), and finally the \textit{URI Underlaying Network} is the URI were we can find the initial newtork topology, for example if your initial network comes from a controller, you will have to provide your's controller API REST. If your initial network is a ruby NTM, you will have to provide the file where the NTM is written.\\
+\begin{lstlisting}[language=bash,breaklines=true]
+$ git clone git@github.com:andyLaurito92/haikunet.git
+$ cd haikunet
+$ sudo ./install_haikunet.sh 
+\end{lstlisting}
 
+And that's it!, you have already installed the interpreter. Let's understand a bit more about the language before jumping into the code.
 
-Haikunet flow's work as follow: We first run the interpreter giving as argument a progam and an output destiny, this output destiny specifies to which controller the program is being interpretated, right now the options are either OpenDayLight or ONOS. The interpreter lexer's then receive the program, which will be in charge of tokenize it and give it to the parser, which will detect if the tokens are gramatically well written. After this, the semantic checker will detect either statical or dynamical errors in the program (we will explain in more detailed this erros definition's in the \textbf{Formal Definition} section), using the underlaying network which was given by the topologygenerator tool. After this two things can happen: either the program had no errors, meaning that the code generator will execute the bunch of request that have to be done to the API of the controllers specified in the input of the interpreter, or it had, this will cause an error raise exception with a message which will explain the problem. \\
+\subsubsection{Using the interpreter}
 
-This short paragraph resumes the working flow of a program being interprated by Haikunet. In the \textbf{Language Implementation} section we will cover in detailed what happens in each of the components previously mentioned.\\
+\textbf{Pre-requisite:} Have running locally the ONOS controller, and have already download the language repository.
+
+For running the Haikunet interpreter, you will need: 
+\begin{itemize}
+\item The path to the file where the haikunet program is (remember that only files with the ".hk" extension are allowed).
+\item Specify one of the destinations supported (the current supported are \textit{ONOS}, \textit{OPENDAYLIGHT} and \textit{DEBUG}).
+\item An URI from where to obtain the initial topology.
+\end{itemize}
+
+Let's get into more detailed in the last two arguments.\\
+The destination argument is an option which will tell the interpreter to which destiny has to generate the code of the input program, the options current supported are \textit{ONOS}, \textit{OPENDAYLIGHT} and \textit{DEBUG}. The first two are controllers, and selecting one of them will generate a bunch of request to the corresponding API REST. The DEBUG option will generate a simulation in DEVS, taking as initial topology the one specified by argument, and will show you simulations result's once the run is complete. The idea is that with this results, you will be able to identify if the network behaviour is the one you expected. We will get into more detailed on this in the \textbf{Implementing your first program} subsection.\\
+The other argument is the URI from the Initial Network, which was already explained in the \textbf{Formal Definition} section. As the name remarks, will be either a URI of an API REST of a controller, or a path to a file which will contain a ruby NTM (this was explained in the previous chapter, in the \textbf{Network Topology Model} section).\\
+
+Let's now suppose that:
+\begin{itemize}
+\item We want to execute the \textit{host\_to\_host.hk} program (you can find it in \textit{\$HAIKUNET\_DIRECTORY/examples/programs}), which creates two host if they don't exist in the underlying network, and creates a flow between them. 
+\item We are using ONOS as destiny output.
+\item We will use as initial topology the one that we have at ONOS. 
+\end{itemize} 
+
+This is how you use the interpreter for doing that (we will assume that you will execute the haikunet interpreter from the \textit{\$HAIKUNET\_DIRECTORY}, and the ONOS local version that you are running can be located at http://127.0.0.1:8181 address):
+
+\begin{lstlisting}[language=bash,breaklines=true]
+$ haikunet program -n examples/programs/host_to_host.hk -d ONOS -u http://127.0.0.1:8181/onos/v1/
+\end{lstlisting}
+
+In the previous command:
+\begin{itemize}
+\item \textbf{-n} is the option to provide the path to the interpreter.
+\item \textbf{-d} is the destiny name.
+\item \textbf{-u} is the path to the uri initial topology.
+\end{itemize}
+
+If you want to debug the same program using the same initial topology, just run the following command:
+
+\begin{lstlisting}[language=bash,breaklines=true]
+$ haikunet program -n examples/programs/host_to_host.hk -d DEBUG -u http://127.0.0.1:8181/onos/v1/
+\end{lstlisting}
+
+You may also want to try to use as initial topology the one provided in \textit{examples/initial\_topologies} to debug it. The command to run in this case is:
+
+\begin{lstlisting}[language=bash,breaklines=true]
+$ haikunet program -n examples/programs/host_to_host.hk -d DEBUG -u examples/initial_topologies/example_topology.rb
+\end{lstlisting}
+
+In case your default controller is OpenDayLight, you just have to use the OPENDAYLIGHT destiny, and specify the uri \textit{http://OPEN\_DAY\_LIGHT\_IP:8080/restconf/operational/network-topology:network-topology/topology/flow:1/}, where \textit{OPEN\_DAY\_LIGHT\_IP} stands for the corresponding IP address of the controller. 
+
+You can find these and more examples in the interpreter help's by running the following command:
+
+\begin{lstlisting}[language=bash,breaklines=true]
+$ haikunet program --help
+\end{lstlisting}
+
+Now that we know how to use the interpreter, let's write our first program!.
 
 \subsubsection{Implementing your first program}
+
+
 
 \section{Language Implementation}
 
