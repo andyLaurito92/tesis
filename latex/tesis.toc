@@ -22,15 +22,23 @@
 \contentsline {section}{\numberline {4.1}Conceptual Idea}{27}{section.4.1}
 \contentsline {section}{\numberline {4.2}Why Haikunet?}{28}{section.4.2}
 \contentsline {section}{\numberline {4.3}Formal Definition}{29}{section.4.3}
-\contentsline {section}{\numberline {4.4}Tutorial}{29}{section.4.4}
-\contentsline {subsubsection}{\numberline {4.4.0.1}Installation}{29}{subsubsection.4.4.0.1}
-\contentsline {subsubsection}{\numberline {4.4.0.2}Learning Haikunet}{29}{subsubsection.4.4.0.2}
-\contentsline {subsubsection}{\numberline {4.4.0.3}Implementing your first program}{30}{subsubsection.4.4.0.3}
-\contentsline {section}{\numberline {4.5}Language Implementation}{30}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Lexer/Parser}{30}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Semantic Checker}{30}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}Code Generation}{30}{subsection.4.5.3}
-\contentsline {section}{\numberline {4.6}Implementing your CodeGenerator}{30}{section.4.6}
-\contentsline {section}{\numberline {4.7}Limitations}{30}{section.4.7}
-\contentsline {section}{\numberline {4.8}Future work}{30}{section.4.8}
-\contentsline {chapter}{\numberline {5.}Conclusions and Future Work}{31}{chapter.5}
+\contentsline {subsection}{\numberline {4.3.1}Debugging}{29}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Error}{29}{subsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.2.1}Flow property definition error}{29}{subsubsection.4.3.2.1}
+\contentsline {subsubsection}{\numberline {4.3.2.2}No path error}{31}{subsubsection.4.3.2.2}
+\contentsline {subsubsection}{\numberline {4.3.2.3}Inconsistent host definition error}{32}{subsubsection.4.3.2.3}
+\contentsline {subsubsection}{\numberline {4.3.2.4}Percentage in loss packets error}{32}{subsubsection.4.3.2.4}
+\contentsline {subsection}{\numberline {4.3.3}Static and Dynamic errors}{32}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Initial Network}{33}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Tutorial}{33}{section.4.4}
+\contentsline {subsubsection}{\numberline {4.4.0.1}Installation}{33}{subsubsection.4.4.0.1}
+\contentsline {subsubsection}{\numberline {4.4.0.2}Learning Haikunet}{33}{subsubsection.4.4.0.2}
+\contentsline {subsubsection}{\numberline {4.4.0.3}Implementing your first program}{34}{subsubsection.4.4.0.3}
+\contentsline {section}{\numberline {4.5}Language Implementation}{34}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Lexer/Parser}{34}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Semantic Checker}{34}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Code Generation}{34}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}Implementing your CodeGenerator}{34}{section.4.6}
+\contentsline {section}{\numberline {4.7}Limitations}{34}{section.4.7}
+\contentsline {section}{\numberline {4.8}Future work}{34}{section.4.8}
+\contentsline {chapter}{\numberline {5.}Conclusions and Future Work}{35}{chapter.5}

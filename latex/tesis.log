@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  13 JAN 2017 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.26)  17 JAN 2017 15:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -707,7 +707,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
- <logofcen.pdf, id=144, 108.405pt x 108.405pt>
+ <logofcen.pdf, id=184, 108.405pt x 108.405pt>
 File: logofcen.pdf Graphic file (type pdf)
 
 <use logofcen.pdf>
@@ -783,7 +783,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--24
  []
 
 
-<images/topologygenerator/topologygenerator_abstract_multiple.png, id=261, 534.
+<images/topologygenerator/topologygenerator_abstract_multiple.png, id=311, 534.
 99875pt x 355.3275pt>
 File: images/topologygenerator/topologygenerator_abstract_multiple.png Graphic 
 file (type png)
@@ -793,7 +793,7 @@ Package pdftex.def Info: images/topologygenerator/topologygenerator_abstract_mu
 ltiple.png used on input line 29.
 (pdftex.def)             Requested size: 426.79135pt x 283.47078pt.
  [5]
-<images/topologygenerator/topologygenerator_abstract_single.png, id=267, 675.52
+<images/topologygenerator/topologygenerator_abstract_single.png, id=317, 675.52
 374pt x 355.3275pt>
 File: images/topologygenerator/topologygenerator_abstract_single.png Graphic fi
 le (type png)
@@ -811,7 +811,7 @@ LaTeX Info: Redefining \. on input line 43.
 LaTeX Info: Redefining \% on input line 43.
 [6 <./images/topologygenerator/topologygenerator_abstract_multiple.png> <./imag
 es/topologygenerator/topologygenerator_abstract_single.png>]
-<images/topologygenerator/controller_example.png, id=276, 715.67375pt x 365.365
+<images/topologygenerator/controller_example.png, id=327, 715.67375pt x 365.365
 pt>
 File: images/topologygenerator/controller_example.png Graphic file (type png)
  <use images/topologygenerator/controller_example.png>
@@ -823,7 +823,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--60
 
  []
 
-<images/topologygenerator/ruby_provider.png, id=277, 715.67375pt x 365.365pt>
+<images/topologygenerator/ruby_provider.png, id=328, 715.67375pt x 365.365pt>
 File: images/topologygenerator/ruby_provider.png Graphic file (type png)
 
 <use images/topologygenerator/ruby_provider.png>
@@ -845,7 +845,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
 
-<images/topologygenerator/onos_builder.png, id=285, 765.86125pt x 365.365pt>
+<images/topologygenerator/onos_builder.png, id=336, 765.86125pt x 365.365pt>
 File: images/topologygenerator/onos_builder.png Graphic file (type png)
 
 <use images/topologygenerator/onos_builder.png>
@@ -992,7 +992,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 520--521
  []
 
 
-<images/topologygenerator/newtork_example.png, id=568, 335.2525pt x 463.7325pt>
+<images/topologygenerator/newtork_example.png, id=618, 335.2525pt x 463.7325pt>
 File: images/topologygenerator/newtork_example.png Graphic file (type png)
 <use images/topologygenerator/newtork_example.png>
 Package pdftex.def Info: images/topologygenerator/newtork_example.png used on i
@@ -1048,7 +1048,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
-<images/haikunet/arquitectura_haikunet.png, id=813, 850.17625pt x 451.6875pt>
+<images/haikunet/arquitectura_haikunet.png, id=864, 850.17625pt x 451.6875pt>
 File: images/haikunet/arquitectura_haikunet.png Graphic file (type png)
 
 <use images/haikunet/arquitectura_haikunet.png>
@@ -1067,49 +1067,95 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--43
 
  []
 
+LaTeX Info: Redefining \. on input line 50.
+LaTeX Info: Redefining \% on input line 50.
+[28 <./images/haikunet/arquitectura_haikunet.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
-Underfull \vbox (badness 4429) has occurred while \output is active []
+ []
 
-LaTeX Info: Redefining \. on input line 54.
-LaTeX Info: Redefining \% on input line 54.
- [28 <./images/haikunet/arquitectura_haikunet.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
+
+ []
+
+<images/haikunet/error_scenario_1.png, id=884, 379.4175pt x 360.34625pt>
+File: images/haikunet/error_scenario_1.png Graphic file (type png)
+
+<use images/haikunet/error_scenario_1.png>
+Package pdftex.def Info: images/haikunet/error_scenario_1.png used on input lin
+e 71.
+(pdftex.def)             Requested size: 426.79135pt x 405.34454pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 74.
+LaTeX Info: Redefining \% on input line 74.
+ [29]
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
+
+ []
+
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+[30 <./images/haikunet/error_scenario_1.png>]
+<images/haikunet/error_scenario_2.png, id=909, 429.605pt x 365.365pt>
+File: images/haikunet/error_scenario_2.png Graphic file (type png)
+
+<use images/haikunet/error_scenario_2.png>
+Package pdftex.def Info: images/haikunet/error_scenario_2.png used on input lin
+e 109.
+(pdftex.def)             Requested size: 426.79135pt x 362.978pt.
+LaTeX Info: Redefining \. on input line 132.
+LaTeX Info: Redefining \% on input line 132.
+ [31 <./images/haikunet/error_scenario_2.png>]
+<images/haikunet/error_scenario_3.png, id=926, 665.48625pt x 480.79625pt>
+File: images/haikunet/error_scenario_3.png Graphic file (type png)
+
+<use images/haikunet/error_scenario_3.png>
+Package pdftex.def Info: images/haikunet/error_scenario_3.png used on input lin
+e 136.
+(pdftex.def)             Requested size: 426.79135pt x 308.3468pt.
+LaTeX Info: Redefining \. on input line 165.
+LaTeX Info: Redefining \% on input line 165.
+ [32 <./images/haikunet/error_scenario_3.png>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 64.
+(hyperref)                than one, level fixed on input line 184.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--71
+Underfull \hbox (badness 10000) in paragraph at lines 188--191
+
+ []
+
+LaTeX Info: Redefining \. on input line 191.
+LaTeX Info: Redefining \% on input line 191.
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
-
- []
-
-LaTeX Info: Redefining \. on input line 76.
-LaTeX Info: Redefining \% on input line 76.
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 197--198
 
  []
 
 )
 LaTeX Info: Redefining \. on input line 81.
 LaTeX Info: Redefining \% on input line 81.
- [30]
+ [34]
 Cap\'{\i }tulo 5.
-(./conclusions.tex) [31
+(./conclusions.tex) [35
 
 ]
 LaTeX Info: Redefining \. on input line 85.
 LaTeX Info: Redefining \% on input line 85.
- [32
+ [36
 
 ]
 No file tesis.bbl.
@@ -1120,7 +1166,7 @@ Underfull \hbox (badness 6658) in paragraph at lines 95--96
  []
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 100.
-[33
+[37
 
 pdfTeX warning (ext4): destination with the same identifier (name{cite.topology
 zoo}) has been already used, duplicate ignored
@@ -1136,9 +1182,15 @@ LaTeX Info: Redefining \% on input line 23.
 )
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 100.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 100.
-Package rerunfilecheck Info: File `tesis.out' has not changed.
-(rerunfilecheck)             Checksum: EB472470C7CA3E9E9C02CFD0D4845424;2368.
 
+
+Package rerunfilecheck Warning: File `tesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `tesis.out':
+(rerunfilecheck)             Before: E6028AA125BD0F0F4A013D7A0649CAC7;3200
+(rerunfilecheck)             After:  09D3D0EF47FEBBFACC32E864CD1B05BA;3003.
 
 LaTeX Warning: There were undefined references.
 
@@ -1148,28 +1200,55 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 100.
  ) 
 Here is how much of TeX's memory you used:
- 10195 strings out of 493029
- 142479 string characters out of 6136234
- 405522 words of memory out of 5000000
- 13067 multiletter control sequences out of 15000+600000
+ 10281 strings out of 493029
+ 144166 string characters out of 6136234
+ 405531 words of memory out of 5000000
+ 13094 multiletter control sequences out of 15000+600000
  10364 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  32i,10n,47p,1858b,1884s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mtt10.pfb>
-Output written on tesis.pdf (45 pages, 461165 bytes).
+pdfTeX warning (dest): name{section.4.9} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.6.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.6.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.6.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.4.5.0.3} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.4.5.0.2} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.4.5.0.1} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.4.3.3.2} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.4.3.3.1} has been referenced but does
+ not exist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t10.pfb>
+Output written on tesis.pdf (49 pages, 519999 bytes).
 PDF statistics:
- 1006 PDF objects out of 1200 (max. 8388607)
- 923 compressed objects within 10 object streams
- 531 named destinations out of 1000 (max. 500000)
- 321 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1133 PDF objects out of 1200 (max. 8388607)
+ 1039 compressed objects within 11 object streams
+ 587 named destinations out of 1000 (max. 500000)
+ 416 words of extra memory for PDF output out of 10000 (max. 10000000)
 

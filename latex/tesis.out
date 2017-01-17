@@ -21,15 +21,23 @@
 \BOOKMARK [1][-]{section.4.1}{Conceptual Idea}{chapter.4}% 21
 \BOOKMARK [1][-]{section.4.2}{Why Haikunet?}{chapter.4}% 22
 \BOOKMARK [1][-]{section.4.3}{Formal Definition}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.4}{Tutorial}{chapter.4}% 24
-\BOOKMARK [2][-]{subsubsection.4.4.0.1}{Installation}{section.4.4}% 25
-\BOOKMARK [3][-]{subsubsection.4.4.0.2}{Learning Haikunet}{subsubsection.4.4.0.1}% 26
-\BOOKMARK [3][-]{subsubsection.4.4.0.3}{Implementing your first program}{subsubsection.4.4.0.1}% 27
-\BOOKMARK [1][-]{section.4.5}{Language Implementation}{chapter.4}% 28
-\BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 29
-\BOOKMARK [2][-]{subsection.4.5.2}{Semantic Checker}{section.4.5}% 30
-\BOOKMARK [2][-]{subsection.4.5.3}{Code Generation}{section.4.5}% 31
-\BOOKMARK [1][-]{section.4.6}{Implementing your CodeGenerator}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.7}{Limitations}{chapter.4}% 33
-\BOOKMARK [1][-]{section.4.8}{Future work}{chapter.4}% 34
-\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 35
+\BOOKMARK [2][-]{subsection.4.3.1}{Debugging}{section.4.3}% 24
+\BOOKMARK [2][-]{subsection.4.3.2}{Error}{section.4.3}% 25
+\BOOKMARK [3][-]{subsubsection.4.3.2.1}{Flow property definition error}{subsection.4.3.2}% 26
+\BOOKMARK [3][-]{subsubsection.4.3.2.2}{No path error}{subsection.4.3.2}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.2.3}{Inconsistent host definition error}{subsection.4.3.2}% 28
+\BOOKMARK [3][-]{subsubsection.4.3.2.4}{Percentage in loss packets error}{subsection.4.3.2}% 29
+\BOOKMARK [2][-]{subsection.4.3.3}{Static and Dynamic errors}{section.4.3}% 30
+\BOOKMARK [2][-]{subsection.4.3.4}{Initial Network}{section.4.3}% 31
+\BOOKMARK [1][-]{section.4.4}{Tutorial}{chapter.4}% 32
+\BOOKMARK [2][-]{subsubsection.4.4.0.1}{Installation}{section.4.4}% 33
+\BOOKMARK [3][-]{subsubsection.4.4.0.2}{Learning Haikunet}{subsubsection.4.4.0.1}% 34
+\BOOKMARK [3][-]{subsubsection.4.4.0.3}{Implementing your first program}{subsubsection.4.4.0.1}% 35
+\BOOKMARK [1][-]{section.4.5}{Language Implementation}{chapter.4}% 36
+\BOOKMARK [2][-]{subsection.4.5.1}{Lexer/Parser}{section.4.5}% 37
+\BOOKMARK [2][-]{subsection.4.5.2}{Semantic Checker}{section.4.5}% 38
+\BOOKMARK [2][-]{subsection.4.5.3}{Code Generation}{section.4.5}% 39
+\BOOKMARK [1][-]{section.4.6}{Implementing your CodeGenerator}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.7}{Limitations}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.8}{Future work}{chapter.4}% 42
+\BOOKMARK [0][-]{chapter.5}{Conclusions and Future Work}{}% 43

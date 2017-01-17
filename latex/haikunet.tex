@@ -1,6 +1,6 @@
 \section{Conceptual Idea}
 
-Haikunet is a SDN programming langauge which was created with the main objective of fulfilling the need of debugging the network, and making an intent's oriented programming language agnostic to the controller. This last property means that Haikunet will not be coupled to a particular controller at all. Right now OpenDayLight and ONOS are the Controller's supported, but as you will see in following sections, enlarge this number is not hard at all, and you will have the chance to do this by following the tutorial.\\
+Haikunet is a SDN programming langauge which was created with the main objective of fulfilling the need of debugging the network, and creating an intent's oriented programming language agnostic to the controller. This last property means that Haikunet will not be coupled to a particular controller at all. Right now OpenDayLight and ONOS are the Controller's supported, but as you will see in following sections, enlarge this number is not hard at all, and you will have the chance to do this by following the tutorial.\\
 Writing programs in Haikunet is really easy and straightforward, and this language will give you the advantage of having just one intent written in a common way for several controllers, something that up to now you weren't able to do as far as the writers of this thesis know.\\
 The language is interpretated, written in Ruby and can be ran in any machine with a Ruby major or equal version of 2.0.0. This is how a program written in Haikunet looks like:
 
@@ -24,8 +24,8 @@ The main ideas that you have to understand before writing a program in this lang
 Which would be the initial topology?, think of this as the network in which you want to apply the intent. It's called initial because it can be seen as the initial point from where we start, and after the intent is applied to the newtork, we will obtain the desired network, which can be called the last one. In the \textbf{Formal Definition} section this is better explained.
 \item What is what you want from the newtork?\\
 Try to understand well what are you going to ask to the network, if it's possible to do it, which components are going to be involved in, etc. From this though, you will write your program.
-\item Destiny
-Which is going to be the destiny?, Has the destiny the ability to do what you are expecting from the network?. Remember that you can always debug first what you are doing, and then proceed to apply it to the real network!.
+\item Which is going to be the destiny?\\
+Has the destiny the ability to do what you are expecting from the network?. Remember that you can always debug first what you are doing, and then proceed to apply it to the real network!.
 \end{itemize}
 
 After this, as every programming language, you will need to practice in order to write good programs. Let's take a look at the architectural components of the language, and how they relate one with each other.
@@ -49,26 +49,135 @@ The name Haikunet comes from the join of Haiku and Network. A Haiku is a Japanes
 
 \section{Formal Definition}
 
-The idea of this section is to establish key concepts and main ideas that will be use in this chapter, or that have already been mentioned before. We will start by answering the following questions:\\
+In this section we will establish key concepts and main ideas that will be use in this chapter. The section will be divided in one definition after another, and after all definitions are made, we will continue with the Haikunet tutorial.\\
 
-What does debugging mean in our context?\\
+\subsection{Debugging}
 
-What is a static error?\\
+Debugging will be the process of finding either static or dynamic errors before the intent is applied to the network. The definition of these type of erros can be found ahead in the section.\\
+In this work, we are not going to explore techniques which involves stopping an intent execution's in a controller. 
 
-What is dynamic error?\\
+\subsection{Error}
 
-What is a static property?\\
+An error will be a request made by a program written in Haikunet, which has not semantically sense in the context of the current network. Since this definition involves a huge amount of errors for a thesis work, we will focus in a limited scope which will be introduced next. We will show some scenarios, their respectively errors in them, and the error output that the interpreter will show:
 
-Links, 
+\subsubsection{Flow property definition error}
 
-What is a dynamic property?\\
+\textbf{Description:} This error happens when you use a host property in a flow definition, and this property cannot be neither found or inferred from the initial network topology. \\
 
-A este tipo de propiedades sobre las que debo dejar transcurrir un tiempo t, las llamo propiedades dinámicas. (notemos que toda acción de monitoring es una propiedad dinámica. Otra propiedad dinámica es la actualización de registros DNS).
-Acá es donde entra el simulador. ¿Porque usarlo? Porque en el simulador puedo simular 1 hora del comportamiento de esta misma red en menos de 10 segundos. Esto lo que me permite es entonces definir de forma mucho más precisa el average!, y en particular, volver un comportamiento asincrónico, sincrónico. 
+\textbf{Example:} Let's suppose that we have the following initial network:
 
-URI Underlaying Network
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/haikunet/error_scenario_1.png}
+\caption{Initial network context in flow property definition error}
+\end{figure}
 
-The concept of initial network comes from the following view: When you apply an intent to a network, you can see the network as a mutable element which is being transformed by the application of an intent. This abstraction allow us to identify different network states that can be pointed out in the intents process: The first one, the initial one, is where the user wants to apply the intent. Then there is a last one, which is the one in which the intent has already been applied, in case it was possible to do so, and is the newtork result of applying the intent. Since the intent can transform several times the network, we can identify all the intermediate states in which the network hd to be in order to reach the last state. 
+and we execute the following program:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+source_host := Host(mac="A2:37:46:4C:E2:0D")
+
+my_flow := Flow (src=source_host, dst="127.0.0.10", priority="55")
+
+Intent firstExample
+    Select my_flow
+\end{lstlisting}
+
+In this example, we have the problem that the property \textit{dst = "127.0.0.1"} is not a valid ip in the current network. \\
+
+An important observation here is that this is an error, because the mistake is made in the flow definition line. If we would have a mispelled property in the Host definition as we show in this example (let's assume that I wanted to create a flow between \textit{127.0.0.3} and \textit{127.0.0.8}):
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+source_host := Host(ip="127.0.0.2")
+
+my_flow := Flow (src=source_host, dst="127.0.0.8", priority="55")
+
+Intent firstExample
+    Select my_flow
+\end{lstlisting}
+
+This would not be considered as an error, since the semantic of this program in the initial network context given before, would mean first to create a host with \textit{127.0.0.2} as IP, and then create a flow between this new host and the one which has \textit{127.0.0.8} as IP.
+
+\subsubsection{No path error}
+
+\textbf{Description:} This error is thrown when you are trying to create a flow between two host which have no path between them.
+
+Let's suppose that we have the following initial network:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/haikunet/error_scenario_2.png}
+\caption{Initial network context in no path error}
+\end{figure}
+
+and we execute the following program:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+source_host := Host(ip="10.0.0.2")
+
+    destiny_host := Host(ip="10.0.0.4")
+
+my_flow := Flow (src=source_host, dst=destiny_host, priority="55")
+
+Intent firstExample
+    Select my_flow
+\end{lstlisting}
+
+It can be seen in the image above that the error is thrown because there is no path between hosts \textit{10.0.0.2} and \textit{10.0.0.4}. 
+
+\subsubsection{Inconsistent host definition error}
+
+\textbf{Description:} This error is thrown when you are trying to either create or refer to a Host which already exist with different properties from the real ones. 
+
+Let's suppose that we have the following initial network:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/haikunet/error_scenario_3.png}
+\caption{Initial network context in inconsistent host definition error}
+\end{figure}
+
+and we execute the following program:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+one_host := Host(mac="9A:4A:43:D4:36:45", vlan="-1", ipAddresses=["10.0.0.1"], elementId="of:0000000000000002", port="1")
+
+second_host := Host(mac="72:D2:0D:24:C5:36", vlan="-1", ipAddresses=["10.0.0.4"], elementId="of:0000000000000003", port="2")
+
+my_flow := Flow (src=one_host, dst=second_host, priority="55")
+
+Intent firstExample
+    Select my_flow
+\end{lstlisting}
+
+The problem here is that we are trying to define the same host with different mac addresses. CORRECT THE IMAGE SO WE CAN SEE THE HOST WITH ITS CURRENT MAC.
+
+\subsubsection{Percentage in loss packets error}
+
+STILL HAS TO BE IMPLEMENTED.
+
+\subsection{Static and Dynamic errors}
+
+When debugging definition was made, static and dynamic errors were mentioned. We now proceed to define each type of error, and we will categorize the erros showed before in order to understand better these definitions.
+
+\begin{itemize}
+
+\item Static error\\
+A static error can be defined as an error which can be pointed out as one, without the need of letting time pass into the underlying network. Examples of these types of erros showed before are the \textit{Flow property definition error}, \textit{No path error} and \textit{Inconsistent host definition error}
+
+\item Dynamic error\\
+A dynamic error can be defined as an erorr which needs time to be elpased in the underlying network, in order to identify it as one. An example of this kind of error is the \textit{Percentage in loss packets error}. 
+\end{itemize} 
+
+As it can be seen on the definition above, time is a variable needed for defining both kind of errors. This variable is introduced because the network is a model which is always changing, and not necesarilly just because a program changes it (for example we can always have either infraestracture or software issues, making links and host not reacheable, causing a change in the underlying network topology).\\
+From the definition of both types of erros, we studied the best way to detect each of them.\\
+From the first type of errors, an interpreter using a network model plus a definition of a semantic checker were implemented in order to detect them.\\ Since for detecting the second type of errors we need time to be elapsed in the underlying network, and the time needed varies depending on each error, a connection with DEVS was implemented. The key idea in this is having a representational model of the network, which can be ran as a simulation in DEVS, modelling hours of time elapsed in the network. The simulation will then replied with results, and from this results we will be able to detect if there are dynamic errors present in the program. 
+
+
+\subsection{Initial Network}
+
+The concept of initial network comes from the following view: When you apply an intent to a network, you can see the network as a mutable element which is being transformed by the application of an intent. This abstraction allow us to identify different network states that can be pointed out in the intents process: The first one, the initial one, is the network in which the user wants to apply the intent. Then there is a last one, which is the one in which the intent has already been applied, in case it was possible to do so, and is the newtork result of applying the intent. Since the intent can transform several times the network (for example first adding a host, then adding a link, etc.), we can identify all the intermediate states in which the network has to be in order to reach the last state. \\
+From the given approach, in the \textbf{Future work} section we will introduce several ideas that we have related to this important concept.
 
 \section{Tutorial}
 
