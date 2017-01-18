@@ -510,16 +510,122 @@ Lambda
     }
 \end{lstlisting}
 
-Ruby is the code showed above in the extended grammar.\\
+Ruby is the code showed in the extended grammar above.\\
 After having our program parsed, the next step is to check if the program is semantically correct. For doing this, we have implemented a semantic checker which will be explained next. 
 
 \subsection{Semantic Checker}
 
+The semantic checker is the component in charge of detecting static errors previously defined in the \textbf{Formal Definition} section, since we have a few quantity of these errors, we implemented the semantic checker to iterate over each of the possible errors, and try to analyze if it's present in the underlying network.\\
+In this component we have as parameter both the abstract syntax tree, which was created by the parser as it was explained in the previous section, and a representation of the underlying network. For getting this representation we use the \textit{Topologygenerator}, introduced in the chapter before, as it follows: ONOS ESTA HARCODEADO, HAY QUE HACER QUE ESTO SEA PÁRAMETRICO
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+@topology_generator = Topologygenerator.new({
+            "source" => "ONOS",
+            "directory_concrete_builders" => "#{File.dirname(File.realpath(__FILE__))}/haikunet_builders/initial_topology_builders",
+            "output_directory" => "#{ENV['HOME']}/.haikunet/initial_topology/#{@file_name}",
+            "uri_resource" => uri_initial_topology 
+        })
+\end{lstlisting}
+
+As you can check from the previous code, Haikunet has builders which are custom implementations focus in getting all the data which can be get from each of the elements in the network, with this we intend to make the process of detecting errors easier.
+
+With the underlaying network representation obtained from the topologygenerator, we can now perform static checks. In case an error is found, a \textit{Semantic Error} is thrown and the execution of the program is stopped, meaning that the program never reaches it's supposed destination. You can get into more detailed in how each error checking was implemented by checking out the code. 
+
+Now that we have our program checked, and we know that it's free of either syntactical or semantical errors, we can now proceed to generate what we have been looking out from the beginning, the desired output.
+
 \subsection{Code Generation}
+
+Once that we know that our program is free of the errors that we have defined, it's time to proceed to generate the output of the program. Haikunet implement's a decoupled way for doing this, which consists of dependently of the destiny recieved by argument, a class which implements the respectively code generator will be called. Adding a new code generator to Haikunet is really easy and straightforward, as you will find out in the \textbf{Implementing your CodeGenerator} tutorial in the following section.
+
+For creating this decoupled way of associating recieving arguments with their respectively generator, Ruby modules were used. The idea of this implementation consist in the following: You select one of the destinies supported, this string is then used for include a module which has as name the argument capitalize plus the string \textit{CodeGenerator} added at the end, as it's showed in the code:
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+require_relative "#{destiny.downcase}_code_generator.rb"
+self.class.send(:include, Object.const_get("#{destiny.capitalize}CodeGenerator"))
+generate_output file_name
+\end{lstlisting}
+
+After including the \textit{CodeGenerator}, the function \textit{generate\_output} of the module is called. We will get into more detailed in how modules should be implemented in the \textbf{Implementing your CodeGenerator} tutorial.
+
+Since we have three destinies supported currently, we will have for each destiny a code generator's class. The destinies are \textit{ONOS}, \textit{OPENDAYLIGHT} and \textit{DEBUG}, and their respectively code generator classes are \textit{OnosCodeGenerator}, \textit{OpenDayLightCodeGenerator} and \textit{DebugCodeGenerator}.
+ The first two of them that are controllers will be explained next, and the DebugCodeGenerator class is explained in the \textbf{Debugging with DEVS} subsection which follows.
+
+\subsubsection{Controllers}
+HAY QUE TERMINAR DE IMPLEMENTAR EL OPENDAYLIGHT CODE GENERATOR!!!!.
+
+The code to be generated, independently of the controller, will be requests to an API. What we have to do here is to define those elements which were not defined in the underlying network, eventually modified properties of one of these elements, and create and intent with their respectively logic (in case either conditions or actions are defined), for each intent defined in the program. For example, let's get into more detailed in the \textit{OnosCodeGenerator} module, in the \textit{generate\_output} function.
+
+\begin{lstlisting}[language=Ruby,breaklines=true]
+    def generate_output(file_name)
+        code = ''
+        requests = []
+        json = ''
+        @identifiers.each do |identifier|
+            case identifier.value
+            when HaikunetHost
+                host_params = get_host_params identifier
+                next if is_defined_in_topology host_params
+                json = "{
+                    \"mac\" : \"#{host_params['mac']}\", \n
+                    \"vlan\" : \"#{host_params['vlan']}\", \n
+                    \"ipAddresses\" : #{host_params['ips']}, \n
+                    \"location\" : {
+                        \"elementId\" : \"#{host_params['elementId']}\", \n
+                        \"port\" : \"#{host_params['port']}\"
+                    }
+                }\n"
+                requests.push({ "end_point" => "hosts", "message" => json })
+                code += json
+            when HaikunetFlow
+                flow_params = get_flow_params identifier
+                flow_params['src'].each do |src_mac|
+                  flow_params['dst'].each do |dst_mac|
+                    json = "{
+                          \"type\": \"HostToHostIntent\",
+                          \"appId\": \"org.onosproject.ovsdb\",
+                          \"priority\": #{flow_params['priority']},
+                          \"one\": \"#{src_mac}/-1\",
+                          \"two\": \"#{dst_mac}/-1\"
+                        }
+                      "
+                    requests.push({ "end_point" => "intents", "message" => json })
+                    code += json
+                  end
+                end
+            end
+        end
+
+        requests.each do |request|
+          response = Typhoeus.post "http://127.0.0.1:8181/onos/v1/#{request['end_point']}",
+                        headers: { 'Accept-Encoding' => 'application/json', 'Content-Type' => 'application/json'},
+                        body: request["message"],
+                        userpwd:"onos:rocks"
+
+          raise OnosCodeGeneratorError, "When posting the following request: #{request['message']} to the endpoint #{request['end_point']}, the following error was raised #{response.body}" unless response.success?
+        end
+
+        write_file  "#{file_name[0,file_name.length-3]}_requests",
+                    code
+    end
+\end{lstlisting}
+
+What we are doing in this case is matching each identifier with it's corresponding json request to made to the api, for example in the \textit{HaikunetHost} identifier case, we create a JSON which has all the needed properties to create a new Host in ONOS. In the \textit{HaikunetFlow} case, what we have decided to do is to create per each \textit{(source,destiny)} pair that can be created from the flow definition, a JSON which will create a HostToHostintent. This is not the only way that we could have done this, for example, we could have either implemented a custom Intent class for our pourpose, or have used another type of intent, for example the PointToPointIntent. Our decision then was to select the HostToHostIntent, because this provided what we needed, which was to create a flow between sources and destinies, and we didn't need to implement our custom Intent, which was something that we tried to avoid, since doing this would have implied that Haikunet would have needed a custom ONOS version for running it.\\
+After that every identifier which was present in the program has been translated into it's corresponding requests, what is left now it's to perform the bunch of requests recently created. In case some of this request fails, an exception is thrown describing the error, and the execution of the requests is stopped. An important thing to remark here, is that if one request fails in a bunch, then the following request after this will not be performed, but the ones before will not be undone, meaning that the network can end in an inconsistent state!. This is something that has to be done, and will be discussed later in the \textbf{Future Work} chapter.
+
+Finally, if everything works fine, all the request will be written down in a file, just to let know the user the performed request made by the interpreter. This file can be really usefull for logging purpouses.
+
+\subsubsection{DebugCodeGenerator}
+
+This is the code generator which will be called in case \textit{DEBUG} option is received as argument. In this subsection we want to introduce the model which will be used to simulate the network, the default parameters that will be set, how is the communication between the simulator and the interpreter, and explain how should this option be used.
+
+Let's first understand what is the \textit{DebugCodeGenerator} purpose. As it was explained in the \textbf{Formal Definition} section, debugging here means finding errors before the intent is applied to the network, in order to detect some kind of errors, for example dynamic ones, instead of applying directly the program to a functional network and find out which are the errors introduced, we give the user another way, the simulation way. What does it mean?, that when the \textit{DEBUG} option is selected, the model of the underlying network will be converted to a simulation model, the program will be applied to this model, and finally the model will be ran in DEVS. After the running, results will be showed to the user, and from these results we would be able to check if the network behaves as expected. This is the \textit{DebugCodeGenerator} purpose, to give the user the ability of testing Haikunet program's without affecting an operational network.\\
+Now that we understand the purpose, let's understand how do we translate a program:
+
+CONTINUAR
 
 \section{Tutorial}
 
-\subsubsection{Installation}
+\subsection{Installation}
 
 \textbf{Pre-requisite:} You need to have a git client installed, a machine running a Linux distribution (it was tested in an Ubuntus machine, but should work in any Linux distribution machine), and already installed a ruby version equal or major to 2.0.0.
 
@@ -533,7 +639,7 @@ $ sudo ./install_haikunet.sh
 
 And that's it!, you have already installed the interpreter. Let's understand a bit more about the language before jumping into the code.
 
-\subsubsection{Using the interpreter}
+\subsection{Using the interpreter}
 
 \textbf{Pre-requisite:} Have running locally the ONOS controller, and have already download the language repository.
 
@@ -590,7 +696,7 @@ $ haikunet program --help
 
 Now that we know how to use the interpreter, let's write our first program!.
 
-\subsubsection{Implementing your first program}
+\subsection{Implementing your first program}
 
 \subsection{Implementing your CodeGenerator}
 
